@@ -42,8 +42,46 @@
 #### Explain variable scoping in Python!
 #### What’s the difference between const and var in JavaScript?
 #### How the list comprehension looks like in Python?
+    List comprehensions provide a concise way to create lists. 
+    It consists of brackets containing an expression followed by a for clause, then
+    zero or more for or if clauses. The expressions can be anything, meaning you can
+    put in all kinds of objects in lists. The result will be a new list resulting from
+    evaluating the expression in the context of the for and if clauses which follow it.
+
+    Syntax:
+        [ expression for item in list if conditional ]
+
+    This is equivalent to:
+        for item in list:
+            if conditional:
+                expression
+    
+    Example:
+        string = "Hello 12345 World"
+        numbers = [number for number in string if number.isdigit()]
+
+The list comprehension always returns a result list. 
 #### How the “ternary expression” looks like in Python?
+    Ternary operators are more commonly known as conditional expressions in Python. 
+    These operators evaluate something based on a condition being true or not. 
+    It allows to quickly test a condition instead of a multiline if statement.
+
+    Syntax: 
+        condition_if_true if condition else condition_if_false
+
+    Example: 
+        is_nice = True
+        state = "nice" if is_nice else "not nice"
 #### How the ternary expression looks like in JavaScript?
+    The conditional (ternary) operator is frequently used as a shortcut for the if statement.
+    You can shorten your if statements into one line of code with the conditional operator. 
+
+    Syntax: condition ? exprIfTrue : exprIfFalse
+        condition: An expression whose value is used as a condition.
+        exprIfTrue: An expression which is evaluated if the condition evaluates to a truthy value.
+        exprIfFalse: An expression which is executed if the condition is falsy.
+
+    Example: person.driver = person.age >= 16 ? 'You can drive' : 'You can't drive';
 #### How to import a function from another module in Python?
 #### How to import a function from another module in JavaScript?
 
