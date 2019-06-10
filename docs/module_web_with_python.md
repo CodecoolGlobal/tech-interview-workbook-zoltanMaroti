@@ -204,8 +204,42 @@ The list comprehension always returns a result list.
 #### How does an HTTP Request look like? What are the most relevant HTTP header fields?
 #### How does an HTTP Response look like? What are the most relevant HTTP header fields?
 #### What is DNS? How does it work?
+    Domain Name Servers are like an address book for websites. When you type a web address in your browser, 
+    the browser looks at the DNS to find the website's real address before it can retrieve the website. 
+    The browser needs to find out which server the website lives on, so it can send HTTP messages to the right place. 
+    The Domain Name System (DNS) is a hierarchical and decentralized naming system for computers, services, or other 
+    resources connected to the Internet or a private network. Web browsers interact through Internet Protocol (IP) addresses. 
+    DNS translates domain names to IP addresses so browsers can load Internet resources. Each device connected to the Internet 
+    has a unique IP address which other machines use to find the device. The process of DNS resolution involves converting 
+    a hostname (such as www.example.com) into a computer-friendly IP address (such as 192.168.1.1). A DNS name server is 
+    a server that stores the DNS records for a domain; a DNS name server responds with answers to queries against its database.
+
 #### What is a web server?
 #### Explain the client-server architecture.
+    Computers connected to the web are called clients and servers. 
+    Clients are the typical web user's internet-connected devices (for example, your computer connected to your Wi-Fi, 
+    or your phone connected to your mobile network) and web-accessing software available on those devices 
+    (usually a web browser like Firefox or Chrome).
+    Servers are computers that store webpages, sites, or apps. When a client device wants to access a webpage, 
+    a copy of the webpage is downloaded from the server onto the client machine to be displayed in the user's web browser.
+    Client–server model is a distributed application structure that partitions tasks or workloads between the providers 
+    of a resource or service, called servers, and service requesters, called clients. A server host runs one or more server 
+    programs which share their resources with clients. A client does not share any of its resources, but requests a server's 
+    content or service function. Clients therefore initiate communication sessions with servers which await incoming requests. 
+    Examples of computer applications that use the client–server model are Email, network printing, and the World Wide Web.
+
+        1. The browser goes to the DNS server, and finds the real address of the server that the website lives on.
+        2. The browser sends an HTTP request message to the server, asking it to send a copy of the website to the client. 
+           This message, and all other data sent between the client and the server, is sent across your internet connection using TCP/IP.
+        3. If the server approves the client's request, the server sends the client a "200 OK" message and then starts sending 
+           the website's files to the browser as a series of small chunks called data packets.
+        4. The browser assembles the small chunks into a complete website and displays it to you.
+
+
+
+
+
+
 #### What would you use a session for?
 #### What would you use a cookie for?
 
