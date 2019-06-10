@@ -155,9 +155,50 @@ The list comprehension always returns a result list.
 ### Networks
 
 #### What kind of HTTP status codes do you know?
+    All HTTP response status codes are separated into five classes (or categories). 
+    The first digit of the status code defines the class of response. 
+        1xx (Informational): The request was received, continuing process
+        2xx (Successful): The request was successfully received, understood and accepted
+        3xx (Redirection): Further action needs to be taken in order to complete the request
+        4xx (Client Error): The request contains bad syntax or cannot be fulfilled
+        5xx (Server Error): The server failed to fulfill an apparently valid request
+    
+    Most important status codes:
+        200 OK: Standard response for successful HTTP requests.
+        301 Moved Permanently: This and all future requests should be directed to the given URI.
+        400 Bad Request: The server cannot or will not process the request due to an apparent client error. 
+        403 Forbidden: The request was valid, but the server is refusing action. The user might not have the necessary permissions.
+        404 Not Found: The requested resource could not be found but may be available in the future.
+        405 Method Not Allowed: A request method is not supported for the requested resource.
+        408 Request Timeout: The server timed out waiting for the request.
+        500 Internal Server Error: A generic error message, given when an unexpected condition was encountered. 
+        501 Not Implemented: The server either does not recognize the request method, or it lacks the ability to fulfil the request.
 #### What is a API?
 #### What is REST API?
 #### What is JSON? When to use?
+    JSON (JavaScript Object Notation) is a lightweight data-interchange format. It is easy for humans to read and write. 
+    JSON is a text format that is completely language independent. JSON is a syntax for storing and exchanging data.
+    When exchanging data between a browser and a server, the data can only be text.
+    JSON is text, and we can convert any JavaScript object into JSON, and send JSON to the server.
+    We can also convert any JSON received from the server into JavaScript objects.
+    This way we can work with the data as JavaScript objects, with no complicated parsing and translations.
+    JSON uses JavaScript syntax, but the JSON format is text only.
+    Text can be read and used as a data format by any programming language.
+
+    JSON is built on two structures: 
+        A collection of name/value pairs. In various languages, this is realized as an object, dictionary, hash table. 
+        An ordered list of values. In most languages, this is realized as an array, vector, list, or sequence.
+    
+    Methods:
+        JSON.parse(): Parse a string as JSON, optionally transform the produced value and its properties, and return the value.
+        JSON.stringify(): Return a JSON string corresponding to the specified value.
+
+    Example:
+        var myObj = {name: "John", age: 31, city: "New York"};
+        var myJSON = JSON.stringify(myObj);
+
+        var myJSON = '{"name":"John", "age":31, "city":"New York"}';
+        var myObj = JSON.parse(myJSON);
 #### What is TCP/IP? What layers does it define, what are they responsible for?
 #### What’s the difference between TCP and UDP?
 #### How does an HTTP Request look like? What are the most relevant HTTP header fields?
