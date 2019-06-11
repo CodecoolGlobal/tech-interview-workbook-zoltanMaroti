@@ -5,23 +5,91 @@
 ### Clean code
 
 #### Point out 5 suggestions, how to format an SQL query!
+    ?
 #### What layers can you name in a simple web application?
+    The standard three layered architecture for Web Applications:
+    
+    Presentation Layer: The most external is the View Layer, it is the visible part of the application, which interacts with the user.
+    The technologies usually involved in this layer on the web development context are mainly the markup that is processed by the browser (HTML/ XHTML/ ...), the style of the page (CSS) and client-side scripts (Javascript/ Flash/ ...).
 
+    Business Layer: The layer in the middle is the Business Logic Layer, which serves as an intermediate between the View (or presentation)
+    and the innermost Data Layer. The central layer of the model deals with the logic of the program. It receives data from the upper level and transforms it, using in the inner application logics. The tools used in this level are usually server-side scripts like PHP,ASP.NET Ruby or CGI. There is even a solution that uses server-side Javascript, called node.js.
+
+    Data Layer: This last one is where all the data used by the application is stored. The deepest level in the layered architecture, the data layer deals with data retrieval from its sources. Most of the web applications currently active use relational databases, but now the market is seeing a change of paradigm in the form of the NoSQL.
+
+    The benefits of using layered models in software development are in the way that it is easier to know exactly what each part of the application does. It makes easier to construct the application, to debug it, and to maintain and reuse the code.
+
+      
 ### Error handling
 #### What error can occur, when an array does not have an element on the requested index?
+    In Python, IndexError exception is raised when a sequence reference is out of range.
+    In Javascript, ReferenceError is raised when the script attempts to access an object property which doesn't exist ("undefined").
+
 #### What is the “finally” block, and how would you use it?
+    The try statement allows you to define a block of code to be tested for errors while it is being executed.
+    The catch statement allows you to define a block of code to be executed, if an error occurs in the try block.
+    The finally statement lets you execute code, after try and catch, regardless of the result.
+
+    The catch and finally statements are both optional, but you need to use one of them (if not both) while using the try statement.
+
+    Example:
+    try {
+        tryCode - Block of code to try
+    }
+    catch(err) {
+        catchCode - Block of code to handle errors
+    } 
+    finally {
+        finallyCode - Block of code to be executed regardless of the try / catch result
+    }
 #### Why should we catch special exception types?
 
 ### Security
 #### What is SQL injection? How to protect an application against it?
+    SQL injection is a code injection technique that might destroy your database.
+    SQL injection is one of the most common web hacking techniques.
+    SQL injection is the placement of malicious code in SQL statements, via web page input.
+    It usually occurs when you ask a user for input, like their username/userid, and instead of a name/id, the user gives you an SQL statement that you will unknowingly run on your database.
+
+    Example:
+        txtUserId = getRequestString("UserId");
+        txtSQL = "SELECT * FROM Users WHERE UserId = " + txtUserId;
+
+    Protection against SQL injection:
+        - Parameterized Statements: Input validation and parametrized queries including prepared statements. 
+        - The developer must sanitize all input, not only web form inputs such as login forms.
+        - Check that supplied fields like email addresses match a regular expression.
+        - Ensure that numeric or alphanumeric fields do not contain symbol characters.
+        - Reject (or strip) out whitespace and new line characters where they are not appropriate.
+        - Turn off the visibility of database errors on your production sites.
+        - Escaping Inputs: Ensure proper escaping of special string characters in input parameters.
+        - Password Hashing: Applications should store user passwords as strong, one-way hashes, preferably salted. 
+        - Third Party Authentication: Facebook, Twitter, and Google all provide mature OAuth APIs, which can be used to let users log into your website using their existing accounts on those systems. This saves you as an application developer from rolling your own authentication, and assures your users that their passwords are only stored in a single location.
+
 #### What is XSS? How to protect an application against it?
 #### How to properly store passwords?
+    The best way to protect passwords is to employ salted password hashing. Hash algorithms are one way functions. They turn any amount of data into a fixed-length "fingerprint" that cannot be reversed. Well-designed key stretching algorithms such as PBKDF2, bcrypt, and scrypt. DO NOT use: Fast cryptographic hash functions such as MD5, SHA1, SHA256, SHA512, RipeMD, WHIRLPOOL, SHA3, etc.
+
+    The general workflow for account registration and authentication in a hash-based account system is as follows:
+        1. The user creates an account.
+        2. Their password is hashed and stored in the database. The plain-text (unencrypted) password is never written to the hard drive.
+        3. When the user attempts to login, the hash of the password they entered is checked against the hash of their real password.
+        4. If the hashes match, the user is granted access. If not, the user is told they entered invalid login credentials.
+        5. Steps 3 and 4 repeat every time someone tries to login to their account.
+
+    Only cryptographic hash functions may be used to implement password hashing. Hash functions like SHA256, SHA512, RipeMD, and WHIRLPOOL are cryptographic hash functions.
+
+    Salt: We can randomize the hashes by appending or prepending a random string, called a salt, to the password before hashing. To check if a password is correct, we need the salt, so it is usually stored in the user account database along with the hash, or as part of the hash string itself.
 #### What is HTTPS?
+    HTTPS (HTTP Secure) is an encrypted version of the HTTP protocol. It usually uses SSL (Secure Sockets Layer) or TLS (Transport Layer Security) protocols to encrypt all communication between a client and a server. This secure connection allows clients to safely exchange sensitive data with a server, for example for banking activities or online shopping.
 #### What is encryption and decryption?
 #### What is hashing?
+    Hashing is generating a value or values from a string of text using a mathematical function.
+    Hash algorithms are one way functions. They turn any amount of data into a fixed-length "fingerprint" that cannot be reversed. Well-designed key stretching algorithms such as PBKDF2, bcrypt, and scrypt. DO NOT use for password hashing: Fast cryptographic hash functions such as MD5, SHA1, SHA256, SHA512, RipeMD, WHIRLPOOL, SHA3, etc. Only cryptographic hash functions may be used to implement password hashing. Hash functions like SHA256, SHA512, RipeMD, and WHIRLPOOL are cryptographic hash functions.
 #### What is the difference between encryption and hashing? When would you use which?
 #### What encryption methods do you know?
 #### What hashing methods do you know?
+    Well-designed key stretching algorithms such as PBKDF2, bcrypt, and scrypt. DO NOT use for password hashing: Fast cryptographic hash functions such as MD5, SHA1, SHA256, SHA512, RipeMD, WHIRLPOOL, SHA3, etc.
 #### How/where would you store sensitive data (like db password, API key, ...) of your application?
 
 ## Computer science
