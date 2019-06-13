@@ -67,6 +67,14 @@
         - Third Party Authentication: Facebook, Twitter, and Google all provide mature OAuth APIs, which can be used to let users log into your website using their existing accounts on those systems. This saves you as an application developer from rolling your own authentication, and assures your users that their passwords are only stored in a single location.
 
 #### What is XSS? How to protect an application against it?
+    Cross-site scripting (XSS) is a security exploit which allows an attacker to inject into a website malicious client-side code. This code is executed by the victims and lets the attackers bypass access controls and impersonate users. The user's browser cannot detect the malicious script is untrustworthy, and so gives it access to any cookies, session tokens, or other sensitive site-specific information, or lets the malicious script rewrite the HTML content. Cross-site scripting attacks usually occur when 1) data enters a Web app through an untrusted source (most often a Web request) or 2) dynamic content is sent to a Web user without being validated for malicious content. The malicious content often includes JavaScript, but sometimes HTML, Flash, or any other code the browser can execute. The variety of attacks based on XSS is almost limitless, but they commonly include transmitting private data like cookies or other session information to the attacker, redirecting the victim to a webpage controlled by the attacker, or performing other malicious operations on the user's machine under the guise of the vulnerable site. XSS attacks can be put into three categories: stored (also called persistent), reflected (also called non-persistent), or DOM-based.
+
+    How to protect yourself from XSS attacks?
+    - Sanitize Data: it is simple to remove all values ​​from what is submitted and which are not of the desired type.
+    - Validate the data: Validation is about making sure a value matches your expectation. Typically, you enable the user to resubmit the request once validation fails.
+    - Escape the filters: script, alert, escaping invalid characters
+    - X-XSS-Protection header: The HTTP X-XSS-Protection response header is a feature of Internet Explorer, Chrome and Safari that stops pages from loading when they detect reflected cross-site scripting (XSS) attacks. 
+    - Content-Security-Policy: The HTTP Content-Security-Policy response header allows web site administrators to control resources the user agent is allowed to load for a given page. With a few exceptions, policies mostly involve specifying server origins and script endpoints. This helps guard against cross-site scripting attacks (XSS). For example, it disables the use of inline JavaScript ('unsafe-inline').
 #### How to properly store passwords?
     The best way to protect passwords is to employ salted password hashing. Hash algorithms are one way functions. They turn any amount of data into a fixed-length "fingerprint" that cannot be reversed. Well-designed key stretching algorithms such as PBKDF2, bcrypt, and scrypt. DO NOT use: Fast cryptographic hash functions such as MD5, SHA1, SHA256, SHA512, RipeMD, WHIRLPOOL, SHA3, etc.
 
@@ -91,6 +99,7 @@
 #### What hashing methods do you know?
     Well-designed key stretching algorithms such as PBKDF2, bcrypt, and scrypt. DO NOT use for password hashing: Fast cryptographic hash functions such as MD5, SHA1, SHA256, SHA512, RipeMD, WHIRLPOOL, SHA3, etc.
 #### How/where would you store sensitive data (like db password, API key, ...) of your application?
+    For public and private authentication keys I would use environmental variables. An environment variable is a KEY=value pair that is stored on the local system where your code/app is being run and is accessible from within your code. An environment variable is a variable whose value is set outside the program, typically through functionality built into the operating system or microservice. The primary use case for environment variables is to limit the need to modify and re-release an application due to changes in configuration data. You can also avoid (accidentally) committing (exposing) your private keys, passwords or other sensitive details(by hard-coding in them in your script) to GitHub by storing them as environment variables. This way we can use our keys and tokens in our local environment and be safe from getting these sensitive data exposed to others on Github.
 
 ## Computer science
 
@@ -160,6 +169,16 @@ The list comprehension always returns a result list.
 #### List the ways of defining a callable logical unit in JavaScript!
 #### What is an event listener? How to attach one?
 #### How to trigger an event in JavaScript?
+    In the browser most code is event-driven and writing interactive applications in JavaScript is often about waiting for and reacting to events, to alter the behavior of the browser in some way. Events occur when the page loads, when user interacts (clicks, hovers, changes) and myriad other times, and can be triggered manually too. To react to an event you listen for it and supply a function which will be called by the browser when the event occurs. This function is known as an event listener (aka event handler) which is a type of callback.
+    When an event is happening we say the event has been triggered or fired. When js/we catch an event then we say event is handled => event handling. 
+
+    How to define event listeners:
+        let element = document.querySelectorAll('.btn')[0];
+        element.addEventListener('click', clickHandler);
+
+        function clickHandler(event) {
+            console.log('button is clicked');
+        }
 #### What is a callback function? Tell some examples of its usage.
 #### What is a Python decorator? How does it work? Tell some examples of its usage.
 #### What is the difference between synchronous and asynchronous execution?
