@@ -24,6 +24,7 @@
 #### What error can occur, when an array does not have an element on the requested index?
     In Python, IndexError exception is raised when a sequence reference is out of range.
     In Javascript, ReferenceError is raised when the script attempts to access an object property which doesn't exist ("undefined").
+    Attempting to access an index outside of the array, returns the value undefined.
 
 #### What is the “finally” block, and how would you use it?
     The try statement allows you to define a block of code to be tested for errors while it is being executed.
@@ -203,6 +204,31 @@ The list comprehension always returns a result list.
 
 #### What’s the difference between XML, XHTML and HTML?
 #### How to include a JavaScript file in a webpage?
+    The <script> tag is used to define a client-side script (JavaScript).
+    The <script> element either contains scripting statements, or it points to an external script file through the src attribute.
+    Attributes:
+        async, defer, src, type, charset
+
+    The <script> tag can be placed in the <head> section of your HTML, in the <body> section, or after the </body> close tag, depending on when you want the JavaScript to load. Generally, JavaScript code can go inside of the document <head> section in order to keep them contained and out of the main content of your HTML document. However, if your script needs to run at a certain point within a page’s layout, you should put it at the point where it should be called, usually within the <body> section.
+
+    Example:
+        <script src="myscripts.js"></script>
+    
+    Note: There are several ways an external script can be executed:
+    - If async="async": The script is executed asynchronously with the rest of the page (the script will be executed while the page continues the parsing)
+    - If async is not present and defer="defer": The script is executed when the page has finished parsing
+    - If neither async or defer is present: The script is fetched and executed immediately, before the browser continues parsing the page
+
+    Non-blocking script tags can be placed just about anywhere:
+        <script src="script.js" async></script>
+        <script src="script.js" defer></script>
+        <script src="script.js" async defer></script>
+    
+    The current state-of-the-art is to put scripts in the <head> tag and use the async or defer attributes. This allows your scripts to be downloaded asap without blocking your browser.
+
+    <noscript>: element for users that have disabled scripts in their browser, or have a browser that doesn't support client-side scripting.
+
+
 #### How to include a CSS file in a webpage?
 #### How to select an element using its id in CSS?
 #### How to select elements using their class in CSS?
@@ -321,11 +347,6 @@ The list comprehension always returns a result list.
         3. If the server approves the client's request, the server sends the client a "200 OK" message and then starts sending 
            the website's files to the browser as a series of small chunks called data packets.
         4. The browser assembles the small chunks into a complete website and displays it to you.
-
-
-
-
-
 
 #### What would you use a session for?
 #### What would you use a cookie for?
