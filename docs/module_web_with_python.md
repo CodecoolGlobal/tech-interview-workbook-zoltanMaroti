@@ -165,7 +165,27 @@ The list comprehension always returns a result list.
 
 ### Functional
 #### What is recursion?
+    ? Recursion in computer science is a method of solving a problem where the solution depends on solutions to smaller instances of the same problem (as opposed to iteration). The process in which a function calls itself directly or indirectly is called recursion and the corresponding function is called as recursive function.? A method or function that calls itself until some exit condition is reached.
 #### Write a recursive function which calculates the Fibonacci numbers!
+    In Python:
+        def Fibonacci(n): 
+            if n < 0: 
+                print("Incorrect input") 
+            # First Fibonacci number is 0 
+            elif n == 1: 
+                return 0
+            # Second Fibonacci number is 1 
+            elif n == 2: 
+                return 1
+            else: 
+                return Fibonacci(n-1) + Fibonacci(n-2)
+    
+    In Javascript:
+        function fibonacci(num) {
+            if (num <= 1) return 1;
+            return fibonacci(num - 1) + fibonacci(num - 2);
+        }
+
 #### How to store a function in a variable in Python?
 #### List the ways of defining a callable logical unit in JavaScript!
 #### What is an event listener? How to attach one?
@@ -190,19 +210,73 @@ The list comprehension always returns a result list.
 
 #### How can you connect your application to a database server? What are the possible ways?
 #### When do you use the DISTINCT keyword in SQL?
+    Inside a table, a column often contains many duplicate values; and sometimes you only want to list the different (distinct) values.
+    The SELECT DISTINCT statement is used to return only distinct (different) values.
+
+    SELECT DISTINCT Syntax:
+        SELECT DISTINCT column1, column2, ...
+        FROM table_name;
+
 #### What are aggregate functions in SQL? Give 3 examples.
+    An aggregate function performs a calculation on a set of values, and returns a single value. Except for COUNT, aggregate functions ignore null values. Aggregate functions are often used with the GROUP BY clause of the SELECT statement. Aggregate functions allow us to easily produce summarized data from our database. 
+
+    - COUNT: counts how many rows are in a particular column.
+    - SUM: adds together all the values in a particular column.
+    - MIN: and MAX return the lowest and highest values in a particular column, respectively.
+    - AVG: calculates the average of a group of selected values.
+
 #### What kind of JOIN types do you know in SQL? Could you give examples?
+    A JOIN clause is used to combine rows from two or more tables, based on a related column between them.
+    Different Types of SQL JOINs:
+    - (INNER) JOIN: Returns records that have matching values in both tables
+    - LEFT (OUTER) JOIN: Returns all records from the left table, and the matched records from the right table
+    - RIGHT (OUTER) JOIN: Returns all records from the right table, and the matched records from the left table
+    - FULL (OUTER) JOIN: Returns all records when there is a match in either left or right table
+
 #### What are the constraints in sql?
+    SQL constraints are used to specify rules for data in a table. Constraints are used to limit the type of data that can go into a table. This ensures the accuracy and reliability of the data in the table. If there is any violation between the constraint and the data action, the action is aborted. Constraints can be column level or table level. Column level constraints apply to a column, and table level constraints apply to the whole table. Constraints can be specified when the table is created with the CREATE TABLE statement, or after the table is created with the ALTER TABLE statement. 
+
+    The following constraints are commonly used in SQL:
+        - NOT NULL - Ensures that a column cannot have a NULL value
+        - UNIQUE - Ensures that all values in a column are different
+        - PRIMARY KEY - A combination of a NOT NULL and UNIQUE. Uniquely identifies each row in a table
+        - FOREIGN KEY - Uniquely identifies a row/record in another table
+        - CHECK - Ensures that all values in a column satisfies a specific condition
+        - DEFAULT - Sets a default value for a column when no value is specified
+
+    Syntax:
+        CREATE TABLE table_name (
+        column1 datatype constraint,
+        column2 datatype constraint,
+        column3 datatype constraint,
+        ....
+    );
+
+
 #### What is a cursor in SQL? Why would you use one?
+    A cursor is a temporary work area created in the system memory when a SQL statement is executed. A cursor contains information on a select statement and the rows of data accessed by it. This temporary work area is used to store the data retrieved from the database, and manipulate this data. A cursor can hold more than one row, but can process only one row at a time. The set of rows the cursor holds is called the active set. A database cursor can be thought of as a pointer to a specific row within a query result.  The pointer can be moved from one row to the next.  Depending on the type of cursor, you may be even able to move it to the previous row.
+
 #### What are database indexes? When to use?
 #### What are database transactions? When to use?
 #### What kind of database relations do you know? How to define them?
+    One-to-One: A row in table A can have only one matching row in table B, and vice versa. This is not a common relationship type.
+
+    One-to-Many (or Many-to-One): In this type of relationship, a row in table A can have many matching rows in table B, but a row in table B can have only one matching row in table A. This is the most common relationship type.
+
+    Many-to-Many: a row in table A can have many matching rows in table B, and vice versa. A many-to-many relationship could be thought of as two one-to-many relationships, linked by an intermediary table. The intermediary table is typically referred to as a “junction table” (also as a “cross-reference table”). This table is used to link the other two tables together. It does this by having two fields that reference the primary key of each of the other two tables.
+
+    Self Referencing Relationships: This is used when a table needs to have a relationship with itself.
 #### You have a table with an “address” field which contains data like “3525, Miskolc, Régiposta 9.” (postcode, city, street name and address). How would you query all records related to Miskolc?
 #### How would you keep track of what kind of data has changed after an UPDATE or DELETE operation in a table?
 
 ### HTML & CSS
 
 #### What’s the difference between XML, XHTML and HTML?
+    HTML is the HyperText Markup Language, which is designed to create structured documents and provide for semantic meaning behind the documents. HTML5 is the next version of the HTML specification.
+
+    XML is the Extensible Markup Language, which provides rules for creating, structuring, and encoding documents. You often see XML being used to store data and to allow for communication between applications. It's programming language-agnostic - all of the major programming languages provide mechanisms for reading and writing XML documents, either as part of the core or in external libraries.
+
+    XHTML is an XML-based HTML. It serves the same function as HTML, but with the same rules as XML documents. These rules deal with the structure of the markup.
 #### How to include a JavaScript file in a webpage?
     The <script> tag is used to define a client-side script (JavaScript).
     The <script> element either contains scripting statements, or it points to an external script file through the src attribute.
@@ -407,6 +481,17 @@ The list comprehension always returns a result list.
 
 #### What kind of software development methodologies do you know? What are the main features of these?
 #### What are the SCRUM roles?
+    Scrum has three roles: product owner, scrum master and the development team members. 
+
+    Product Owner: The person with the product vision. 
+        Responsibilities:
+            - Managing the scrum backlog 
+            - Release management
+            - Stakeholder management
+
+    Scrum Master: The scrum expert who helps the team build the product according to the scrum framework
+
+    Development Team: The team members who execute the work
 #### What are the SCRUM ceremonies?
 #### What are the SCRUM artifacts?
 #### What is the main goal of a retrospective meeting?
