@@ -7,143 +7,164 @@
 #### Point out 5 suggestions, how to format an SQL query!
     ?
 #### What layers can you name in a simple web application?
-    The standard three layered architecture for Web Applications:
-    
-    Presentation Layer: The most external is the View Layer, it is the visible part of the application, which interacts with the user.
-    The technologies usually involved in this layer on the web development context are mainly the markup that is processed by the browser (HTML/ XHTML/ ...), the style of the page (CSS) and client-side scripts (Javascript/ Flash/ ...).
+The benefits of using layered models in software development are that it is easier to know exactly what each part of the application does. It makes easier to construct the application, to debug it, and to maintain and reuse the code.
+The standard three layered architecture for Web Applications:
 
-    Business Layer: The layer in the middle is the Business Logic Layer, which serves as an intermediate between the View (or presentation)
-    and the innermost Data Layer. The central layer of the model deals with the logic of the program. It receives data from the upper level and transforms it, using in the inner application logics. The tools used in this level are usually server-side scripts like PHP,ASP.NET Ruby or CGI. There is even a solution that uses server-side Javascript, called node.js.
+**Presentation / View Layer:** The most external layer, it is the visible part of the application, which interacts with the user. The technologies usually involved in this layer on the web development context are mainly the markup that is processed by the browser (HTML/ XHTML/ ...), 
+the style of the page (CSS) and client-side scripts (Javascript/ Flash/ ...).
 
-    Data Layer: This last one is where all the data used by the application is stored. The deepest level in the layered architecture, the data layer deals with data retrieval from its sources. Most of the web applications currently active use relational databases, but now the market is seeing a change of paradigm in the form of the NoSQL.
+**Business Layer:** The layer in the middle is the Business Logic Layer, which serves as an intermediate between the View (or presentation) and the innermost Data Layer. The central layer of the model deals with the logic of the program. 
+It receives data from the upper level and transforms it, using in the inner application logics. The tools used in this level are usually server-side scripts like PHP,ASP.NET Ruby or CGI. There is even a solution that uses server-side Javascript, called node.js.
 
-    The benefits of using layered models in software development are in the way that it is easier to know exactly what each part of the application does. It makes easier to construct the application, to debug it, and to maintain and reuse the code.
+**Data Layer:** This last one is where all the data used by the application is stored. The deepest level in the layered architecture, the data layer deals with data retrieval from its sources. Most of the web applications currently active use relational databases, 
+but now the market is seeing a change of paradigm in the form of the NoSQL.
 
-      
 ### Error handling
 #### What error can occur, when an array does not have an element on the requested index?
-    In Python, IndexError exception is raised when a sequence reference is out of range.
-    In Javascript, ReferenceError is raised when the script attempts to access an object property which doesn't exist ("undefined").
-    Attempting to access an index outside of the array, returns the value undefined.
+In Python, IndexError exception is raised when a sequence reference is out of range.
+In Javascript, ReferenceError is raised when the script attempts to access an object property which doesn't exist ("undefined").
+Attempting to access an index outside of the array, returns the value undefined.
 
 #### What is the “finally” block, and how would you use it?
-    The try statement allows you to define a block of code to be tested for errors while it is being executed.
-    The catch statement allows you to define a block of code to be executed, if an error occurs in the try block.
-    The finally statement lets you execute code, after try and catch, regardless of the result.
+**The try statement** allows you to define a block of code to be tested for errors while it is being executed.
+**The catch statement** allows you to define a block of code to be executed, if an error occurs in the try block.
+**The finally statement** lets you execute code, after try and catch, regardless of the result.
 
-    The catch and finally statements are both optional, but you need to use one of them (if not both) while using the try statement.
+The catch and finally statements are both optional, but you need to use one of them (if not both) while using the try statement.
 
-    Example:
-    try {
-        tryCode - Block of code to try
-    }
-    catch(err) {
-        catchCode - Block of code to handle errors
-    } 
-    finally {
-        finallyCode - Block of code to be executed regardless of the try / catch result
-    }
+**Example:**
+```javascript
+try {
+    // Block of code to try
+}
+catch(err) {
+    // Block of code to handle errors
+} 
+finally {
+    // Block of code to be executed regardless of the try / catch result
+}
+```
+
 #### Why should we catch special exception types?
 
 ### Security
 #### What is SQL injection? How to protect an application against it?
-    SQL injection is a code injection technique that might destroy your database.
-    SQL injection is one of the most common web hacking techniques.
-    SQL injection is the placement of malicious code in SQL statements, via web page input.
-    It usually occurs when you ask a user for input, like their username/userid, and instead of a name/id, the user gives you an SQL statement that you will unknowingly run on your database.
+SQL injection is one of the most common web hacking techniques. It's a code injection technique that might destroy the database.
+SQL injection is the placement of malicious code in SQL statements, via web page input. It usually occurs when you ask a user for input, like their username/userid, and instead of a name/id, the user gives you an SQL statement that you will unknowingly run on your database.
 
-    Example:
-        txtUserId = getRequestString("UserId");
-        txtSQL = "SELECT * FROM Users WHERE UserId = " + txtUserId;
+**Example:**
+```sql
+txtUserId = getRequestString("UserId");
+txtSQL = "SELECT * FROM Users WHERE UserId = " + txtUserId;
+```
 
-    Protection against SQL injection:
-        - Parameterized Statements: Input validation and parametrized queries including prepared statements. 
-        - The developer must sanitize all input, not only web form inputs such as login forms.
-        - Check that supplied fields like email addresses match a regular expression.
-        - Ensure that numeric or alphanumeric fields do not contain symbol characters.
-        - Reject (or strip) out whitespace and new line characters where they are not appropriate.
-        - Turn off the visibility of database errors on your production sites.
-        - Escaping Inputs: Ensure proper escaping of special string characters in input parameters.
-        - Password Hashing: Applications should store user passwords as strong, one-way hashes, preferably salted. 
-        - Third Party Authentication: Facebook, Twitter, and Google all provide mature OAuth APIs, which can be used to let users log into your website using their existing accounts on those systems. This saves you as an application developer from rolling your own authentication, and assures your users that their passwords are only stored in a single location.
+**Protection against SQL injection:**
+- Parameterized Statements: Input validation and parametrized queries including prepared statements. 
+- The developer must sanitize all input, not only web form inputs such as login forms.
+- Check that supplied fields like email addresses match a regular expression.
+- Ensure that numeric or alphanumeric fields do not contain symbol characters.
+- Reject (or strip) out whitespace and new line characters where they are not appropriate.
+- Turn off the visibility of database errors on your production sites.
+- Escaping Inputs: Ensure proper escaping of special string characters in input parameters.
+- Password Hashing: Applications should store user passwords as strong, one-way hashes, preferably salted. 
+- Third Party Authentication: Facebook, Twitter, and Google all provide mature OAuth APIs, which can be used to let users log into your website using their existing accounts on those systems. This saves you as an application developer from rolling your own authentication, and assures your users that their passwords are only stored in a single location.
 
 #### What is XSS? How to protect an application against it?
-    Cross-site scripting (XSS) is a security exploit which allows an attacker to inject into a website malicious client-side code. This code is executed by the victims and lets the attackers bypass access controls and impersonate users. The user's browser cannot detect the malicious script is untrustworthy, and so gives it access to any cookies, session tokens, or other sensitive site-specific information, or lets the malicious script rewrite the HTML content. Cross-site scripting attacks usually occur when 1) data enters a Web app through an untrusted source (most often a Web request) or 2) dynamic content is sent to a Web user without being validated for malicious content. The malicious content often includes JavaScript, but sometimes HTML, Flash, or any other code the browser can execute. The variety of attacks based on XSS is almost limitless, but they commonly include transmitting private data like cookies or other session information to the attacker, redirecting the victim to a webpage controlled by the attacker, or performing other malicious operations on the user's machine under the guise of the vulnerable site. XSS attacks can be put into three categories: stored (also called persistent), reflected (also called non-persistent), or DOM-based.
+XSS (Cross-site scripting) is a security exploit which allows an attacker to inject malicious client-side code into a website. This code is executed by the victims and lets the attackers bypass access controls and impersonate users, redirecting the victim to a webpage controlled by the attacker. The user's browser cannot detect the malicious script is untrustworthy, and gives it access to any cookies, session tokens, or other sensitive site-specific information, or lets the malicious script rewrite the HTML DOM content. The malicious content often includes JavaScript, but sometimes HTML, Flash, or any other code the browser can execute. Cross-site scripting attacks usually occur when:
+- Data enters a Web app through an untrusted source (most often a Web request)
+- Dynamic content is sent to a Web user without being validated for malicious content. 
 
-    How to protect yourself from XSS attacks?
-    - Sanitize Data: it is simple to remove all values ​​from what is submitted and which are not of the desired type.
-    - Validate the data: Validation is about making sure a value matches your expectation. Typically, you enable the user to resubmit the request once validation fails.
-    - Escape the filters: script, alert, escaping invalid characters
-    - X-XSS-Protection header: The HTTP X-XSS-Protection response header is a feature of Internet Explorer, Chrome and Safari that stops pages from loading when they detect reflected cross-site scripting (XSS) attacks. 
-    - Content-Security-Policy: The HTTP Content-Security-Policy response header allows web site administrators to control resources the user agent is allowed to load for a given page. With a few exceptions, policies mostly involve specifying server origins and script endpoints. This helps guard against cross-site scripting attacks (XSS). For example, it disables the use of inline JavaScript ('unsafe-inline').
+**How to protect yourself from XSS attacks?**
+- Sanitize Data: it is simple to remove all values ​​from what is submitted and which are not of the desired type.
+- Validate the data: Validation is about making sure a value matches your expectation.
+- Escape the filters: script, alert, escaping invalid characters
+- X-XSS-Protection header: The HTTP X-XSS-Protection response header is a feature of Internet Explorer, Chrome and Safari that stops pages from loading when they detect reflected cross-site scripting (XSS) attacks. 
+- Content-Security-Policy: The HTTP Content-Security-Policy response header allows web site administrators to control resources the user agent is allowed to load for a given page. This helps guard against cross-site scripting attacks (XSS). For example, it disables the use of inline JavaScript ('unsafe-inline').
+
 #### How to properly store passwords?
-    The best way to protect passwords is to employ salted password hashing. Hash algorithms are one way functions. They turn any amount of data into a fixed-length "fingerprint" that cannot be reversed. Well-designed key stretching algorithms such as PBKDF2, bcrypt, and scrypt. DO NOT use: Fast cryptographic hash functions such as MD5, SHA1, SHA256, SHA512, RipeMD, WHIRLPOOL, SHA3, etc.
+The best way to protect passwords is to employ salted password hashing. 
+**Salt:** We can randomize the hashes by appending or prepending a random string, called a salt, to the password before hashing. To check if a password is correct, we need the salt, so it is usually stored in the user account database along with the hash, or as part of the hash string itself.
 
-    The general workflow for account registration and authentication in a hash-based account system is as follows:
-        1. The user creates an account.
-        2. Their password is hashed and stored in the database. The plain-text (unencrypted) password is never written to the hard drive.
-        3. When the user attempts to login, the hash of the password they entered is checked against the hash of their real password.
-        4. If the hashes match, the user is granted access. If not, the user is told they entered invalid login credentials.
-        5. Steps 3 and 4 repeat every time someone tries to login to their account.
+The general workflow for account registration and authentication in a hash-based account system is the following:
+1. The user creates an account.
+2. Their password is hashed and the hash is stored in the database. The plain-text (unencrypted) password is never written to the hard drive.
+3. When the user attempts to login, the hash of the password they entered is checked against the hash of their real password.
+4. If the hashes match, the user is granted access. If not, the user is told they entered invalid login credentials.
+5. Steps 3 and 4 repeat every time someone tries to login to their account.
 
-    Only cryptographic hash functions may be used to implement password hashing. Hash functions like SHA256, SHA512, RipeMD, and WHIRLPOOL are cryptographic hash functions.
-
-    Salt: We can randomize the hashes by appending or prepending a random string, called a salt, to the password before hashing. To check if a password is correct, we need the salt, so it is usually stored in the user account database along with the hash, or as part of the hash string itself.
 #### What is HTTPS?
-    HTTPS (HTTP Secure) is an encrypted version of the HTTP protocol. It usually uses SSL (Secure Sockets Layer) or TLS (Transport Layer Security) protocols to encrypt all communication between a client and a server. This secure connection allows clients to safely exchange sensitive data with a server, for example for banking activities or online shopping.
+HTTPS (HTTP Secure) is an encrypted version of the HTTP protocol. It usually uses SSL (Secure Sockets Layer) or TLS (Transport Layer Security) protocols to encrypt all communication between a client and a server. 
+This secure connection allows clients to safely exchange sensitive data with a server, for example for banking activities or online shopping.
+
 #### What is encryption and decryption?
+Encryption is the practice of scrambling information in a way that only someone with a corresponding key can unscramble and read it. Encryption is a two-way function. When you encrypt something, you’re doing so with the intention of decrypting it later.
+To encrypt data you use something called a cipher, which is an algorithm – a series of well-defined steps that can be followed procedurally – to encrypt and decrypt information.
+
 #### What is hashing?
-    Hashing is generating a value or values from a string of text using a mathematical function.
-    Hash algorithms are one way functions. They turn any amount of data into a fixed-length "fingerprint" that cannot be reversed. Well-designed key stretching algorithms such as PBKDF2, bcrypt, and scrypt. DO NOT use for password hashing: Fast cryptographic hash functions such as MD5, SHA1, SHA256, SHA512, RipeMD, WHIRLPOOL, SHA3, etc. Only cryptographic hash functions may be used to implement password hashing. Hash functions like SHA256, SHA512, RipeMD, and WHIRLPOOL are cryptographic hash functions.
+Hashing is generating a value or values from a string of text using a mathematical function. Hash algorithms are one way functions. They turn any amount of data into a fixed-length "fingerprint" that cannot be reversed. 
+Well-designed key stretching algorithms such as PBKDF2, bcrypt, and scrypt. 
+
 #### What is the difference between encryption and hashing? When would you use which?
+Encryption is a two-way function. When you encrypt something, you’re doing so with the intention of decrypting it later.
+Hashing is a one-way function where data is mapped to a fixed-length value. Hashing is primarily used for authentication.
+The key is that encryption is reversible. Hashing is not.
+
 #### What encryption methods do you know?
+AES, RSA, ECC, PGP
+
 #### What hashing methods do you know?
-    Well-designed key stretching algorithms such as PBKDF2, bcrypt, and scrypt. DO NOT use for password hashing: Fast cryptographic hash functions such as MD5, SHA1, SHA256, SHA512, RipeMD, WHIRLPOOL, SHA3, etc.
+Well-designed key stretching algorithms such as PBKDF2, bcrypt, and scrypt. 
+DO NOT use for password hashing: Fast cryptographic hash functions such as MD5, SHA1, SHA256, SHA512, RipeMD, WHIRLPOOL, SHA3, etc.
+
 #### How/where would you store sensitive data (like db password, API key, ...) of your application?
-    For public and private authentication keys I would use environmental variables. An environment variable is a KEY=value pair that is stored on the local system where your code/app is being run and is accessible from within your code. An environment variable is a variable whose value is set outside the program, typically through functionality built into the operating system or microservice. The primary use case for environment variables is to limit the need to modify and re-release an application due to changes in configuration data. You can also avoid (accidentally) committing (exposing) your private keys, passwords or other sensitive details(by hard-coding in them in your script) to GitHub by storing them as environment variables. This way we can use our keys and tokens in our local environment and be safe from getting these sensitive data exposed to others on Github.
+For public and private authentication keys I would use environmental variables. An environment variable is a KEY=value pair which is set outside the program and stored on the local system where your code/app is being run and is accessible from within your code. The primary use case for environment variables is to limit the need to modify and re-release an application due to changes in configuration data. You can also avoid (accidentally) committing (exposing) your private keys, passwords or other sensitive details (by hard-coding in them in your script) to GitHub by storing them as environment variables. This way we can use our keys and tokens in our local environment and be safe from getting these sensitive data exposed to others on Github.
 
 ## Computer science
 
 ### Algorithms
 
 #### What is the difference between Stack and Queue data structure?
-    Data structure: A data structure is a specialized format for organizing and storing data. General data structure types include the array, the file, the record, the table, the tree, and so on. Any data structure is designed to organize data to suit a specific purpose so that it can be accessed and worked with in appropriate ways. In computer programming, a data structure may be selected or designed to store data for the purpose of working on it with various algorithms.
+**Data structure:** A data structure is a specialized format for organizing and storing data to suit a specific purpose so that it can be accessed and worked with in appropriate ways with various algorithms. 
+General data structure types include the array, the file, the record, the table, the tree, and so on. 
 
-    Stack is an abstract data type with a bounded(predefined) capacity. It is a simple data structure that allows adding and removing elements in a particular order. Every time an element is added, it goes on the top of the stack and the only element that can be removed is the element that is at the top of the stack, just like a pile of objects. 
+**Stack** is an abstract data type with a predefined capacity. It is a simple data structure that allows adding and removing elements in a particular order. 
+Every time an element is added, it goes on the top of the stack and the only element that can be removed is the element that is at the top of the stack, just like a pile of objects. 
 
-    Basic features of Stack:
-    - Stack is an ordered list of similar data type.
-    - Stack is a LIFO (Last in First out) structure
-    - push() function is used to insert new elements into the Stack and pop() function is used to remove an element from the stack. Both insertion and removal are allowed at only one end of Stack called Top.
-    - Stack is said to be in Overflow state when it is completely full and is said to be in Underflow state if it is completely empty.
+**Basic features of Stack:**
+- Stack is an ordered list of similar data type
+- Stack is a LIFO (Last in First out) structure
+- push() function is used to insert new elements into the Stack and pop() function is used to remove an element from the stack. Both insertion and removal are allowed at only one end of Stack called Top.
+- Stack is said to be in Overflow state when it is completely full and is said to be in Underflow state if it is completely empty.
 
-    Applications of Stack:
-    - Parsing
-    - Expression Conversion, to reverse a word
+**Applications of Stack:**
+- Parsing
+- Expression Conversion, to reverse a word
 
-    Analysis of Stack Operations / time complexities for various operations:
-    - Push Operation : O(1)
-    - Pop Operation : O(1)
-    - Search Operation : O(n)
+**Analysis of Stack Operations / time complexities for various operations:**
+- Push Operation : O(1)
+- Pop Operation : O(1)
+- Search Operation : O(n)
 
-    Queue is also an abstract data type or a linear data structure, just like stack data structure, in which the first element is inserted from one end called the REAR(also called tail), and the removal of existing element takes place from the other end called as FRONT(also called head). This makes queue as FIFO (First in First Out) data structure, which means that element inserted first will be removed first.
-    Which is exactly how queue system works in real world. If you go to a ticket counter to buy movie tickets, and are first in the queue, then you will be the first one to get the tickets. Right? Same is the case with Queue data structure. Data inserted first, will leave the queue first. The process to add an element into queue is called Enqueue and the process of removal of an element from queue is called Dequeue.
+**Queue** is also an abstract data type or a linear data structure, just like stack data structure. The first element is inserted from one end called the REAR (also called tail), and the removal of existing element takes place from the other end called as FRONT (also called head). 
+This makes queue as FIFO (First in First Out) data structure, which means that element inserted first will be removed first. The process to add an element into queue is called Enqueue and the process of removal of an element from queue is called Dequeue.
 
-    Basic features of Queue:
-    - Like stack, queue is also an ordered list of elements of similar data types
-    - Queue is a FIFO( First in First Out ) structure
-    - Once a new element is inserted into the Queue, all the elements inserted before the new element in the queue must be removed
-    - peek( ) function is oftenly used to return the value of first element without dequeuing it
+Real-world example: If you go to a ticket counter to buy movie tickets, and are first in the queue, then you will be the first one to get the tickets.
 
-    Applications of Queue:
-    - Serving requests on a single shared resource, like a printer, CPU task scheduling etc
-    - In real life scenario, Call Center phone systems uses Queues to hold people calling them in an order, until a service representative is free
-    - Handling of interrupts in real-time systems. The interrupts are handled in the same order as they arrive i.e First come first served
+**Basic features of Queue:**
+- Like stack, queue is also an ordered list of elements of similar data types
+- Queue is a FIFO (First in First Out) structure
+- Once a new element is inserted into the Queue, all the elements inserted before the new element in the queue must be removed
+- peek() function is oftenly used to return the value of first element without dequeuing it
 
-    Complexity Analysis of Queue Operations:
-    - Enqueue: O(1)
-    - Dequeue: O(1)
-    - Size: O(1)
+**Applications of Queue:**
+- Serving requests on a single shared resource, like a printer, CPU task scheduling etc
+- In real life scenario, Call Center phone systems uses Queues to hold people calling them in an order, until a service representative is free
+- Handling of interrupts in real-time systems. The interrupts are handled in the same order as they arrive i.e First come first served
+
+**Complexity Analysis of Queue Operations:**
+- Enqueue: O(1)
+- Dequeue: O(1)
+- Size: O(1)
 
 #### What is BubbleSort? Describe the main logic of this sorting algorithm.
 #### Explain the process of finding the maximum and minimum value in a list of numbers!
@@ -158,88 +179,104 @@
 #### Explain variable scoping in Python!
 #### What’s the difference between const and var in JavaScript?
 #### How the list comprehension looks like in Python?
-    List comprehensions provide a concise way to create lists. 
-    It consists of brackets containing an expression followed by a for clause, then
-    zero or more for or if clauses. The expressions can be anything, meaning you can
-    put in all kinds of objects in lists. The result will be a new list resulting from
-    evaluating the expression in the context of the for and if clauses which follow it.
+List comprehensions provide a concise way to create lists. It consists of brackets containing an expression followed by a for clause, then zero or more for or if clauses. The expressions can be anything, meaning you can put in all kinds of objects in lists. 
+The result will be a new list resulting from evaluating the expression in the context of the for and if clauses which follow it. The list comprehension always returns a result list.
 
-    Syntax:
-        [ expression for item in list if conditional ]
+**Syntax:**
+```
+[ expression for item in list if conditional ]
+```
 
-    This is equivalent to:
-        for item in list:
-            if conditional:
-                expression
+This is equivalent to:
+```python
+for item in list:
+    if conditional:
+        expression
+```
     
-    Example:
-        string = "Hello 12345 World"
-        numbers = [number for number in string if number.isdigit()]
+**Example:**
+```python
+string = "Hello 12345 World"
+numbers = [number for number in string if number.isdigit()]
+```
 
-The list comprehension always returns a result list. 
 #### How the “ternary expression” looks like in Python?
-    Ternary operators are more commonly known as conditional expressions in Python. 
-    These operators evaluate something based on a condition being true or not. 
-    It allows to quickly test a condition instead of a multiline if statement.
+Ternary operators are more commonly known as conditional expressions in Python. These operators evaluate something based on a condition being true or not. It allows to quickly test a condition instead of a multiline if statement.
 
-    Syntax: 
-        condition_if_true if condition else condition_if_false
+**Syntax:**
+condition_if_true if condition else condition_if_false
 
-    Example: 
-        is_nice = True
-        state = "nice" if is_nice else "not nice"
+**Example:** 
+```python
+is_nice = True
+state = "nice" if is_nice else "not nice"
+```
+
 #### How the ternary expression looks like in JavaScript?
-    The conditional (ternary) operator is frequently used as a shortcut for the if statement.
-    You can shorten your if statements into one line of code with the conditional operator. 
+The conditional (ternary) operator is frequently used as a shortcut for the if statement. You can shorten your if statements into one line of code with the conditional operator. 
 
-    Syntax: condition ? exprIfTrue : exprIfFalse
-        condition: An expression whose value is used as a condition.
-        exprIfTrue: An expression which is evaluated if the condition evaluates to a truthy value.
-        exprIfFalse: An expression which is executed if the condition is falsy.
+**Syntax:** 
+condition ? exprIfTrue : exprIfFalse
+- condition: An expression whose value is used as a condition.
+- exprIfTrue: An expression which is evaluated if the condition evaluates to a truthy value.
+- exprIfFalse: An expression which is executed if the condition is falsy.
 
-    Example: person.driver = person.age >= 16 ? 'You can drive' : 'You can't drive';
+**Example:** 
+```javascript
+person.driver = person.age >= 16 ? "You can drive" : "You can't drive";
+```
+
 #### How to import a function from another module in Python?
 #### How to import a function from another module in JavaScript?
 
 ### Functional
 #### What is recursion?
-    ? Recursion in computer science is a method of solving a problem where the solution depends on solutions to smaller instances of the same problem (as opposed to iteration). The process in which a function calls itself directly or indirectly is called recursion and the corresponding function is called as recursive function.? A method or function that calls itself until some exit condition is reached.
+? Recursion in computer science is a method of solving a problem where the solution depends on solutions to smaller instances of the same problem (as opposed to iteration). The process in which a function calls itself directly or indirectly is called recursion and the corresponding function is called as recursive function.? A method or function that calls itself until some exit condition is reached.
+
 #### Write a recursive function which calculates the Fibonacci numbers!
-    In Python:
-        def Fibonacci(n): 
-            if n < 0: 
-                print("Incorrect input") 
-            # First Fibonacci number is 0 
-            elif n == 1: 
-                return 0
-            # Second Fibonacci number is 1 
-            elif n == 2: 
-                return 1
-            else: 
-                return Fibonacci(n-1) + Fibonacci(n-2)
-    
-    In Javascript:
-        function fibonacci(num) {
-            if (num <= 1) return 1;
-            return fibonacci(num - 1) + fibonacci(num - 2);
-        }
+**In Python:** 
+```python
+def Fibonacci(n): 
+    if n < 0: 
+        print("Incorrect input") 
+    # First Fibonacci number is 0 
+    elif n == 1: 
+        return 0
+    # Second Fibonacci number is 1 
+    elif n == 2: 
+        return 1
+    else: 
+        return Fibonacci(n-1) + Fibonacci(n-2)
+```   
+
+**In Javascript:**
+```javascript
+function fibonacci(num) {
+    if (num <= 1) return 1;
+    return fibonacci(num - 1) + fibonacci(num - 2);
+}
+```  
 
 #### How to store a function in a variable in Python?
 #### List the ways of defining a callable logical unit in JavaScript!
 #### What is an event listener? How to attach one?
 #### How to trigger an event in JavaScript?
-    In the browser most code is event-driven and writing interactive applications in JavaScript is often about waiting for and reacting to events, to alter the behavior of the browser in some way. Events occur when the page loads, when user interacts (clicks, hovers, changes) and myriad other times, and can be triggered manually too. To react to an event you listen for it and supply a function which will be called by the browser when the event occurs. This function is known as an event listener (aka event handler) which is a type of callback.
-    When an event is happening we say the event has been triggered or fired. When js/we catch an event then we say event is handled => event handling. 
+In the browser most code is event-driven and writing interactive applications in JavaScript is often about waiting for and reacting to events, to alter the behavior of the browser in some way. Events occur when the page loads, when user interacts (clicks, hovers, changes) and many other times, and can be triggered manually too. To register to an event you listen for it and supply a function which will be called by the browser when the event occurs. This function is known as an event listener (aka event handler) which is a type of callback.
+When an event is happening we say the event has been triggered or fired. When js catch an event then we say the event is handled => event handling. 
 
-    How to define event listeners:
-        let element = document.querySelectorAll('.btn')[0];
-        element.addEventListener('click', clickHandler);
+**How to define event listeners:**
+```javascript
+let element = document.querySelectorAll('.btn')[0];
+element.addEventListener('click', clickHandler);
 
-        function clickHandler(event) {
-            console.log('button is clicked');
-        }
+function clickHandler(event) {
+    console.log('button is clicked');
+}
+``` 
+
 #### What is a callback function? Tell some examples of its usage.
-    CallBack Function is a function which passed into another function as an argument and is expected to execute after some kind of event. The purpose of the callback is to inform a class Sync/Async if some work in other class is done. This is very useful when working with Asynchronous tasks. Suppose we want to perform some routine tasks like perform some operation or display content after some clicking a button, or fetching data from internet. This is also used in event handling, as we get notified when a button clicked via callback function. 
+CallBack Function is a function which is passed into another function as an argument and is expected to execute after some kind of event. The purpose of the callback is to inform a class Sync/Async if some work in other class is done. This is very useful when working with Asynchronous tasks. For example when we want to perform some routine tasks like perform some operation or display content after some clicking a button, or fetching data from internet. This is also used in event handling, as we get notified when a button is clicked via callback function. 
+
 #### What is a Python decorator? How does it work? Tell some examples of its usage.
 #### What is the difference between synchronous and asynchronous execution?
     A synchronous operation blocks a process till the operation completes. An asynchronous operation is non-blocking and only initiates the operation. The caller could discover completion by some other mechanism. 
