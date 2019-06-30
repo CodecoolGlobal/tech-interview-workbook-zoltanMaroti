@@ -174,7 +174,79 @@ Real-world example: If you go to a ticket counter to buy movie tickets, and are 
 
 ### Procedural
 #### How the CASE condition works in SQL?
+The CASE statement goes through conditions and returns a value when the first condition is met (like an IF-THEN-ELSE statement). So, once a condition is true, it will stop reading and return the result. If no conditions are true, it returns the value in the ELSE clause.
+If there is no ELSE part and no conditions are true, it returns NULL.
+
+**Syntax:**
+```sql
+CASE
+    WHEN condition1 THEN result1
+    WHEN condition2 THEN result2
+    WHEN conditionN THEN resultN
+    ELSE result
+END;
+```
+
+**Example:**
+```sql
+SELECT OrderID, Quantity,
+CASE
+    WHEN Quantity > 30 THEN "The quantity is greater than 30"
+    WHEN Quantity = 30 THEN "The quantity is 30"
+    ELSE "The quantity is under 30"
+END AS QuantityText
+FROM OrderDetails;
+```
+
 #### How the switch-case condition works in JavaScript?
+The switch statement executes a block of code depending on different cases.
+The switch statement evaluates an expression, matching the expression's value to a case clause (using the strict comparison, ===), and executes statements associated with that case, as well as statements in cases that follow the matching case.
+
+If no matching case clause is found, the program looks for the optional default clause, and if found, transfers control to that clause, executing the associated statements. If no default clause is found, the program continues execution at the statement following the end of switch.
+
+The optional break statement associated with each case label ensures that the program breaks out of switch once the matched statement is executed and continues execution at the statement following switch. If break is omitted, the program continues execution at the next statement in the switch statement.
+
+**Syntax:**
+```javascript
+switch (expression) {
+  case value1:
+    //Statements executed when the
+    //result of expression matches value1
+    [break;]
+  case value2:
+    //Statements executed when the
+    //result of expression matches value2
+    [break;]
+  ...
+  case valueN:
+    //Statements executed when the
+    //result of expression matches valueN
+    [break;]
+  [default:
+    //Statements executed when none of
+    //the values match the value of the expression
+    [break;]]
+}
+```
+
+**Example:**
+```javascript
+switch (expr) {
+  case 'Oranges':
+    console.log('Oranges are $0.59 a pound.');
+    break;
+  case 'Apples':
+    console.log('Apples are $0.32 a pound.');
+    break;
+  case 'Mangoes':
+  case 'Papayas':
+    console.log('Mangoes and papayas are $2.79 a pound.');
+    break;
+  default:
+    console.log('Sorry, we are out of ' + expr + '.');
+}
+```
+
 #### How to achieve a switch-case-like structure in Python?
 #### Explain variable scoping in Python!
 #### What’s the difference between const and var in JavaScript?
@@ -228,6 +300,34 @@ person.driver = person.age >= 16 ? "You can drive" : "You can't drive";
 
 #### How to import a function from another module in Python?
 #### How to import a function from another module in JavaScript?
+**1. Exporting module features**<br />
+The first thing you need to do to get access to module features is export them. This is done using the export statement.
+You can export functions, var, let, const, and classes. They need to be top-level items; you can't use export inside a function, for example.
+
+**Example:** 
+```javascript
+export const name = 'Zoli';
+
+export function greetings() {
+  return 'Hello World'
+```
+
+**2. Importing features into your script**<br />
+Once you've exported some features out of your module, you need to import them into your script to be able to use them. The simplest way to do this is as follows:
+
+```javascript
+import { name, draw } from './modules/main.js';
+```
+
+Once you've imported the features into your script, you can use them just like they were defined inside the same file.
+
+**3. Applying the module to your HTML**<br />
+Now we just need to apply the main.js module to our HTML page. 
+First of all, you need to include type="module" in the script element, to declare this script as a module:
+
+```html
+<script type="module" src="main.js"></script>
+```
 
 ### Functional
 #### What is recursion?
