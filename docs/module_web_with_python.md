@@ -5,7 +5,20 @@
 ### Clean code
 
 #### Point out 5 suggestions, how to format an SQL query!
-    ?
+- Use upper case: SQL keywords are not case sensitive. However, it is common practice to write them in upper case.
+- Use indentation: put every clause into a new line, and split lines if they would become too long otherwise.
+- Naming: always choose shorter, pronouncable, meaningful names, conveying specific information.
+- Use a collective name or, less ideally, a plural form. For example staff and employees.
+- Never give a table the same name as one of its columns and vice versa.
+- Columns: Always use the singular name.
+- Functions or stored procedures should start with a verb that tells what it does
+- Give consistent, meaningful aliases to joined tables in a query
+- Avoid descriptive prefixes or Hungarian notation
+- Ensure the name is unique and does not exist as a reserved keyword.
+- Use underscores: words are usually either separated by an underscore.
+- Comments: Include comments in SQL code where necessary. /* ... */ opening and closing.
+- Avoid CamelCase: it is difficult to scan quickly.
+
 #### What layers can you name in a simple web application?
 The benefits of using layered models in software development are that it is easier to know exactly what each part of the application does. It makes easier to construct the application, to debug it, and to maintain and reuse the code.
 The standard three layered architecture for Web Applications:
@@ -243,7 +256,45 @@ switch (expr) {
 
 #### How to achieve a switch-case-like structure in Python?
 #### Explain variable scoping in Python!
+Not all variables are accessible from all parts of our program, and not all variables exist for the same amount of time. Where a variable is accessible and how long it exists depend on how it is defined. We call the part of a program where a variable is accessible its scope, and the duration for which the variable exists its lifetime.
+
+**Global:**
+A variable which is defined in the main body of a file is called a global variable. It will be visible throughout the file, and also inside any file which imports that file. Global variables can have unintended consequences because of their wide-ranging effects – that is why we should almost never use them. Only objects which are intended to be used globally, like functions and classes, should be put in the global namespace.
+
+**Local:**
+A variable which is defined inside a function is local to that function. It is accessible from the point at which it is defined until the end of the function, and exists for as long as the function is executing. The parameter names in the function definition behave like local variables, but they contain the values that we pass into the function when we call it. When we use the assignment operator (=) inside a function, its default behaviour is to create a new local variable – unless a variable with the same name is already defined in the local scope.
+
+**Scope resolution via LEGB rule:**
+In Python, the LEGB rule is used to decide the order in which the namespaces are to be searched for scope resolution. 
+- Local (L): Defined inside function/class
+- Enclosed (E): Defined inside enclosing functions (Nested function concept)
+- Global (G): Defined at the uppermost level
+- Built-in (B): Reserved names in Python builtin modules
+
 #### What’s the difference between const and var in JavaScript?
+**Const:**
+Constants are block-scoped, much like variables defined using the let statement. The value of a constant cannot change through reassignment, and it can't be redeclared.
+
+This declaration creates a constant whose scope can be either global or local to the block in which it is declared. Global constants do not become properties of the window object, unlike var variables. An initializer for a constant is required; that is, you must specify its value in the same statement in which it's declared (which makes sense, given that it can't be changed later). The const declaration creates a read-only reference to a value. It does not mean the value it holds is immutable, just that the variable identifier cannot be reassigned. A constant cannot share its name with a function or a variable in the same scope.
+
+**Var:**
+The var statement declares a variable, optionally initializing it to a value. Var declarations, wherever they occur, are processed before any code is executed. This is called hoisting. The scope of a variable declared with var is its current execution context, which is either the enclosing function or, for variables declared outside any function, global. If you re-declare a JavaScript variable, it will not lose its value. Assigning a value to an undeclared variable implicitly creates it as a global variable (it becomes a property of the global object) when the assignment is executed. The differences between declared and undeclared variables are:
+- Declared variables are constrained in the execution context in which they are declared. Undeclared variables are always global.
+- Declared variables are created before any code is executed. Undeclared variables do not exist until the code assigning to them is executed.
+It is recommended to always declare variables, regardless of whether they are in a function or global scope.
+
+var hoisting:
+Because variable declarations (and declarations in general) are processed before any code is executed, declaring a variable anywhere in the code is equivalent to declaring it at the top. This also means that a variable can appear to be used before it's declared. This behavior is called "hoisting", as it appears that the variable declaration is moved to the top of the function or global code. For that reason, it is recommended to always declare variables at the top of their scope (the top of global code and the top of function code) so it's clear which variables are function scoped (local) and which are resolved on the scope chain.
+
+**Let:**
+The let statement declares a block scope local variable, optionally initializing it to a value.
+let allows you to declare variables that are limited to a scope of a block statement, or expression on which it is used, unlike the var keyword, which defines a variable globally, or locally to an entire function regardless of block scope. The other difference between var and let is that the latter is initialized to value only when parser evaluates it. Just like const the let does not create properties of the window object when declared globally. Variables declared by let have their scope in the block for which they are defined, as well as in any contained sub-blocks. In this way, let works very much like var. The main difference is that the scope of a var variable is the entire enclosing function. 
+
+let hoisting:
+let bindings are created at the top of the (block) scope containing the declaration, commonly referred to as "hoisting". Unlike variables declared with var, which will start with the value undefined, let variables are not initialized until their definition is evaluated. Accessing the variable before the initialization results in a ReferenceError. The variable is in a "temporal dead zone" from the start of the block until the initialization is processed.
+
+
+
 #### How the list comprehension looks like in Python?
 List comprehensions provide a concise way to create lists. It consists of brackets containing an expression followed by a for clause, then zero or more for or if clauses. The expressions can be anything, meaning you can put in all kinds of objects in lists. 
 The result will be a new list resulting from evaluating the expression in the context of the for and if clauses which follow it. The list comprehension always returns a result list.
@@ -359,6 +410,9 @@ function fibonacci(num) {
 ```  
 
 #### How to store a function in a variable in Python?
+variable = function 
+**NOT** variable = function(), because it calls the function and stores the return value. It does not store the function. 
+
 #### List the ways of defining a callable logical unit in JavaScript!
 #### What is an event listener? How to attach one?
 #### How to trigger an event in JavaScript?
@@ -561,6 +615,12 @@ A cursor is a temporary work area created in the system memory when a SQL statem
 **Self Referencing Relationships:** This is used when a table needs to have a relationship with itself.
 
 #### You have a table with an “address” field which contains data like “3525, Miskolc, Régiposta 9.” (postcode, city, street name and address). How would you query all records related to Miskolc?
+```sql
+SELECT postcode, streetname, address 
+FROM tablename
+WHERE city = "Miskolc";
+```
+
 #### How would you keep track of what kind of data has changed after an UPDATE or DELETE operation in a table?
 
 ### HTML & CSS
@@ -601,6 +661,19 @@ The current state-of-the-art is to put scripts in the head tag and use the async
 
 
 #### How to include a CSS file in a webpage?
+An external style sheet is used to define the style for many HTML pages. To use an external style sheet, add a link to it in the ```<head>``` section of the HTML page:
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+...
+</body>
+</html>
+```
+
 #### How to select an element using its id in CSS?
 #### How to select elements using their class in CSS?
 #### How to select elements which have the ‘alpha’ and ‘beta’ classes in CSS?
