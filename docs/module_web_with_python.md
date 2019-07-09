@@ -131,11 +131,9 @@ For public and private authentication keys I would use environmental variables. 
 ### Algorithms
 
 #### What is the difference between Stack and Queue data structure?
-**Data structure:** A data structure is a specialized format for organizing and storing data to suit a specific purpose so that it can be accessed and worked with in appropriate ways with various algorithms. 
-General data structure types include the array, the file, the record, the table, the tree, and so on. 
+**Data structure:** A data structure is a specialized format for organizing and storing data to suit a specific purpose so that it can be accessed and worked with in appropriate ways with various algorithms. General data structure types include the array, the file, the record, the table, the tree, and so on. 
 
-**Stack** is an abstract data type with a predefined capacity. It is a simple data structure that allows adding and removing elements in a particular order. 
-Every time an element is added, it goes on the top of the stack and the only element that can be removed is the element that is at the top of the stack, just like a pile of objects. 
+**Stack** is an abstract data type with a predefined capacity. It is a simple data structure that allows adding and removing elements in a particular order. Every time an element is added, it goes on the top of the stack and the only element that can be removed is the element that is at the top of the stack, just like a pile of objects. 
 
 **Basic features of Stack:**
 - Stack is an ordered list of similar data type
@@ -144,34 +142,22 @@ Every time an element is added, it goes on the top of the stack and the only ele
 - Stack is said to be in Overflow state when it is completely full and is said to be in Underflow state if it is completely empty.
 
 **Applications of Stack:**
-- Parsing
+- Parsing, Memory management, Search
 - Expression Conversion, to reverse a word
+- used in "undo" mechanism in text editor
 
-**Analysis of Stack Operations / time complexities for various operations:**
-- Push Operation : O(1)
-- Pop Operation : O(1)
-- Search Operation : O(n)
-
-**Queue** is also an abstract data type or a linear data structure, just like stack data structure. The first element is inserted from one end called the REAR (also called tail), and the removal of existing element takes place from the other end called as FRONT (also called head). 
-This makes queue as FIFO (First in First Out) data structure, which means that element inserted first will be removed first. The process to add an element into queue is called Enqueue and the process of removal of an element from queue is called Dequeue.
-
+**Queue** is also an abstract data type or a linear data structure, just like stack data structure. The first element is inserted from one end called the REAR (also called tail), and the removal of existing element takes place from the other end called as FRONT (also called head. This makes queue as FIFO (First in First Out) data structure, which means that element inserted first will be removed first. The process to add an element into queue is called Enqueue and the process of removal of an element from queue is called Dequeue.
 Real-world example: If you go to a ticket counter to buy movie tickets, and are first in the queue, then you will be the first one to get the tickets.
 
 **Basic features of Queue:**
 - Like stack, queue is also an ordered list of elements of similar data types
 - Queue is a FIFO (First in First Out) structure
 - Once a new element is inserted into the Queue, all the elements inserted before the new element in the queue must be removed
-- peek() function is oftenly used to return the value of first element without dequeuing it
 
 **Applications of Queue:**
-- Serving requests on a single shared resource, like a printer, CPU task scheduling etc
+- Serving requests on a single shared resource, like a printer, CPU task scheduling, Disk Scheduling
 - In real life scenario, Call Center phone systems uses Queues to hold people calling them in an order, until a service representative is free
 - Handling of interrupts in real-time systems. The interrupts are handled in the same order as they arrive i.e First come first served
-
-**Complexity Analysis of Queue Operations:**
-- Enqueue: O(1)
-- Dequeue: O(1)
-- Size: O(1)
 
 #### What is BubbleSort? Describe the main logic of this sorting algorithm.
 #### Explain the process of finding the maximum and minimum value in a list of numbers!
@@ -206,12 +192,8 @@ FROM OrderDetails;
 ```
 
 #### How the switch-case condition works in JavaScript?
-The switch statement executes a block of code depending on different cases.
-The switch statement evaluates an expression, matching the expression's value to a case clause (using the strict comparison, ===), and executes statements associated with that case, as well as statements in cases that follow the matching case.
-
-If no matching case clause is found, the program looks for the optional default clause, and if found, transfers control to that clause, executing the associated statements. If no default clause is found, the program continues execution at the statement following the end of switch.
-
-The optional break statement associated with each case label ensures that the program breaks out of switch once the matched statement is executed and continues execution at the statement following switch. If break is omitted, the program continues execution at the next statement in the switch statement.
+The switch statement executes a block of code depending on different cases, matching the expression's value to a case clause (using the strict comparison, ===), and executes statements associated with that case, as well as statements in cases that follow the matching case.
+If no matching case clause is found, the program looks for the optional **default** clause, and if found, transfers control to that clause, executing the associated statements. If no default clause is found, the program continues execution at the statement following the end of switch. The optional **break** statement associated with each case label ensures that the program breaks out of switch once the matched statement is executed and continues execution at the statement following switch. If break is omitted, the program continues execution at the next statement in the switch statement.
 
 **Syntax:**
 ```javascript
@@ -283,21 +265,18 @@ The var statement declares a variable, optionally initializing it to a value. Va
 - Declared variables are created before any code is executed. Undeclared variables do not exist until the code assigning to them is executed.
 It is recommended to always declare variables, regardless of whether they are in a function or global scope.
 
-var hoisting:
+**var hoisting:**
 Because variable declarations (and declarations in general) are processed before any code is executed, declaring a variable anywhere in the code is equivalent to declaring it at the top. This also means that a variable can appear to be used before it's declared. This behavior is called "hoisting", as it appears that the variable declaration is moved to the top of the function or global code. For that reason, it is recommended to always declare variables at the top of their scope (the top of global code and the top of function code) so it's clear which variables are function scoped (local) and which are resolved on the scope chain.
 
 **Let:**
 The let statement declares a block scope local variable, optionally initializing it to a value.
 let allows you to declare variables that are limited to a scope of a block statement, or expression on which it is used, unlike the var keyword, which defines a variable globally, or locally to an entire function regardless of block scope. The other difference between var and let is that the latter is initialized to value only when parser evaluates it. Just like const the let does not create properties of the window object when declared globally. Variables declared by let have their scope in the block for which they are defined, as well as in any contained sub-blocks. In this way, let works very much like var. The main difference is that the scope of a var variable is the entire enclosing function. 
 
-let hoisting:
+**let hoisting:**
 let bindings are created at the top of the (block) scope containing the declaration, commonly referred to as "hoisting". Unlike variables declared with var, which will start with the value undefined, let variables are not initialized until their definition is evaluated. Accessing the variable before the initialization results in a ReferenceError. The variable is in a "temporal dead zone" from the start of the block until the initialization is processed.
 
-
-
 #### How the list comprehension looks like in Python?
-List comprehensions provide a concise way to create lists. It consists of brackets containing an expression followed by a for clause, then zero or more for or if clauses. The expressions can be anything, meaning you can put in all kinds of objects in lists. 
-The result will be a new list resulting from evaluating the expression in the context of the for and if clauses which follow it. The list comprehension always returns a result list.
+List comprehensions provide a concise way to create lists. It consists of brackets containing an expression followed by a for clause, then zero or more for or if clauses. The expressions can be anything, meaning you can put in all kinds of objects in lists. The result will be a new list resulting from evaluating the expression in the context of the for and if clauses which follow it. The list comprehension always returns a result list.
 
 **Syntax:**
 ```
@@ -354,7 +333,7 @@ from file import function
 #### How to import a function from another module in JavaScript?
 **1. Exporting module features**<br />
 The first thing you need to do to get access to module features is export them. This is done using the export statement.
-You can export functions, var, let, const, and classes. They need to be top-level items; you can't use export inside a function, for example.
+You can export functions, var, let, const, and classes. They need to be top-level items; you can't use export inside a function.
 
 **Example:** 
 ```javascript
@@ -365,13 +344,11 @@ export function greetings() {
 ```
 
 **2. Importing features into your script**<br />
-Once you've exported some features out of your module, you need to import them into your script to be able to use them. The simplest way to do this is as follows:
+Once you've exported some features out of your module, you need to import them into your script to be able to use them. Once you've imported the features into your script, you can use them just like they were defined inside the same file. The simplest way to do this is as follows:
 
 ```javascript
 import { name, draw } from './modules/main.js';
 ```
-
-Once you've imported the features into your script, you can use them just like they were defined inside the same file.
 
 **3. Applying the module to your HTML**<br />
 Now we just need to apply the main.js module to our HTML page. 
@@ -415,8 +392,21 @@ variable = function
 
 #### List the ways of defining a callable logical unit in JavaScript!
 #### What is an event listener? How to attach one?
+In the browser most code is event-driven and writing interactive applications in JavaScript is often about waiting for and reacting to events to alter the behavior of the browser in some way. Events occur when the page loads, when user interacts (clicks, hovers, changes) and many other times, and can be triggered manually too. To register to an event you listen for it and supply a function which will be called by the browser when the event occurs. This function is known as an event listener (aka event handler) which is a type of callback.
+When an event is happening we say the event has been triggered or fired. When js catch an event then we say the event is handled => event handling. 
+
+**How to define event listeners:**
+```javascript
+let element = document.querySelectorAll('.btn')[0];
+element.addEventListener('click', clickHandler);
+
+function clickHandler(event) {
+    console.log('button is clicked');
+}
+``` 
+
 #### How to trigger an event in JavaScript?
-In the browser most code is event-driven and writing interactive applications in JavaScript is often about waiting for and reacting to events, to alter the behavior of the browser in some way. Events occur when the page loads, when user interacts (clicks, hovers, changes) and many other times, and can be triggered manually too. To register to an event you listen for it and supply a function which will be called by the browser when the event occurs. This function is known as an event listener (aka event handler) which is a type of callback.
+In the browser most code is event-driven and writing interactive applications in JavaScript is often about waiting for and reacting to events to alter the behavior of the browser in some way. Events occur when the page loads, when user interacts (clicks, hovers, changes) and many other times, and can be triggered manually too. To register to an event you listen for it and supply a function which will be called by the browser when the event occurs. This function is known as an event listener (aka event handler) which is a type of callback.
 When an event is happening we say the event has been triggered or fired. When js catch an event then we say the event is handled => event handling. 
 
 **How to define event listeners:**
@@ -568,11 +558,12 @@ An aggregate function performs a calculation on a set of values, and returns a s
 
 - COUNT: counts how many rows are in a particular column.
 - SUM: adds together all the values in a particular column.
-- MIN: and MAX return the lowest and highest values in a particular column, respectively.
+- MIN: and MAX return the lowest and highest values in a particular column.
 - AVG: calculates the average of a group of selected values.
 
 #### What kind of JOIN types do you know in SQL? Could you give examples?
 A JOIN clause is used to combine rows from two or more tables, based on a related column between them.<br />
+
 **Different Types of SQL JOINs:**
 - (INNER) JOIN: Returns records that have matching values in both tables
 - LEFT (OUTER) JOIN: Returns all records from the left table, and the matched records from the right table
@@ -601,14 +592,14 @@ column3 datatype constraint,
 ```
 
 #### What is a cursor in SQL? Why would you use one?
-A cursor is a temporary work area created in the system memory when a SQL statement is executed. A cursor contains information on a select statement and the rows of data accessed by it. This temporary work area is used to store the data retrieved from the database, and manipulate this data. A cursor can hold more than one row, but can process only one row at a time. The set of rows the cursor holds is called the active set. A database cursor can be thought of as a pointer to a specific row within a query result. The pointer can be moved from one row to the next. Depending on the type of cursor, you may be even able to move it to the previous row.
+A cursor is a temporary work area created in the system memory when a SQL statement is executed. This temporary work area is used to store the data retrieved from the database, and manipulate this data. A cursor can hold more than one row, but can process only one row at a time. A database cursor can be thought of as a pointer to a specific row within a query result. The pointer can be moved from one row to the next.
 
 #### What are database indexes? When to use?
 #### What are database transactions? When to use?
 #### What kind of database relations do you know? How to define them?
-**One-to-One:** A row in table A can have only one matching row in table B, and vice versa. This is not a common relationship type.
+**One-to-One:** A row in table A can have only one matching row in table B, and vice versa.
 
-**One-to-Many (or Many-to-One):** In this type of relationship, a row in table A can have many matching rows in table B, but a row in table B can have only one matching row in table A. This is the most common relationship type.
+**One-to-Many (or Many-to-One):** a row in table A can have many matching rows in table B, but a row in table B can have only one matching row in table A. This is the most common relationship type.
 
 **Many-to-Many:** a row in table A can have many matching rows in table B, and vice versa. A many-to-many relationship could be thought of as two one-to-many relationships, linked by an intermediary table. The intermediary table is typically referred to as a “junction table” (also as a “cross-reference table”). This table is used to link the other two tables together. It does this by having two fields that reference the primary key of each of the other two tables.
 
@@ -626,18 +617,18 @@ WHERE city = "Miskolc";
 ### HTML & CSS
 
 #### What’s the difference between XML, XHTML and HTML?
-**HTML** is the HyperText Markup Language, which is designed to create structured documents and provide for semantic meaning behind the documents. HTML5 is the next version of the HTML specification.
+**HTML** is the HyperText Markup Language, which is designed to create structured documents and provide for semantic meaning behind the documents.
 
-**XML** is the Extensible Markup Language, which provides rules for creating, structuring, and encoding documents. You often see XML being used to store data and to allow for communication between applications. It's programming language-agnostic - all of the major programming languages provide mechanisms for reading and writing XML documents, either as part of the core or in external libraries.
+**XML** is the Extensible Markup Language, which provides rules for creating, structuring, and encoding documents. You often see XML being used to store data and to allow for communication between applications. All of the major programming languages provide mechanisms for reading and writing XML documents.
 
 **XHTML** is an XML-based HTML. It serves the same function as HTML, but with the same rules as XML documents. These rules deal with the structure of the markup.
 
 #### How to include a JavaScript file in a webpage?
-The script tag is used to define a client-side script (JavaScript). The script element either contains scripting statements, or it points to an external script file through the src attribute.
+The ```<script>``` tag is used to define a client-side script (JavaScript). The ```<script>``` element either contains scripting statements, or it points to an external script file through the src attribute.
 
 **Attributes:** async, defer, src, type, charset
 
-The script tag can be placed in the head section of your HTML, in the body section, or after the /body close tag, depending on when you want the JavaScript to load. Generally, JavaScript code can go inside of the document head section in order to keep them contained and out of the main content of your HTML document. However, if your script needs to run at a certain point within a page’s layout, you should put it at the point where it should be called, usually within the body section.
+The ```<script>``` tag can be placed in the head section of your HTML, in the body section, or after the ```</body>``` close tag, depending on when you want the JavaScript to load. Generally, JavaScript code can go inside of the document head section in order to keep them contained and out of the main content of your HTML document. However, if your script needs to run at a certain point within a page’s layout, you should put it at the point where it should be called, usually within the body section.
 
 **Example:**
 ```html
@@ -658,7 +649,6 @@ Non-blocking script tags can be placed just about anywhere:
 The current state-of-the-art is to put scripts in the head tag and use the async or defer attributes. This allows your scripts to be downloaded asap without blocking your browser.
 
 ```<noscript>:``` element for users that have disabled scripts in their browser, or have a browser that doesn't support client-side scripting.
-
 
 #### How to include a CSS file in a webpage?
 An external style sheet is used to define the style for many HTML pages. To use an external style sheet, add a link to it in the ```<head>``` section of the HTML page:
@@ -687,18 +677,18 @@ An external style sheet is used to define the style for many HTML pages. To use 
 ### Javascript
 
 #### What is javascript?
-JavaScript (JS) is a lightweight interpreted programming language with first-class functions (when functions in that language are treated like any other variable). While it is most well-known as the scripting language for Web pages, many non-browser environments also use it, such as Node.js, Apache CouchDB and Adobe Acrobat. JavaScript is a prototype-based, multi-paradigm, dynamic language, supporting object-oriented, imperative, and declarative (e.g. functional programming) styles. JavaScript runs on the client side of the web, which can be used to design / program how the web pages behave on the occurrence of an event. Another common application for JavaScript is as a (Web) server side scripting language. Node.js is a popular example of this.
+JavaScript (JS) is a lightweight interpreted programming language with first-class functions (when functions in that language are treated like any other variable). JavaScript is a prototype-based, multi-paradigm, dynamic language, supporting object-oriented, imperative, and declarative (e.g. functional programming) styles. JavaScript runs on the client side of the web, which can be used to design / program how the web pages behave on the occurrence of an event. Another common application for JavaScript is as a (Web) server side scripting language. Node.js is a popular example of this.
 
 The standard for JavaScript is ECMAScript. This specification is updated from time to time to contain modern features. After some time different javascript engines (for example in the browsers) implement these new features. ECMAScript 2015 (ES2015 or it was called ES6 some time ago) was a larger change. Current edition: 9th Edition - ECMAScript 2018.
 
 #### When to use AJAX? Bring examples of its usage.
-Ajax is not a technology but group of inter-related technologies. 
+Ajax is not a technology but group of inter-related technologies. AJAX stands for Asynchronous JavaScript And XML. In a nutshell, it is the use of the XMLHttpRequest object to communicate with servers. It can send and receive information in various formats, including JSON, XML, HTML, and text files. AJAX’s most appealing characteristic is its "asynchronous" nature, which means it can communicate with the server, exchange data, and update the page without having to refresh the page.
 
 **AJAX technologies includes:**
 - HTML/XHTML and CSS: These technologies are used for displaying content and style. It is mainly used for presentation.
 - DOM: It is used for dynamic display and interaction with data.
 - XML or JSON: For carrying data to and from server. JSON (Javascript Object Notation) is like XML but short and faster than XML.
-- XMLHttpRequest: For asynchronous communication between client and server
+- XMLHttpRequest / Fetch API: For asynchronous communication between client and server
 - JavaScript: It is used to bring above technologies together.
 
 An object of XMLHttpRequest is used for asynchronous communication between client and server. It performs following operations:
@@ -708,25 +698,8 @@ An object of XMLHttpRequest is used for asynchronous communication between clien
 
 If you use an asynchronous XMLHttpRequest, you receive a callback when the data has been received. This lets the browser continue to work as normal while your request is being handled. Use XMLHttpRequest (XHR) objects to interact with servers. You can retrieve data from a URL without having to do a full page refresh. This enables a Web page to update just part of a page without disrupting what the user is doing. XMLHttpRequest is used heavily in AJAX programming. Despite its name, XMLHttpRequest can be used to retrieve any type of data, not just XML.
 
-AJAX stands for Asynchronous JavaScript And XML. In a nutshell, it is the use of the XMLHttpRequest object to communicate with servers. It can send and receive information in various formats, including JSON, XML, HTML, and text files. AJAX’s most appealing characteristic is its "asynchronous" nature, which means it can communicate with the server, exchange data, and update the page without having to refresh the page.
-
-**The two major features of AJAX allow you to do the following:**
-- Make requests to the server without reloading the page
-- Receive and work with data from the server
-
-**Properties of XMLHttpRequest object:**
-- onReadyStateChange: It is called whenever readystate attribute changes.
-- readyState: 	represents the state of the request. It ranges from 0 to 4.
-- reponseText: returns response as text.
-- responseXML: returns response as XML
-
-**Methods of XMLHttpRequest object:**
-- open(method, URL, async): opens the request specifying get or post method and url, specifies asynchronous or not.
-- send(): sends get request.
-- setRequestHeader(header,value): it adds request headers.
-
 **How AJAX works?**
-AJAX communicates with the server using XMLHttpRequest object.
+AJAX communicates with the server using XMLHttpRequest object / Fetch API.
 1. User sends a request from the UI and a javascript call goes to XMLHttpRequest object.
 2. HTTP Request is sent to the server by XMLHttpRequest object.
 3. Server interacts with the database using JSP, PHP, Servlet, ASP.net etc.
@@ -735,12 +708,12 @@ AJAX communicates with the server using XMLHttpRequest object.
 6. HTML and CSS data is displayed on the browser.
 
 #### What is DOM and how to manipulate it from Javascript?
-The DOM is an API that allows access to and modification of the current document. It allows manipulation of document Node and Element.
-The Document Object Model (DOM) connects web pages to scripts or programming languages by representing the structure of a document—such as the HTML representing a web page—in memory. The DOM is an object-oriented representation of the web page, which can be modified with a scripting language such as JavaScript. The DOM represents a document with a logical tree. Each branch of the tree ends in a node, and each node contains objects. DOM methods allow programmatic access to the tree; with them you can change the document's structure, style, or content. Nodes can also have event handlers attached to them; once an event is triggered, the event handlers get executed. DOM is a WEB API. 
+The DOM is a WEB API that allows access to and modification of the current document. The DOM is an object-oriented representation of the web page, which can be modified with a scripting language such as JavaScript. The DOM represents a document with a logical tree. Each branch of the tree ends in a node, and each node contains objects (elements). DOM methods allow programmatic access to the tree; with them you can change the document's structure, style, or content. Nodes can also have event handlers attached to them; once an event is triggered, the event handlers get executed.
 
 **Most important DOM interfaces:** ChildNode, Document, Event, Node, NodeList, ParentNode, Window...
+
 #### What are events and how/why to use them in Javascript?
-Events are responsible for interaction of JavaScript with HTML web pages. The general definition of event is any act can occur by someone. In the web development, the definition of events is also same. Events can be subscribed by listeners that occurs only when the particular event can be fired. HTML events are "things" that happen to HTML elements. When JavaScript is used in HTML pages, JavaScript can "react" on these events. An HTML event can be something the browser does, or something a user does.
+Events are responsible for interaction of JavaScript with HTML web pages. The general definition of event is any act can occur by someone. Events can be subscribed by listeners that occurs only when the particular event can be fired. HTML events are "things" that happen to HTML elements. When JavaScript is used in HTML pages, JavaScript can "react" on these events. An HTML event can be something the browser does, or something a user does.
 
 **Here are some examples of HTML events:**
 - An HTML web page has finished loading
@@ -748,24 +721,18 @@ Events are responsible for interaction of JavaScript with HTML web pages. The ge
 - An HTML button was clicked
 
 Often, when events happen, you may want to do something. JavaScript lets you execute code when events are detected.
-DOM Events are sent to notify code of interesting things that have taken place. Each event is represented by an object which is based on the Event interface, and may have additional custom fields and/or functions used to get additional information about what happened. Events can represent everything from basic user interactions to automated notifications of things happening in the rendering model. The Event interface represents an event which takes place in the DOM. An event can be triggered by the user action e.g. clicking mouse button or tapping keyboard, or generated by APIs to represent the progress of an asynchronous task. There are many types of events, some of which use other interfaces based on the main Event interface. Event itself contains the properties and methods which are common to all events. Many DOM elements can be set up to accept (or "listen" for) these events, and execute code in response to process (or "handle") them. Event-handlers are usually connected (or "attached") to various HTML elements (such as button, div, span, etc.) using EventTarget.addEventListener(). The Event() constructor creates a new Event.
+DOM Events are sent to notify code of interesting things that have taken place. Each event is represented by an object which is based on the Event interface, and may have additional custom fields and/or functions used to get additional information about what happened. Events can represent everything from basic user interactions to automated notifications of things happening in the rendering model. The Event interface represents an event which takes place in the DOM. An event can be triggered by the user action e.g. clicking mouse button or tapping keyboard or generated by APIs to represent the progress of an asynchronous task. There are many types of events, some of which use other interfaces based on the main Event interface. Many DOM elements can be set up to accept (or "listen" for) these events, and execute code in response to process (or "handle") them. Event-handlers are usually connected (or "attached") to various HTML elements (such as button, div, span, etc.) using EventTarget.addEventListener(). The Event() constructor creates a new Event.
 
 #### What is event bubbling/capturing? How would you use it?
-Event Bubbling and Event Capturing is the foundation of event handler and event delegation in JavaScript. Event bubbling and capturing are two ways of event propagation in the HTML DOM API, when an event occurs in an element inside another element, and both elements have registered a handle for that event. The event propagation mode determines in which order the elements receive the event. Event Bubbling is the event starts from the deepest element or target element to its parents, then all its ancestors which are on the way to bottom to top. Event Capturing is the event starts from top element to target element. 
+Event Bubbling and Event Capturing is the foundation of event handling in JavaScript. Event bubbling and capturing are two ways of event propagation in the HTML DOM API, when an event occurs in an element inside another element, and both elements have registered a handle for that event. The event propagation mode determines in which order the elements receive the event. **Event Bubbling** is the event starts from the deepest element or target element to its parents, then all its ancestors which are on the way to bottom to top. **Event Capturing** is the event starts from top element to target element. 
 
 **With bubbling,** the event is first captured and handled by the innermost element and then propagated to outer elements.<br />
 **With capturing,** the event is first captured by the outermost element and propagated to the inner elements.<br />
 
 We can use the addEventListener(type, listener, useCapture) to register event handlers for in either bubbling (default) or capturing mode. To use the capturing model pass the third argument as true.
 
-**Full View of Event Flow** - every event flow has three phase:
-
-- Event Capturing
-- Event Target
-- Event Bubbling.
-
 #### What is JSON and how do we use it?
-JSON is a string format which is very similar to the one that javascript uses to define objects. Browsers has a built in JSON object to convert a variable to JSON string (JSON.stringify function) and to convert a JSON string back to a variable (JSON.parse function). Data is either converted to or from JSON, using methods called stringify and parse respectively. JSON.stringify converts an object into a JSON string. The string can then be converted back to a JavaScript object using JSON.parse. JSON — JavaScript Object Notation — is a set of text formatting rules for storing and transferring data in a machine and human readable way. It looks a lot like the object literal syntax of JavaScript, and it is from there JSON originates. JSON is used to transfer information - between your browser to a server, or saved in text files for retrieval later - because it’s simply text. That means you can’t store complex data like a function, but you can store arrays objects containing simple data, strings and numbers. JSON is taking over from XML as the data-transfer format of the web, and many new web APIs are written exclusively serving JSON, which can mean that you can be using AJAX technology to grab JSON.
+JSON — JavaScript Object Notation — is a set of text formatting rules (string format) for storing and transferring data in a machine and human readable way. It looks a lot like the object literal syntax of JavaScript, and it is from there JSON originates. JSON is used to transfer information - between your browser to a server, or saved in text files for retrieval later - because it’s simply text. That means you can’t store complex data like a function, but you can store arrays objects containing simple data, strings and numbers. Data is either converted to or from JSON, using methods called stringify and parse respectively. JSON.stringify converts an object into a JSON string. The string can then be converted back to a JavaScript object using JSON.parse. JSON is taking over from XML as the data-transfer format of the web, and many new web APIs are written exclusively serving JSON, which can mean that you can use AJAX technology to grab JSON.
 
 **It is useful to:**
 - send/receive data: between js code and a server / between two servers
@@ -795,8 +762,7 @@ JSON is a string format which is very similar to the one that javascript uses to
 ### Networks
 
 #### What kind of HTTP status codes do you know?
-All HTTP response status codes are separated into five classes (or categories). 
-The first digit of the status code defines the class of response. 
+All HTTP response status codes are separated into five classes (or categories). The first digit of the status code defines the class of response. 
 - 1xx (Informational): The request was received, continuing process
 - 2xx (Successful): The request was successfully received, understood and accepted
 - 3xx (Redirection): Further action needs to be taken in order to complete the request
@@ -812,10 +778,9 @@ The first digit of the status code defines the class of response.
 - 405 Method Not Allowed: A request method is not supported for the requested resource.
 - 408 Request Timeout: The server timed out waiting for the request.
 - 500 Internal Server Error: A generic error message, given when an unexpected condition was encountered. 
-- 501 Not Implemented: The server either does not recognize the request method, or it lacks the ability to fulfil the request.
 
 #### What is a API?
-An API (Application Programming Interface) is a set of features and rules that exist inside a software program (the application) enabling interaction with it through software - as opposed to a human user interface. The API can be seen as a simple contract (the interface) between the application offering it and other items, such as third party software or hardware. An application programming interface (API) is a set of subroutine definitions, communication protocols, and tools for building software. In general terms, it is a set of clearly defined methods of communication among various components. A good API makes it easier to develop a computer program by providing all the building blocks. In Web development, an API is generally a set of code features (e.g. methods, properties, events, and URLs) that a developer can use in their apps for interacting with components of a user's web browser, or other software/hardware on the user's computer, or third party websites and services. When writing code for the Web, there are a great many Web APIs available. Below is a list of all the APIs and interfaces (object types) that you may be able to use while developing your Web app or site. Web APIs are typically used with JavaScript, although this doesn't always have to be the case.
+An API (Application Programming Interface) is a set of features and rules that exist inside a software program (the application) enabling interaction with it through software. In general terms, it is a set of clearly defined methods of communication among various components. A good API makes it easier to develop a computer program by providing all the building blocks. In Web development, an API is generally a set of code features (e.g. methods, properties, events, and URLs) that a developer can use in their apps for interacting with components of a user's web browser, or other software/hardware on the user's computer, or third party websites and services. When writing code for the Web, there are many Web APIs available. Below is a list of all the APIs and interfaces (object types) that you may be able to use while developing your Web app or site. Web APIs are typically used with JavaScript, although this doesn't always have to be the case.
 
 **Examples:**
 Web APIs: DOM, Fetch API, Web Storage API...
@@ -891,6 +856,7 @@ Meetings or “ceremonies” are an important part of agile development. They he
 **Sprint review:** Held at the end of each sprint to demonstrate the added functionality. The goal is to get feedback from the product owner and other stakeholders to ensure that the delivered increment met the business need and to revise the Product Backlog based on the feedback.<br />
 **Sprint retrospective:** Retrospectives typically last 90 minutes and are there to help us incorporate continuous improvement into our team culture and into our Sprint cadence. This is where the Scrum Team meets to reflect on their previous Sprint and to figure out how to improve as a team by asking – what went well, what did not and what can be improved. <br />
 **Daily scrum:** Once we begin a Sprint, we have what we call a Daily Scrum every day. Organized by the Scrum Master, Daily Scrum is typically a 15-minute stand-up meeting to synchronize the work of team members, i.e. what’s done on the prior day, what needs to be done today. 
+
 #### What are the SCRUM artifacts?
 Scrum Artifacts provide key information that the Scrum Team and the stakeholders need to be aware of for understanding the product under development, the activities being planned, and the activities done in the project. The following artifacts are defined in Scrum Process Framework.
 
