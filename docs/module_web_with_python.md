@@ -26,9 +26,9 @@ In Javascript, ReferenceError is raised when the script attempts to access an ob
 Attempting to access an index outside of the array, returns the value undefined.
 
 #### What is the “finally” block, and how would you use it?
-**The try statement** allows you to define a block of code to be tested for errors while it is being executed.
-**The catch statement** allows you to define a block of code to be executed, if an error occurs in the try block.
-**The finally statement** lets you execute code, after try and catch, regardless of the result.
+**The try statement** allows you to define a block of code to be tested for errors while it is being executed.<br />
+**The catch statement** allows you to define a block of code to be executed, if an error occurs in the try block.<br />
+**The finally statement** lets you execute code, after try and catch, regardless of the result.<br />
 
 The catch and finally statements are both optional, but you need to use one of them (if not both) while using the try statement.
 
@@ -49,8 +49,7 @@ finally {
 
 ### Security
 #### What is SQL injection? How to protect an application against it?
-SQL injection is one of the most common web hacking techniques. It's a code injection technique that might destroy the database.
-SQL injection is the placement of malicious code in SQL statements, via web page input. It usually occurs when you ask a user for input, like their username/userid, and instead of a name/id, the user gives you an SQL statement that you will unknowingly run on your database.
+SQL injection is one of the most common web hacking techniques. SQL injection is the placement of malicious code in SQL statements, via web page input that might destroy the database. It usually occurs when you ask a user for input, like their username / userid, and instead of a name / id, the user gives you an SQL statement that you will unknowingly run on your database.
 
 **Example:**
 ```sql
@@ -59,18 +58,17 @@ txtSQL = "SELECT * FROM Users WHERE UserId = " + txtUserId;
 ```
 
 **Protection against SQL injection:**
-- Parameterized Statements: Input validation and parametrized queries including prepared statements. 
+- Input validation and parametrized queries including prepared statements. 
 - The developer must sanitize all input, not only web form inputs such as login forms.
 - Check that supplied fields like email addresses match a regular expression.
 - Ensure that numeric or alphanumeric fields do not contain symbol characters.
 - Reject (or strip) out whitespace and new line characters where they are not appropriate.
 - Turn off the visibility of database errors on your production sites.
 - Escaping Inputs: Ensure proper escaping of special string characters in input parameters.
-- Password Hashing: Applications should store user passwords as strong, one-way hashes, preferably salted. 
 - Third Party Authentication: Facebook, Twitter, and Google all provide mature OAuth APIs, which can be used to let users log into your website using their existing accounts on those systems. This saves you as an application developer from rolling your own authentication, and assures your users that their passwords are only stored in a single location.
 
 #### What is XSS? How to protect an application against it?
-XSS (Cross-site scripting) is a security exploit which allows an attacker to inject malicious client-side code into a website. This code is executed by the victims and lets the attackers bypass access controls and impersonate users, redirecting the victim to a webpage controlled by the attacker. The user's browser cannot detect the malicious script is untrustworthy, and gives it access to any cookies, session tokens, or other sensitive site-specific information, or lets the malicious script rewrite the HTML DOM content. The malicious content often includes JavaScript, but sometimes HTML, Flash, or any other code the browser can execute. Cross-site scripting attacks usually occur when:
+XSS (Cross-site scripting) is a security exploit which allows an attacker to inject malicious client-side code into a website. This code is executed and lets the attackers bypass access controls and impersonate users, redirecting the victim to a webpage controlled by the attacker. The user's browser cannot detect the malicious script is untrustworthy, and gives it access to any cookies, session tokens, or other sensitive site-specific information, or lets the malicious script rewrite the HTML DOM content. The malicious content often includes JavaScript, but sometimes HTML, Flash, or any other code the browser can execute. Cross-site scripting attacks usually occur when:
 - Data enters a Web app through an untrusted source (most often a Web request)
 - Dynamic content is sent to a Web user without being validated for malicious content. 
 
@@ -90,19 +88,16 @@ The general workflow for account registration and authentication in a hash-based
 2. Their password is hashed and the hash is stored in the database. The plain-text (unencrypted) password is never written to the hard drive.
 3. When the user attempts to login, the hash of the password they entered is checked against the hash of their real password.
 4. If the hashes match, the user is granted access. If not, the user is told they entered invalid login credentials.
-5. Steps 3 and 4 repeat every time someone tries to login to their account.
 
 #### What is HTTPS?
-HTTPS (HTTP Secure) is an encrypted version of the HTTP protocol. It usually uses SSL (Secure Sockets Layer) or TLS (Transport Layer Security) protocols to encrypt all communication between a client and a server. 
-This secure connection allows clients to safely exchange sensitive data with a server, for example for banking activities or online shopping.
+HTTPS (HTTP Secure) is an encrypted version of the HTTP protocol. It usually uses SSL (Secure Sockets Layer) or TLS (Transport Layer Security protocols to encrypt all communication between a client and a server. This secure connection allows clients to safely exchange sensitive data with a server, for example for banking activities or online shopping.
 
 #### What is encryption and decryption?
 Encryption is the practice of scrambling information in a way that only someone with a corresponding key can unscramble and read it. Encryption is a two-way function. When you encrypt something, you’re doing so with the intention of decrypting it later.
-To encrypt data you use something called a cipher, which is an algorithm – a series of well-defined steps that can be followed procedurally – to encrypt and decrypt information.
+To encrypt data you use something called a cipher (which is an algorithm) to encrypt and decrypt information.
 
 #### What is hashing?
-Hashing is generating a value or values from a string of text using a mathematical function. Hash algorithms are one way functions. They turn any amount of data into a fixed-length "fingerprint" that cannot be reversed. 
-Well-designed key stretching algorithms such as PBKDF2, bcrypt, and scrypt. 
+Hashing is generating a value or values from a string of text using a mathematical function. Hash algorithms are one way functions. They turn any amount of data into a fixed-length "fingerprint" that cannot be reversed. Well-designed key stretching algorithms such as PBKDF2, bcrypt, and scrypt. 
 
 #### What is the difference between encryption and hashing? When would you use which?
 Encryption is a two-way function. When you encrypt something, you’re doing so with the intention of decrypting it later.
@@ -113,11 +108,10 @@ The key is that encryption is reversible. Hashing is not.
 AES, RSA, ECC, PGP
 
 #### What hashing methods do you know?
-Well-designed key stretching algorithms such as PBKDF2, bcrypt, and scrypt. 
-DO NOT use for password hashing: Fast cryptographic hash functions such as MD5, SHA1, SHA256, SHA512, RipeMD, WHIRLPOOL, SHA3, etc.
+Well-designed key stretching algorithms such as PBKDF2, bcrypt, and scrypt. **DO NOT** use for password hashing: Fast cryptographic hash functions such as MD5, SHA1, SHA256, SHA512, RipeMD, WHIRLPOOL, SHA3, etc.
 
 #### How/where would you store sensitive data (like db password, API key, ...) of your application?
-For public and private authentication keys I would use environmental variables. An environment variable is a KEY=value pair which is set outside the program and stored on the local system where your code/app is being run and is accessible from within your code. The primary use case for environment variables is to limit the need to modify and re-release an application due to changes in configuration data. You can also avoid (accidentally) committing (exposing) your private keys, passwords or other sensitive details (by hard-coding in them in your script) to GitHub by storing them as environment variables. This way we can use our keys and tokens in our local environment and be safe from getting these sensitive data exposed to others on Github.
+For public and private authentication keys I would use environmental variables. An environment variable is a KEY=value pair which is set outside the program and stored on the local system where your code/app is being run and is accessible from within your code. You can also avoid (accidentally) committing (exposing) your private keys, passwords or other sensitive details (by hard-coding in them in your script) to GitHub by storing them as environment variables. This way we can use our keys and tokens in our local environment and be safe from getting these sensitive data exposed to others on Github.
 
 ## Computer science
 
@@ -299,6 +293,13 @@ person.driver = person.age >= 16 ? "You can drive" : "You can't drive";
 ```
 
 #### How to import a function from another module in Python?
+Python code in one module gains access to the code in another module by the process of importing it. The import statement combines two operations; it searches for the named module, then it binds the results of that search to a name in the local scope. When a module is first imported, Python searches for the module and if found, it creates a module object, initializing it. If the named module cannot be found, a ModuleNotFoundError is raised. 
+
+**Example**
+```python
+from file import function
+```
+
 #### How to import a function from another module in JavaScript?
 **1. Exporting module features**<br />
 The first thing you need to do to get access to module features is export them. This is done using the export statement.
@@ -500,97 +501,103 @@ CallBack Function is a function which is passed into another function as an argu
 
 #### How can you connect your application to a database server? What are the possible ways?
 #### When do you use the DISTINCT keyword in SQL?
-    Inside a table, a column often contains many duplicate values; and sometimes you only want to list the different (distinct) values.
-    The SELECT DISTINCT statement is used to return only distinct (different) values.
+Inside a table, a column often contains many duplicate values; and sometimes you only want to list the different (distinct) values. The SELECT DISTINCT statement is used to return only distinct (different) values.
 
-    SELECT DISTINCT Syntax:
-        SELECT DISTINCT column1, column2, ...
-        FROM table_name;
+**SELECT DISTINCT Syntax:**
+```sql
+SELECT DISTINCT column1, column2, ...
+FROM table_name;
+```
 
 #### What are aggregate functions in SQL? Give 3 examples.
-    An aggregate function performs a calculation on a set of values, and returns a single value. Except for COUNT, aggregate functions ignore null values. Aggregate functions are often used with the GROUP BY clause of the SELECT statement. Aggregate functions allow us to easily produce summarized data from our database. 
+An aggregate function performs a calculation on a set of values, and returns a single value. Except for COUNT, aggregate functions ignore null values. Aggregate functions are often used with the GROUP BY clause of the SELECT statement. Aggregate functions allow us to easily produce summarized data from our database. 
 
-    - COUNT: counts how many rows are in a particular column.
-    - SUM: adds together all the values in a particular column.
-    - MIN: and MAX return the lowest and highest values in a particular column, respectively.
-    - AVG: calculates the average of a group of selected values.
+- COUNT: counts how many rows are in a particular column.
+- SUM: adds together all the values in a particular column.
+- MIN: and MAX return the lowest and highest values in a particular column, respectively.
+- AVG: calculates the average of a group of selected values.
 
 #### What kind of JOIN types do you know in SQL? Could you give examples?
-    A JOIN clause is used to combine rows from two or more tables, based on a related column between them.
-    Different Types of SQL JOINs:
-    - (INNER) JOIN: Returns records that have matching values in both tables
-    - LEFT (OUTER) JOIN: Returns all records from the left table, and the matched records from the right table
-    - RIGHT (OUTER) JOIN: Returns all records from the right table, and the matched records from the left table
-    - FULL (OUTER) JOIN: Returns all records when there is a match in either left or right table
+A JOIN clause is used to combine rows from two or more tables, based on a related column between them.<br />
+**Different Types of SQL JOINs:**
+- (INNER) JOIN: Returns records that have matching values in both tables
+- LEFT (OUTER) JOIN: Returns all records from the left table, and the matched records from the right table
+- RIGHT (OUTER) JOIN: Returns all records from the right table, and the matched records from the left table
+- FULL (OUTER) JOIN: Returns all records when there is a match in either left or right table
 
 #### What are the constraints in sql?
-    SQL constraints are used to specify rules for data in a table. Constraints are used to limit the type of data that can go into a table. This ensures the accuracy and reliability of the data in the table. If there is any violation between the constraint and the data action, the action is aborted. Constraints can be column level or table level. Column level constraints apply to a column, and table level constraints apply to the whole table. Constraints can be specified when the table is created with the CREATE TABLE statement, or after the table is created with the ALTER TABLE statement. 
+SQL constraints are used to specify rules for data in a table. Constraints are used to limit the type of data that can go into a table. This ensures the accuracy and reliability of the data in the table. If there is any violation between the constraint and the data action, the action is aborted. Constraints can be column level or table level. Column level constraints apply to a column, and table level constraints apply to the whole table. Constraints can be specified when the table is created with the CREATE TABLE statement, or after the table is created with the ALTER TABLE statement. 
 
-    The following constraints are commonly used in SQL:
-        - NOT NULL - Ensures that a column cannot have a NULL value
-        - UNIQUE - Ensures that all values in a column are different
-        - PRIMARY KEY - A combination of a NOT NULL and UNIQUE. Uniquely identifies each row in a table
-        - FOREIGN KEY - Uniquely identifies a row/record in another table
-        - CHECK - Ensures that all values in a column satisfies a specific condition
-        - DEFAULT - Sets a default value for a column when no value is specified
+**The following constraints are commonly used in SQL:**
+- NOT NULL - Ensures that a column cannot have a NULL value
+- UNIQUE - Ensures that all values in a column are different
+- PRIMARY KEY - A combination of a NOT NULL and UNIQUE. Uniquely identifies each row in a table
+- FOREIGN KEY - Uniquely identifies a row/record in another table
+- CHECK - Ensures that all values in a column satisfies a specific condition
+- DEFAULT - Sets a default value for a column when no value is specified
 
-    Syntax:
-        CREATE TABLE table_name (
-        column1 datatype constraint,
-        column2 datatype constraint,
-        column3 datatype constraint,
-        ....
-    );
-
+**Syntax:**
+```sql
+CREATE TABLE table_name (
+column1 datatype constraint,
+column2 datatype constraint,
+column3 datatype constraint,
+....
+);
+```
 
 #### What is a cursor in SQL? Why would you use one?
-    A cursor is a temporary work area created in the system memory when a SQL statement is executed. A cursor contains information on a select statement and the rows of data accessed by it. This temporary work area is used to store the data retrieved from the database, and manipulate this data. A cursor can hold more than one row, but can process only one row at a time. The set of rows the cursor holds is called the active set. A database cursor can be thought of as a pointer to a specific row within a query result.  The pointer can be moved from one row to the next.  Depending on the type of cursor, you may be even able to move it to the previous row.
+A cursor is a temporary work area created in the system memory when a SQL statement is executed. A cursor contains information on a select statement and the rows of data accessed by it. This temporary work area is used to store the data retrieved from the database, and manipulate this data. A cursor can hold more than one row, but can process only one row at a time. The set of rows the cursor holds is called the active set. A database cursor can be thought of as a pointer to a specific row within a query result. The pointer can be moved from one row to the next. Depending on the type of cursor, you may be even able to move it to the previous row.
 
 #### What are database indexes? When to use?
 #### What are database transactions? When to use?
 #### What kind of database relations do you know? How to define them?
-    One-to-One: A row in table A can have only one matching row in table B, and vice versa. This is not a common relationship type.
+**One-to-One:** A row in table A can have only one matching row in table B, and vice versa. This is not a common relationship type.
 
-    One-to-Many (or Many-to-One): In this type of relationship, a row in table A can have many matching rows in table B, but a row in table B can have only one matching row in table A. This is the most common relationship type.
+**One-to-Many (or Many-to-One):** In this type of relationship, a row in table A can have many matching rows in table B, but a row in table B can have only one matching row in table A. This is the most common relationship type.
 
-    Many-to-Many: a row in table A can have many matching rows in table B, and vice versa. A many-to-many relationship could be thought of as two one-to-many relationships, linked by an intermediary table. The intermediary table is typically referred to as a “junction table” (also as a “cross-reference table”). This table is used to link the other two tables together. It does this by having two fields that reference the primary key of each of the other two tables.
+**Many-to-Many:** a row in table A can have many matching rows in table B, and vice versa. A many-to-many relationship could be thought of as two one-to-many relationships, linked by an intermediary table. The intermediary table is typically referred to as a “junction table” (also as a “cross-reference table”). This table is used to link the other two tables together. It does this by having two fields that reference the primary key of each of the other two tables.
 
-    Self Referencing Relationships: This is used when a table needs to have a relationship with itself.
+**Self Referencing Relationships:** This is used when a table needs to have a relationship with itself.
+
 #### You have a table with an “address” field which contains data like “3525, Miskolc, Régiposta 9.” (postcode, city, street name and address). How would you query all records related to Miskolc?
 #### How would you keep track of what kind of data has changed after an UPDATE or DELETE operation in a table?
 
 ### HTML & CSS
 
 #### What’s the difference between XML, XHTML and HTML?
-    HTML is the HyperText Markup Language, which is designed to create structured documents and provide for semantic meaning behind the documents. HTML5 is the next version of the HTML specification.
+**HTML** is the HyperText Markup Language, which is designed to create structured documents and provide for semantic meaning behind the documents. HTML5 is the next version of the HTML specification.
 
-    XML is the Extensible Markup Language, which provides rules for creating, structuring, and encoding documents. You often see XML being used to store data and to allow for communication between applications. It's programming language-agnostic - all of the major programming languages provide mechanisms for reading and writing XML documents, either as part of the core or in external libraries.
+**XML** is the Extensible Markup Language, which provides rules for creating, structuring, and encoding documents. You often see XML being used to store data and to allow for communication between applications. It's programming language-agnostic - all of the major programming languages provide mechanisms for reading and writing XML documents, either as part of the core or in external libraries.
 
-    XHTML is an XML-based HTML. It serves the same function as HTML, but with the same rules as XML documents. These rules deal with the structure of the markup.
+**XHTML** is an XML-based HTML. It serves the same function as HTML, but with the same rules as XML documents. These rules deal with the structure of the markup.
+
 #### How to include a JavaScript file in a webpage?
-    The <script> tag is used to define a client-side script (JavaScript).
-    The <script> element either contains scripting statements, or it points to an external script file through the src attribute.
-    Attributes:
-        async, defer, src, type, charset
+The script tag is used to define a client-side script (JavaScript). The script element either contains scripting statements, or it points to an external script file through the src attribute.
 
-    The <script> tag can be placed in the <head> section of your HTML, in the <body> section, or after the </body> close tag, depending on when you want the JavaScript to load. Generally, JavaScript code can go inside of the document <head> section in order to keep them contained and out of the main content of your HTML document. However, if your script needs to run at a certain point within a page’s layout, you should put it at the point where it should be called, usually within the <body> section.
+**Attributes:** async, defer, src, type, charset
 
-    Example:
-        <script src="myscripts.js"></script>
-    
-    Note: There are several ways an external script can be executed:
-    - If async="async": The script is executed asynchronously with the rest of the page (the script will be executed while the page continues the parsing)
-    - If async is not present and defer="defer": The script is executed when the page has finished parsing
-    - If neither async or defer is present: The script is fetched and executed immediately, before the browser continues parsing the page
+The script tag can be placed in the head section of your HTML, in the body section, or after the /body close tag, depending on when you want the JavaScript to load. Generally, JavaScript code can go inside of the document head section in order to keep them contained and out of the main content of your HTML document. However, if your script needs to run at a certain point within a page’s layout, you should put it at the point where it should be called, usually within the body section.
 
-    Non-blocking script tags can be placed just about anywhere:
-        <script src="script.js" async></script>
-        <script src="script.js" defer></script>
-        <script src="script.js" async defer></script>
-    
-    The current state-of-the-art is to put scripts in the <head> tag and use the async or defer attributes. This allows your scripts to be downloaded asap without blocking your browser.
+**Example:**
+```html
+<script src="myscripts.js"></script>
+```
+**Note:** There are several ways an external script can be executed:
+- If async="async": The script is executed asynchronously with the rest of the page (the script will be executed while the page continues the parsing)
+- If async is not present and defer="defer": The script is executed when the page has finished parsing
+- If neither async or defer is present: The script is fetched and executed immediately, before the browser continues parsing the page
 
-    <noscript>: element for users that have disabled scripts in their browser, or have a browser that doesn't support client-side scripting.
+Non-blocking script tags can be placed just about anywhere:
+```html
+<script src="script.js" async></script>
+<script src="script.js" defer></script>
+<script src="script.js" async defer></script>
+```
+
+The current state-of-the-art is to put scripts in the head tag and use the async or defer attributes. This allows your scripts to be downloaded asap without blocking your browser.
+
+```<noscript>:``` element for users that have disabled scripts in their browser, or have a browser that doesn't support client-side scripting.
 
 
 #### How to include a CSS file in a webpage?
@@ -607,97 +614,94 @@ CallBack Function is a function which is passed into another function as an argu
 ### Javascript
 
 #### What is javascript?
-    JavaScript (JS) is a lightweight interpreted programming language with first-class functions (when functions in that language are treated like any other variable). While it is most well-known as the scripting language for Web pages, many non-browser environments also use it, such as Node.js, Apache CouchDB and Adobe Acrobat. JavaScript is a prototype-based, multi-paradigm, dynamic language, supporting object-oriented, imperative, and declarative (e.g. functional programming) styles. JavaScript runs on the client side of the web, which can be used to design / program how the web pages behave on the occurrence of an event. Another common application for JavaScript is as a (Web) server side scripting language. Node.js is a popular example of this.
-    
-    The standard for JavaScript is ECMAScript. This specification is updated from time to time to contain modern features. After some time different javascript engines (for example in the browsers) implement these new features. ECMAScript 2015 (ES2015 or it was called ES6 some time ago) was a larger change. Current edition: 9th Edition - ECMAScript 2018.
+JavaScript (JS) is a lightweight interpreted programming language with first-class functions (when functions in that language are treated like any other variable). While it is most well-known as the scripting language for Web pages, many non-browser environments also use it, such as Node.js, Apache CouchDB and Adobe Acrobat. JavaScript is a prototype-based, multi-paradigm, dynamic language, supporting object-oriented, imperative, and declarative (e.g. functional programming) styles. JavaScript runs on the client side of the web, which can be used to design / program how the web pages behave on the occurrence of an event. Another common application for JavaScript is as a (Web) server side scripting language. Node.js is a popular example of this.
+
+The standard for JavaScript is ECMAScript. This specification is updated from time to time to contain modern features. After some time different javascript engines (for example in the browsers) implement these new features. ECMAScript 2015 (ES2015 or it was called ES6 some time ago) was a larger change. Current edition: 9th Edition - ECMAScript 2018.
 
 #### When to use AJAX? Bring examples of its usage.
-    Ajax is not a technology but group of inter-related technologies. 
-    AJAX technologies includes:
-    - HTML/XHTML and CSS: These technologies are used for displaying content and style. It is mainly used for presentation.
-    - DOM: It is used for dynamic display and interaction with data.
-    - XML or JSON: For carrying data to and from server. JSON (Javascript Object Notation) is like XML but short and faster than XML.
-    - XMLHttpRequest: For asynchronous communication between client and server
-    - JavaScript: It is used to bring above technologies together.
+Ajax is not a technology but group of inter-related technologies. 
 
-    An object of XMLHttpRequest is used for asynchronous communication between client and server. It performs following operations:
-    - Sends data from the client in the background
-    - Receives the data from the server
-    - Updates the webpage without reloading it.
-    If you use an asynchronous XMLHttpRequest, you receive a callback when the data has been received. This lets the browser continue to work as normal while your request is being handled. Use XMLHttpRequest (XHR) objects to interact with servers. You can retrieve data from a URL without having to do a full page refresh. This enables a Web page to update just part of a page without disrupting what the user is doing. XMLHttpRequest is used heavily in AJAX programming. Despite its name, XMLHttpRequest can be used to retrieve any type of data, not just XML.
+**AJAX technologies includes:**
+- HTML/XHTML and CSS: These technologies are used for displaying content and style. It is mainly used for presentation.
+- DOM: It is used for dynamic display and interaction with data.
+- XML or JSON: For carrying data to and from server. JSON (Javascript Object Notation) is like XML but short and faster than XML.
+- XMLHttpRequest: For asynchronous communication between client and server
+- JavaScript: It is used to bring above technologies together.
 
-    AJAX stands for Asynchronous JavaScript And XML. In a nutshell, it is the use of the XMLHttpRequest object to communicate with servers. It can send and receive information in various formats, including JSON, XML, HTML, and text files. AJAX’s most appealing characteristic is its "asynchronous" nature, which means it can communicate with the server, exchange data, and update the page without having to refresh the page.
-    The two major features of AJAX allow you to do the following:
-    - Make requests to the server without reloading the page
-    - Receive and work with data from the server
+An object of XMLHttpRequest is used for asynchronous communication between client and server. It performs following operations:
+- Sends data from the client in the background
+- Receives the data from the server
+- Updates the webpage without reloading it.
 
-    Properties of XMLHttpRequest object:
-    - onReadyStateChange: It is called whenever readystate attribute changes.
-    - readyState: 	represents the state of the request. It ranges from 0 to 4.
-    - reponseText: returns response as text.
-    - responseXML: returns response as XML
+If you use an asynchronous XMLHttpRequest, you receive a callback when the data has been received. This lets the browser continue to work as normal while your request is being handled. Use XMLHttpRequest (XHR) objects to interact with servers. You can retrieve data from a URL without having to do a full page refresh. This enables a Web page to update just part of a page without disrupting what the user is doing. XMLHttpRequest is used heavily in AJAX programming. Despite its name, XMLHttpRequest can be used to retrieve any type of data, not just XML.
 
-    Methods of XMLHttpRequest object:
-    - open(method, URL, async): opens the request specifying get or post method and url, specifies asynchronous or not.
-    - send(): sends get request.
-    - setRequestHeader(header,value): it adds request headers.
+AJAX stands for Asynchronous JavaScript And XML. In a nutshell, it is the use of the XMLHttpRequest object to communicate with servers. It can send and receive information in various formats, including JSON, XML, HTML, and text files. AJAX’s most appealing characteristic is its "asynchronous" nature, which means it can communicate with the server, exchange data, and update the page without having to refresh the page.
 
-    How AJAX works?
-    AJAX communicates with the server using XMLHttpRequest object.
-    1. User sends a request from the UI and a javascript call goes to XMLHttpRequest object.
-    2. HTTP Request is sent to the server by XMLHttpRequest object.
-    3. Server interacts with the database using JSP, PHP, Servlet, ASP.net etc.
-    4. Data is retrieved.
-    5. Server sends XML data or JSON data to the XMLHttpRequest callback function.
-    6. HTML and CSS data is displayed on the browser.
+**The two major features of AJAX allow you to do the following:**
+- Make requests to the server without reloading the page
+- Receive and work with data from the server
+
+**Properties of XMLHttpRequest object:**
+- onReadyStateChange: It is called whenever readystate attribute changes.
+- readyState: 	represents the state of the request. It ranges from 0 to 4.
+- reponseText: returns response as text.
+- responseXML: returns response as XML
+
+**Methods of XMLHttpRequest object:**
+- open(method, URL, async): opens the request specifying get or post method and url, specifies asynchronous or not.
+- send(): sends get request.
+- setRequestHeader(header,value): it adds request headers.
+
+**How AJAX works?**
+AJAX communicates with the server using XMLHttpRequest object.
+1. User sends a request from the UI and a javascript call goes to XMLHttpRequest object.
+2. HTTP Request is sent to the server by XMLHttpRequest object.
+3. Server interacts with the database using JSP, PHP, Servlet, ASP.net etc.
+4. Data is retrieved.
+5. Server sends XML data or JSON data to the XMLHttpRequest callback function.
+6. HTML and CSS data is displayed on the browser.
 
 #### What is DOM and how to manipulate it from Javascript?
-    The DOM is an API that allows access to and modification of the current document. It allows manipulation of document Node and Element.
-    The Document Object Model (DOM) connects web pages to scripts or programming languages by representing the structure of a document—such as the HTML representing a web page—in memory. The DOM is an object-oriented representation of the web page, which can be modified with a scripting language such as JavaScript. The DOM represents a document with a logical tree. Each branch of the tree ends in a node, and each node contains objects. DOM methods allow programmatic access to the tree; with them you can change the document's structure, style, or content. Nodes can also have event handlers attached to them; once an event is triggered, the event handlers get executed. DOM is a WEB API. 
+The DOM is an API that allows access to and modification of the current document. It allows manipulation of document Node and Element.
+The Document Object Model (DOM) connects web pages to scripts or programming languages by representing the structure of a document—such as the HTML representing a web page—in memory. The DOM is an object-oriented representation of the web page, which can be modified with a scripting language such as JavaScript. The DOM represents a document with a logical tree. Each branch of the tree ends in a node, and each node contains objects. DOM methods allow programmatic access to the tree; with them you can change the document's structure, style, or content. Nodes can also have event handlers attached to them; once an event is triggered, the event handlers get executed. DOM is a WEB API. 
 
-    Most important DOM interfaces: ChildNode, Document, Event, Node, NodeList, ParentNode, Window...
+**Most important DOM interfaces:** ChildNode, Document, Event, Node, NodeList, ParentNode, Window...
 #### What are events and how/why to use them in Javascript?
-    Events are responsible for interaction of JavaScript with HTML web pages. The general definition of event is any act can occur by someone. In the web development, the definition of events is also same. Events can be subscribed by listeners that occurs only when the particular event can be fired. HTML events are "things" that happen to HTML elements. When JavaScript is used in HTML pages, JavaScript can "react" on these events. An HTML event can be something the browser does, or something a user does.
-    Here are some examples of HTML events:
-        - An HTML web page has finished loading
-        - An HTML input field was changed
-        - An HTML button was clicked
+Events are responsible for interaction of JavaScript with HTML web pages. The general definition of event is any act can occur by someone. In the web development, the definition of events is also same. Events can be subscribed by listeners that occurs only when the particular event can be fired. HTML events are "things" that happen to HTML elements. When JavaScript is used in HTML pages, JavaScript can "react" on these events. An HTML event can be something the browser does, or something a user does.
 
-    Often, when events happen, you may want to do something. JavaScript lets you execute code when events are detected.
+**Here are some examples of HTML events:**
+- An HTML web page has finished loading
+- An HTML input field was changed
+- An HTML button was clicked
 
-    DOM Events are sent to notify code of interesting things that have taken place. Each event is represented by an object which is based on the Event interface, and may have additional custom fields and/or functions used to get additional information about what happened. Events can represent everything from basic user interactions to automated notifications of things happening in the rendering model.
-    The Event interface represents an event which takes place in the DOM. An event can be triggered by the user action e.g. clicking mouse button or tapping keyboard, or generated by APIs to represent the progress of an asynchronous task. There are many types of events, some of which use other interfaces based on the main Event interface. Event itself contains the properties and methods which are common to all events. Many DOM elements can be set up to accept (or "listen" for) these events, and execute code in response to process (or "handle") them. Event-handlers are usually connected (or "attached") to various HTML elements (such as <button>, <div>, <span>, etc.) using EventTarget.addEventListener(). The Event() constructor creates a new Event.
-
+Often, when events happen, you may want to do something. JavaScript lets you execute code when events are detected.
+DOM Events are sent to notify code of interesting things that have taken place. Each event is represented by an object which is based on the Event interface, and may have additional custom fields and/or functions used to get additional information about what happened. Events can represent everything from basic user interactions to automated notifications of things happening in the rendering model. The Event interface represents an event which takes place in the DOM. An event can be triggered by the user action e.g. clicking mouse button or tapping keyboard, or generated by APIs to represent the progress of an asynchronous task. There are many types of events, some of which use other interfaces based on the main Event interface. Event itself contains the properties and methods which are common to all events. Many DOM elements can be set up to accept (or "listen" for) these events, and execute code in response to process (or "handle") them. Event-handlers are usually connected (or "attached") to various HTML elements (such as button, div, span, etc.) using EventTarget.addEventListener(). The Event() constructor creates a new Event.
 
 #### What is event bubbling/capturing? How would you use it?
-    Event Bubbling and Event Capturing is the foundation of event handler and event delegation in JavaScript.
-    Event bubbling and capturing are two ways of event propagation in the HTML DOM API, when an event occurs in an element inside another element, and both elements have registered a handle for that event. The event propagation mode determines in which order the elements receive the event. Event Bubbling is the event starts from the deepest element or target element to its parents, then all its ancestors which are on the way to bottom to top. Event Capturing is the event starts from top element to target element. 
+Event Bubbling and Event Capturing is the foundation of event handler and event delegation in JavaScript. Event bubbling and capturing are two ways of event propagation in the HTML DOM API, when an event occurs in an element inside another element, and both elements have registered a handle for that event. The event propagation mode determines in which order the elements receive the event. Event Bubbling is the event starts from the deepest element or target element to its parents, then all its ancestors which are on the way to bottom to top. Event Capturing is the event starts from top element to target element. 
 
-    With bubbling, the event is first captured and handled by the innermost element and then propagated to outer elements.
-    With capturing, the event is first captured by the outermost element and propagated to the inner elements.
+**With bubbling,** the event is first captured and handled by the innermost element and then propagated to outer elements.<br />
+**With capturing,** the event is first captured by the outermost element and propagated to the inner elements.<br />
 
-    We can use the addEventListener(type, listener, useCapture) to register event handlers for in either bubbling (default) or capturing mode. To use the capturing model pass the third argument as true.
+We can use the addEventListener(type, listener, useCapture) to register event handlers for in either bubbling (default) or capturing mode. To use the capturing model pass the third argument as true.
 
-    Full View of Event Flow :
-    Every event flow has three phase:
+**Full View of Event Flow** - every event flow has three phase:
 
-        - Event Capturing
-        - Event Target
-        - Event Bubbling.
+- Event Capturing
+- Event Target
+- Event Bubbling.
 
 #### What is JSON and how do we use it?
-    JSON is a string format which is very similar to the one that javascript uses to define objects. Browsers has a built in JSON object to convert a variable to JSON string (JSON.stringify function) and to convert a JSON string back to a variable (JSON.parse function). Data is either converted to or from JSON, using methods called stringify and parse respectively.
-    JSON.stringify converts an object into a JSON string. The string can then be converted back to a JavaScript object using JSON.parse.
-    JSON — JavaScript Object Notation — is a set of text formatting rules for storing and transferring data in a machine and human readable way. It looks a lot like the object literal syntax of JavaScript, and it is from there JSON originates.
-    JSON is used to transfer information - between your browser to a server, or saved in text files for retrieval later - because it’s simply text. That means you can’t store complex data like a function, but you can store arrays, objects containing simple data, strings and numbers. JSON is taking over from XML as the data-transfer format of the web, and many new web APIs are written exclusively serving JSON, which can mean that you can be using AJAX technology to grab JSON.
-    It is useful to:
-        - send/receive data: between js code and a server / between two servers
-        - store data: in localStorage or sessionStorage which can save only strings
-    
-    Example:
-        { "name": "Yoda", age: 894, "lightsaber" : { "color": "green" } }
+JSON is a string format which is very similar to the one that javascript uses to define objects. Browsers has a built in JSON object to convert a variable to JSON string (JSON.stringify function) and to convert a JSON string back to a variable (JSON.parse function). Data is either converted to or from JSON, using methods called stringify and parse respectively. JSON.stringify converts an object into a JSON string. The string can then be converted back to a JavaScript object using JSON.parse. JSON — JavaScript Object Notation — is a set of text formatting rules for storing and transferring data in a machine and human readable way. It looks a lot like the object literal syntax of JavaScript, and it is from there JSON originates. JSON is used to transfer information - between your browser to a server, or saved in text files for retrieval later - because it’s simply text. That means you can’t store complex data like a function, but you can store arrays objects containing simple data, strings and numbers. JSON is taking over from XML as the data-transfer format of the web, and many new web APIs are written exclusively serving JSON, which can mean that you can be using AJAX technology to grab JSON.
 
+**It is useful to:**
+- send/receive data: between js code and a server / between two servers
+- store data: in localStorage or sessionStorage which can save only strings
 
+**Example:**
+```javascript
+{ "name": "Yoda", age: 894, "lightsaber" : { "color": "green" } }
+```
 
 ## Software engineering
 
@@ -718,90 +722,81 @@ CallBack Function is a function which is passed into another function as an argu
 ### Networks
 
 #### What kind of HTTP status codes do you know?
-    All HTTP response status codes are separated into five classes (or categories). 
-    The first digit of the status code defines the class of response. 
-        1xx (Informational): The request was received, continuing process
-        2xx (Successful): The request was successfully received, understood and accepted
-        3xx (Redirection): Further action needs to be taken in order to complete the request
-        4xx (Client Error): The request contains bad syntax or cannot be fulfilled
-        5xx (Server Error): The server failed to fulfill an apparently valid request
-    
-    Most important status codes:
-        200 OK: Standard response for successful HTTP requests.
-        301 Moved Permanently: This and all future requests should be directed to the given URI.
-        400 Bad Request: The server cannot or will not process the request due to an apparent client error. 
-        403 Forbidden: The request was valid, but the server is refusing action. The user might not have the necessary permissions.
-        404 Not Found: The requested resource could not be found but may be available in the future.
-        405 Method Not Allowed: A request method is not supported for the requested resource.
-        408 Request Timeout: The server timed out waiting for the request.
-        500 Internal Server Error: A generic error message, given when an unexpected condition was encountered. 
-        501 Not Implemented: The server either does not recognize the request method, or it lacks the ability to fulfil the request.
-#### What is a API?
-    An API (Application Programming Interface) is a set of features and rules that exist inside a software program (the application) enabling interaction with it through software - as opposed to a human user interface. The API can be seen as a simple contract (the interface) between the application offering it and other items, such as third party software or hardware. 
-    An application programming interface (API) is a set of subroutine definitions, communication protocols, and tools for building software. In general terms, it is a set of clearly defined methods of communication among various components. A good API makes it easier to develop a computer program by providing all the building blocks. In Web development, an API is generally a set of code features (e.g. methods, properties, events, and URLs) that a developer can use in their apps for interacting with components of a user's web browser, or other software/hardware on the user's computer, or third party websites and services. 
-    When writing code for the Web, there are a great many Web APIs available. Below is a list of all the APIs and interfaces (object types) that you may be able to use while developing your Web app or site. Web APIs are typically used with JavaScript, although this doesn't always have to be the case.
+All HTTP response status codes are separated into five classes (or categories). 
+The first digit of the status code defines the class of response. 
+- 1xx (Informational): The request was received, continuing process
+- 2xx (Successful): The request was successfully received, understood and accepted
+- 3xx (Redirection): Further action needs to be taken in order to complete the request
+- 4xx (Client Error): The request contains bad syntax or cannot be fulfilled
+- 5xx (Server Error): The server failed to fulfill an apparently valid request
 
-    Web APIs: DOM, Fetch API, Web Storage API...
+**Most important status codes:**
+- 200 OK: Standard response for successful HTTP requests.
+- 301 Moved Permanently: This and all future requests should be directed to the given URI.
+- 400 Bad Request: The server cannot or will not process the request due to an apparent client error. 
+- 403 Forbidden: The request was valid, but the server is refusing action. The user might not have the necessary permissions.
+- 404 Not Found: The requested resource could not be found but may be available in the future.
+- 405 Method Not Allowed: A request method is not supported for the requested resource.
+- 408 Request Timeout: The server timed out waiting for the request.
+- 500 Internal Server Error: A generic error message, given when an unexpected condition was encountered. 
+- 501 Not Implemented: The server either does not recognize the request method, or it lacks the ability to fulfil the request.
+
+#### What is a API?
+An API (Application Programming Interface) is a set of features and rules that exist inside a software program (the application) enabling interaction with it through software - as opposed to a human user interface. The API can be seen as a simple contract (the interface) between the application offering it and other items, such as third party software or hardware. An application programming interface (API) is a set of subroutine definitions, communication protocols, and tools for building software. In general terms, it is a set of clearly defined methods of communication among various components. A good API makes it easier to develop a computer program by providing all the building blocks. In Web development, an API is generally a set of code features (e.g. methods, properties, events, and URLs) that a developer can use in their apps for interacting with components of a user's web browser, or other software/hardware on the user's computer, or third party websites and services. When writing code for the Web, there are a great many Web APIs available. Below is a list of all the APIs and interfaces (object types) that you may be able to use while developing your Web app or site. Web APIs are typically used with JavaScript, although this doesn't always have to be the case.
+
+**Examples:**
+Web APIs: DOM, Fetch API, Web Storage API...
+
 #### What is REST API?
 #### What is JSON? When to use?
-    JSON (JavaScript Object Notation) is a lightweight data-interchange format. It is easy for humans to read and write. 
-    JSON is a text format that is completely language independent. JSON is a syntax for storing and exchanging data.
-    When exchanging data between a browser and a server, the data can only be text.
-    JSON is text, and we can convert any JavaScript object into JSON, and send JSON to the server.
-    We can also convert any JSON received from the server into JavaScript objects.
-    This way we can work with the data as JavaScript objects, with no complicated parsing and translations.
-    JSON uses JavaScript syntax, but the JSON format is text only.
-    Text can be read and used as a data format by any programming language.
+JSON (JavaScript Object Notation) is a lightweight data-interchange format. It is easy for humans to read and write. JSON is a text format that is completely language independent. JSON is a syntax for storing and exchanging data. When exchanging data between a browser and a server, the data can only be text. JSON is text, and we can convert any JavaScript object into JSON, and send JSON to the server. We can also convert any JSON received from the server into JavaScript objects. This way we can work with the data as JavaScript objects, with no complicated parsing and translations. JSON uses JavaScript syntax, but the JSON format is text only. Text can be read and used as a data format by any programming language.
 
-    JSON is built on two structures: 
-        A collection of name/value pairs. In various languages, this is realized as an object, dictionary, hash table. 
-        An ordered list of values. In most languages, this is realized as an array, vector, list, or sequence.
+**JSON is built on two structures:** 
+- A collection of name/value pairs. In various languages, this is realized as an object, dictionary, hash table. 
+- An ordered list of values. In most languages, this is realized as an array, vector, list, or sequence.
     
-    Methods:
-        JSON.parse(): Parse a string as JSON, optionally transform the produced value and its properties, and return the value.
-        JSON.stringify(): Return a JSON string corresponding to the specified value.
+**Methods:**
+- JSON.parse(): Parse a string as JSON, optionally transform the produced value and its properties, and return the value.
+- JSON.stringify(): Return a JSON string corresponding to the specified value.
 
-    Example:
-        var myObj = {name: "John", age: 31, city: "New York"};
-        var myJSON = JSON.stringify(myObj);
+**Example:**
+```javascript
+var myObj = {name: "John", age: 31, city: "New York"};
+var myJSON = JSON.stringify(myObj);
 
-        var myJSON = '{"name":"John", "age":31, "city":"New York"}';
-        var myObj = JSON.parse(myJSON);
+var myJSON = '{"name":"John", "age":31, "city":"New York"}';
+var myObj = JSON.parse(myJSON);
+```
+
 #### What is TCP/IP? What layers does it define, what are they responsible for?
 #### What’s the difference between TCP and UDP?
 #### How does an HTTP Request look like? What are the most relevant HTTP header fields?
 #### How does an HTTP Response look like? What are the most relevant HTTP header fields?
 #### What is DNS? How does it work?
-    Domain Name Servers are like an address book for websites. When you type a web address in your browser, 
-    the browser looks at the DNS to find the website's real address before it can retrieve the website. 
-    The browser needs to find out which server the website lives on, so it can send HTTP messages to the right place. 
-    The Domain Name System (DNS) is a hierarchical and decentralized naming system for computers, services, or other 
-    resources connected to the Internet or a private network. Web browsers interact through Internet Protocol (IP) addresses. 
-    DNS translates domain names to IP addresses so browsers can load Internet resources. Each device connected to the Internet 
-    has a unique IP address which other machines use to find the device. The process of DNS resolution involves converting 
-    a hostname (such as www.example.com) into a computer-friendly IP address (such as 192.168.1.1). A DNS name server is 
-    a server that stores the DNS records for a domain; a DNS name server responds with answers to queries against its database.
+Domain Name Servers are like an address book for websites. When you type a web address in your browser, the browser looks at the DNS to find the website's real address before it can retrieve the website. The browser needs to find out which server the website lives on, so it can send HTTP messages to the right place. The Domain Name System (DNS) is a hierarchical and decentralized naming system for computers, services or other resources connected to the Internet or a private network. Web browsers interact through Internet Protocol (IP) addresses. DNS translates domain names to IP addresses so browsers can load Internet resources. Each device connected to the Internet has a unique IP address which other machines use to find the device. The process of DNS resolution involves converting a hostname (such as www.example.com) into a computer-friendly IP address (such as 192.168.1.1). A DNS name server is a server that stores the DNS records for a domain; a DNS name server responds with answers to queries against its database.
 
 #### What is a web server?
 #### Explain the client-server architecture.
-    Computers connected to the web are called clients and servers. 
-    Clients are the typical web user's internet-connected devices (for example, your computer connected to your Wi-Fi, 
-    or your phone connected to your mobile network) and web-accessing software available on those devices 
-    (usually a web browser like Firefox or Chrome).
-    Servers are computers that store webpages, sites, or apps. When a client device wants to access a webpage, 
-    a copy of the webpage is downloaded from the server onto the client machine to be displayed in the user's web browser.
-    Client–server model is a distributed application structure that partitions tasks or workloads between the providers 
-    of a resource or service, called servers, and service requesters, called clients. A server host runs one or more server 
-    programs which share their resources with clients. A client does not share any of its resources, but requests a server's 
-    content or service function. Clients therefore initiate communication sessions with servers which await incoming requests. 
-    Examples of computer applications that use the client–server model are Email, network printing, and the World Wide Web.
+Computers connected to the web are called clients and servers. 
+**Clients** are the typical web user's internet-connected devices (for example, your computer connected to your Wi-Fi, 
+or your phone connected to your mobile network) and web-accessing software available on those devices 
+(usually a web browser like Firefox or Chrome).
 
-        1. The browser goes to the DNS server, and finds the real address of the server that the website lives on.
-        2. The browser sends an HTTP request message to the server, asking it to send a copy of the website to the client. 
-           This message, and all other data sent between the client and the server, is sent across your internet connection using TCP/IP.
-        3. If the server approves the client's request, the server sends the client a "200 OK" message and then starts sending 
-           the website's files to the browser as a series of small chunks called data packets.
-        4. The browser assembles the small chunks into a complete website and displays it to you.
+**Servers** are computers that store webpages, sites, or apps. When a client device wants to access a webpage, 
+a copy of the webpage is downloaded from the server onto the client machine to be displayed in the user's web browser.<br />
+
+**Client–server model** is a distributed application structure that partitions tasks or workloads between the providers 
+of a resource or service, called servers, and service requesters, called clients. A server host runs one or more server 
+programs which share their resources with clients. A client does not share any of its resources, but requests a server's 
+content or service function. Clients therefore initiate communication sessions with servers which await incoming requests. 
+Examples of computer applications that use the client–server model are Email, network printing, and the World Wide Web.
+
+1. The browser goes to the DNS server, and finds the real address of the server that the website lives on.
+2. The browser sends an HTTP request message to the server, asking it to send a copy of the website to the client. 
+    This message, and all other data sent between the client and the server, is sent across your internet connection using TCP/IP.
+3. If the server approves the client's request, the server sends the client a "200 OK" message and then starts sending 
+    the website's files to the browser as a series of small chunks called data packets.
+4. The browser assembles the small chunks into a complete website and displays it to you.
 
 #### What would you use a session for?
 #### What would you use a cookie for?
@@ -810,18 +805,31 @@ CallBack Function is a function which is passed into another function as an argu
 
 #### What kind of software development methodologies do you know? What are the main features of these?
 #### What are the SCRUM roles?
-    Scrum has three roles: product owner, scrum master and the development team members. 
+Scrum has three roles: product owner, scrum master and the development team members. 
 
-    Product Owner: The person with the product vision. 
-        Responsibilities:
-            - Managing the scrum backlog 
-            - Release management
-            - Stakeholder management
+**Product Owner:** The person with the product vision. His / her responsibilities are: managing the scrum backlog, release management, stakeholder management<br />
+**Scrum Master:** The scrum expert who helps the team build the product according to the scrum framework<br />
+**Development Team:** The team members who execute the work
 
-    Scrum Master: The scrum expert who helps the team build the product according to the scrum framework
-
-    Development Team: The team members who execute the work
 #### What are the SCRUM ceremonies?
+Meetings or “ceremonies” are an important part of agile development. They help to disseminate timely information, bring common goal and vision, and share team progress to all team members.
+
+**Sprint planning:** The goal of Sprint Planning is to answer the questions “What are we going to work on, and how are we going to do it?”<br />
+**Sprint review:** Held at the end of each sprint to demonstrate the added functionality. The goal is to get feedback from the product owner and other stakeholders to ensure that the delivered increment met the business need and to revise the Product Backlog based on the feedback.<br />
+**Sprint retrospective:** Retrospectives typically last 90 minutes and are there to help us incorporate continuous improvement into our team culture and into our Sprint cadence. This is where the Scrum Team meets to reflect on their previous Sprint and to figure out how to improve as a team by asking – what went well, what did not and what can be improved. <br />
+**Daily scrum:** Once we begin a Sprint, we have what we call a Daily Scrum every day. Organized by the Scrum Master, Daily Scrum is typically a 15-minute stand-up meeting to synchronize the work of team members, i.e. what’s done on the prior day, what needs to be done today. 
 #### What are the SCRUM artifacts?
+Scrum Artifacts provide key information that the Scrum Team and the stakeholders need to be aware of for understanding the product under development, the activities being planned, and the activities done in the project. The following artifacts are defined in Scrum Process Framework.
+
+- Product Vision: the Product Vision is an artifact to define the long-term goal of the project/product.
+- Sprint Goal: the Sprint Goal helps to focus the Sprint.
+- Product Backlog: a product backlog is a list of all the things that are required in the product.
+- Sprint Backlog: the Sprint Backlog is the set of Product Backlog items selected for the Sprint.
+- Definition of Done: every Product Backlog item has acceptance criteria when the item is declared to be done.
+- Burn-Down Chart: Burndown charts are graphs that give an overview of progress over time while completing a project.
+- Increment: The Increment is the sum of all the Product Backlog items completed during a Sprint and all previous Sprints.
+
 #### What is the main goal of a retrospective meeting?
+Retrospectives typically last 90 minutes and are there to help us incorporate continuous improvement into our team culture and into our Sprint cadence. This is where the Scrum Team meets to reflect on their previous Sprint and to figure out how to improve as a team by asking – what went well, what did not and what can be improved. It allows the team to focus on its overall performance and identify strategies for continuous improvement, so that they can continuously learn and improve from each other.
+
 #### Explain, when would you recommend to use the waterfall methodology?
