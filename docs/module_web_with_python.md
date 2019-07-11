@@ -59,6 +59,7 @@ finally {
 ```
 
 #### Why should we catch special exception types?
+Never try to implement a catch-all handler for the base exception type. Catching all exceptions wholesale is never a good idea in any language, whether it’s globally on a base application level, or in a small method used only once. It is bad practice to catch generic Exception because it will obfuscate whatever really happened, damaging both maintainability and extensibility. We can waste a huge amount of time debugging what the actual problem is, when it could be as simple as a syntax error. This is not a good programming practice as it will catch all exceptions and handle every case in the same way. We can specify which exceptions an except clause will catch. It is only good practice to catch a specific exception if it can actually be handled by the catch block.
 
 ### Security
 #### What is SQL injection? How to protect an application against it?
@@ -160,9 +161,88 @@ Real-world example: If you go to a ticket counter to buy movie tickets, and are 
 - Handling of interrupts in real-time systems. The interrupts are handled in the same order as they arrive i.e First come first served
 
 #### What is BubbleSort? Describe the main logic of this sorting algorithm.
+BubbleSort is the simplest sorting algorithm that works by repeatedly swapping the adjacent elements if they are in wrong order.
+
+**Example:**<br />
+First Pass:<br />
+( **5 1** 4 2 8 ) –> ( **1 5** 4 2 8 ), Here, algorithm compares the first two elements, and swaps since 5 > 1.<br />
+( 1 **5 4** 2 8 ) –>  ( 1 **4 5** 2 8 ), Swap since 5 > 4<br />
+( 1 4 **5 2** 8 ) –>  ( 1 4 **2 5** 8 ), Swap since 5 > 2<br />
+( 1 4 2 **5 8** ) –> ( 1 4 2 **5 8** ), Now, since these elements are already in order (8 > 5), algorithm does not swap them.<br />
+
+Second Pass:<br />
+( **1 4** 2 5 8 ) –> ( **1 4** 2 5 8 )<br />
+( 1 **4 2** 5 8 ) –> ( 1 **2 4** 5 8 ), Swap since 4 > 2<br />
+( 1 2 **4 5** 8 ) –> ( 1 2 **4 5** 8 )<br />
+( 1 2 4 **5 8** ) –>  ( 1 2 4 **5 8** )<br />
+
+Now, the array is already sorted, but our algorithm does not know if it is completed. The algorithm needs one whole pass without any swap to know it is sorted.
+
+```python
+def bubblesort(array):
+    # we minus 1 because we are always comparing the current value with the next value
+    length_of_array = len(array) - 1
+    # number of rounds will be the total length - 1, for array with length 5, we will do 4 rounds: 0 and 1, 1 and 2, 2 and 3, 3 and 4.
+    for i in range(length_of_array):
+        # at each round, we compare the current j with the next value
+        for j in range(length_of_array - i):
+            # only swap their positions if left value < right value as we aim to move all the small values to the back
+            if array[j] < array[j + 1]:
+                array[j], array[j + 1] = array[j + 1], array[j]
+
+    return array
+
+
+array = [2, 1, 5, 4, 3]
+print bubblesort(array)
+```
+
 #### Explain the process of finding the maximum and minimum value in a list of numbers!
+**METHOD 1 (Simple Linear Search)**<br />
+Initialize values of min and max as minimum and maximum of the first two elements respectively.  Starting from 3rd, compare each element with max and min, and change max and min accordingly (i.e., if the element is smaller than min then change min, else if the element is greater than max then change max, else ignore the element).
+
+**METHOD 2 (Tournament Method)**<br />
+Divide the array into two parts and compare the maximums and minimums of the the two parts to get the maximum and the minimum of the the whole array.
+
 #### Explain the process of calculating the average value in an array of numbers!
+Average is the sum of array elements divided by the number of elements.
+```python
+def average( a , n ): 
+    # Find sum of array element 
+    sum = 0
+    for i in range(n): 
+        sum += a[i] 
+      
+    return sum/n; 
+  
+# Driver code 
+arr = [10, 2, 3, 4, 5, 6, 7, 8, 9] 
+n = len(arr) 
+print(average(arr, n)) 
+```
+
 #### What is Big O complexity? Explain time and space complexity!
+An algorithm is a set of instructions designed to perform a specific task.
+
+Big O notation is used in Computer Science to describe the performance or complexity of an algorithm. Big O specifically describes the worst-case scenario, and can be used to describe the execution time required or the space used (e.g. in memory or on disk) by an algorithm.
+
+**Complexity:**<br />
+When we talk about complexity we express how the growth of some input/condition affects the consumption of some resource. This resource can be either time or memory. In this regard complexity is a function.
+- its output depends on it's input
+- it represents a rate of growth
+
+**Time complexity:**<br />
+**O(1):** O(1) describes an algorithm that will always execute in the same time (or space) regardless of the size of the input data set.<br />
+**O(N):** O(N) describes an algorithm whose performance will grow linearly and in direct proportion to the size of the input data set.<br /> 
+**O(N2):** O(N2) represents an algorithm whose performance is directly proportional to the square of the size of the input data set. This is common with algorithms that involve nested iterations over the data set. Deeper nested iterations will result in O(N3), O(N4) etc.<br />
+**O(2N):** O(2N) denotes an algorithm whose growth doubles with each additon to the input data set. The growth curve of an O(2N) function is exponential - starting off very shallow, then rising meteorically. An example of an O(2N) function is the recursive calculation of Fibonacci numbers.<br />
+**O(log N):**Binary search. This type of algorithm is described as O(log N). The iterative halving of data sets described in the binary search example produces a growth curve that peaks at the beginning and slowly flattens out as the size of the data sets increase e.g. an input data set containing 10 items takes one second to complete, a data set containing 100 items takes two seconds, and a data set containing 1000 items will take three seconds.
+
+**Memory/space complexity:**<br />
+Space complexity is the amount of memory used by the algorithm. We try to answer these two questions:
+- At any given time how many elements are in collections or any other way in the memory
+- What is the memory footprint of one element in the collection(s) (for example an integer is usually calculated as 4bytes)
+
 #### Explain the process of calculating the average value in a linked list of numbers!
 
 ### Procedural
@@ -237,6 +317,36 @@ switch (expr) {
 ```
 
 #### How to achieve a switch-case-like structure in Python?
+Switch-case statement is a powerful programming feature that allows you control the flow of your program based on the value of a variable or an expression. You can use it to execute different blocks of code, depending on the variable value during runtime. Although popular languages like Java and PHP have in-built switch statement, you may be surprised to know that Python language doesn’t have one. As such, you may be tempted to use a series of if-else-if blocks, using an if condition for each case of your switch statement. However, because of the jump table, a switch statement is much faster than an if-else-if ladder. Instead of evaluating each condition sequentially, it only has to look up the evaluated variable/expression once and directly jump to the appropriate branch of code to execute it.
+
+**How to implement switch statement in Python:**<br />
+The Pythonic way to implement switch statement is to use the powerful dictionary mappings, also known as associative arrays, that provide simple one-to-one key-value mappings.
+```python
+def switch_demo(argument):
+    switcher = {
+        1: "January",
+        2: "February",
+        3: "March",
+        4: "April",
+        5: "May",
+        6: "June",
+        7: "July",
+        8: "August",
+        9: "September",
+        10: "October",
+        11: "November",
+        12: "December"
+    }
+    print(switcher.get(argument, "Invalid month"))
+```
+If you'd like defaults you could use the dictionary get(key[, default])
+```python
+def f(x):
+    return {
+        'a': 1,
+        'b': 2
+    }.get(x, 9)    # 9 is default if x not found
+```
 #### Explain variable scoping in Python!
 Not all variables are accessible from all parts of our program, and not all variables exist for the same amount of time. Where a variable is accessible and how long it exists depend on how it is defined. We call the part of a program where a variable is accessible its scope, and the duration for which the variable exists its lifetime.
 
@@ -424,120 +534,63 @@ CallBack Function is a function which is passed into another function as an argu
 
 #### What is a Python decorator? How does it work? Tell some examples of its usage.
 #### What is the difference between synchronous and asynchronous execution?
-    A synchronous operation blocks a process till the operation completes. An asynchronous operation is non-blocking and only initiates the operation. The caller could discover completion by some other mechanism. 
-    Program execution in most high-level languages is usually very straightforward. Your program starts at the first line of source code and each line of code executed sequentially thereafter. Synchronous program execution is somewhat similar to the above. Your program is executed line by line, one line at a time. Each time a function is called, program execution waits until that function returns before continuing to the next line of code. This method of execution can have undesirable ramifications. Suppose a function is called to start a time consuming process. What if you want to stop the lengthy process? With synchronous execution, your program is “stuck,” waiting for the process to end, with no way out. Asynchronous execution avoids this bottleneck. You are essentially saying, “I know this function call is going to take a great deal of time, but my program doesn’t want to wait around while it executes.” 
+**Synchronous (Classic Web-Application Model) execution:**<br />
+Synchronous program execution in most high-level languages is usually very straightforward. Your program starts at the first line of source code and each line of code executed sequentially thereafter. Each time a function is called, program execution waits until that function returns before continuing to the next line of code. This method of execution can have undesirable ramifications. Blocking operations may not always seem like an issue because computers are fast. Making synchronous calls to resources can lead to long response times locking up the UI until the resource responds. Making requests to your own services like a database can have the same effect.  Suppose a function is called to start a time consuming process. What if you want to stop the lengthy process? With synchronous execution, your program is “stuck,” waiting for the process to end, with no way out. A synchronous request blocks the client until operation completes i.e. browser is unresponsive. In such case, javascript engine of the browser is blocked. If an API call is synchronous, it means that code execution will block (or wait) for the API call to return before continuing. This means that until a response is returned by the API, your application will not execute any further, which could be perceived by the user as latency or performance lag in your app. Asynchronous execution avoids this bottleneck. You are essentially saying, “I know this function call is going to take a great deal of time, but my program doesn’t want to wait around while it executes.”
 
-    Code is a series of instructions, which are run one at a time in sequential order. During normal code execution, an instruction in one function might call out to another function. At this point, the instructions in the other function begin running and the original code is put aside for a moment. When the other function is done, it returns to our original code with some return value. Our original code resumes its execution and can do something with that return value. We refer to this as synchronous execution. However, some code operates outside the normal code execution. We refer to this as asynchronous execution, and it introduces the possibility for chaos into our otherwise orderly system. For example, we might be running some Javascript on our website that needs some data from a server. We call a function that sends a request to the server to get that data. This request is sent on our behalf, but it takes some time to get all the way there and back. In the meantime, the rest of our Javascript keeps running. At some point, the request will complete and will return our data. But there’s no way to get this data back to our original code. Instead of trying to get the data back to the original code to do something with it, we tell the asynchronous function what to do when it completes. In Javascript, this usually looks like passing a callback function as an argument.
+JavaScript is single-threaded, that means only one statement is executed at a time. As the JS engine processes our script line by line, it uses this single Call-Stack to keep track of codes that are supposed to run in their respective order. Like what a stack does, a data structure which records lines of executable instructions and executes them in a LIFO manner. That’s how a script of synchronous tasks gets handled by our browser without involving anything other than the “legendary” Call Stack. But things get a little bit complex when JS engine encounters an asynchronous task. Spoiler: at its base, JavaScript is a synchronous, blocking, single-threaded language. That just means that only one operation can be in progress at a time. However you can manipulate JavaScript to behave in an asynchronous way. It’s not baked in, but it’s possible! JavaScript was born inside the browser, its main job, in the beginning, was to respond to user actions, like onClick, onMouseOver, onChange, onSubmit and so on. How could it do this with a synchronous programming model?
 
-    When you execute something synchronously, you wait for it to finish before moving on to another task. When you execute something asynchronously, you can move on to another task before it finishes.
+**Example**<br />
+For example, we might be running some Javascript on our website that needs some data from a server. We call a function that sends a request to the server to get that data. This request is sent on our behalf, but it takes some time to get all the way there and back. In the meantime the rest of our Javascript keeps running. At some point, the request will complete and will return our data. But there’s no way to get this data back to our original code. Instead of trying to get the data back to the original code to do something with it, we tell the asynchronous function what to do when it completes. In Javascript, this usually looks like passing a callback function as an argument. Passing in a callback is a way to interact with the response or error.
 
-    The difference between synchronous and asynchronous execution becomes important when dealing with many independent processes which are trying to coordinate their actions / behaviour by interacting with each other.
+**Asynchronous (AJAX Web-Application Model) execution:**
+What does asynchronous means? Unlike synchronous, asynchronous is a behaviour. We need this behaviour when things are slow. Synchronous executions of code may seem straightforward but can be slow. Tasks like image processing can be slow, file operations can be really slow, making network request and waiting for response is definitely slow, making huge calculations like over a 100 million for-loop iteration is somewhat slow. So such slow things in Call stack results in “Blocking”. When call stack is blocked, the browser prevents user’s interrupts and other code statements from executing until the blocking statement is executed and the call stack is freed. Asynchronous code can prove helpful and necessary when you don’t know how long a certain operation will take (ajax request, API call, query to database). An asynchronous request doesn’t block the client i.e. browser is responsive. At that time, user can perform another operations also. In such case, javascript engine of the browser is not blocked. Asynchronous calls do not block (or wait) for the API call to return from the server. Execution continues on in your program, and when the call returns from the server, a "callback" function is executed. The important point is that program execution will continue, and asynchronously, the callback function will be called once program execution completes. Hence Asynchronous callbacks are used to handle such situations. So this is where Event Loop, Callback Queue and Web APIs (in browser) kicks in. 
 
-    Introduction:
-    In programming, synchronous operations block instructions until the task is completed, while asynchronous operations can execute without blocking other operations. Asynchronous operations are generally completed by firing an event or by calling a provided callback function.
+**Asynchronous Callbacks:**
+Using callbacks is a very common way to implement asynchronous operations. When a callback function is specified, the CRUD operation is non-blocking which means that the next statement is called immediately even though the result from the database has not yet been fetched. Only when the result is available is the callback called. We use asynchronous callbacks to make our code non-blocking. The earliest and most straightforward solution to being stuck in the synchronous world was asynchronous callbacks (think setTimeout()). Let’s use a database request as an example: asynchronous callbacks allow you to invoke a callback function which sends a database request (and any other nested callbacks) off to your app, where it waits for the response from the database, freeing up the rest of your code to continue running. Once the database request completes, the results (and any other nested code) are sent to the queue, and then processed through the event loop. You can’t know when a user is going to click a button, so what you do is, you define an event handler for the click event. This event handler accepts a function, which will be called when the event is triggered. This is the so-called callback. A callback is a simple function that’s passed as a value to another function, and will only be executed when the event happens. We can do this because JavaScript has first-class functions, which can be assigned to variables and passed around to other functions (called higher-order functions)
 
-    Javascript has a:
-    - Callstack
-    - WebAPI
-    - Event Loop
-    - Callback Queue
+**The problem with callbacks:**
+Callbacks are great for simple cases! However every callback adds a level of nesting, and when you have lots of callbacks, the code starts to be complicated very quickly
 
-    The event loop, the web APIs and the message queue/task queue are not part of the JavaScript engine, it’s a part of browser’s JavaScript runtime environment or Nodejs JavaScript runtime environment (in case of Nodejs). 
+**Alternatives to callbacks:**
+Starting with ES6, JavaScript introduced several features that help us with asynchronous code that do not involve using callbacks:
+- Promises (ES2015)
+- Async/Await (ES2017): They make the code look like it’s synchronous, but it’s asynchronous and non-blocking behind the scenes.
 
-    The Event Loop
-    The job of the Event loop is to look into the call stack and determine if the call stack is empty or not. If the call stack is empty, it looks into the message queue to see if there’s any pending callback waiting to be executed.
+**Promises and Asynchronous Operations:**
+Promises are another way to interact with asynchronous code. A Promise represents the work that is happening asynchronously. When the Promise resolves the result can be caught as an error, or used in a .then() method. then() returns a Promise, this means then is chainable returning another Promise to the next then. ES6 introduced the concept of job queue/micro-task queue which is used by Promises in JavaScript. The difference between the message queue and the job queue is that the job queue has a higher priority than the message queue, which means that promise jobs inside the job queue/ micro-task queue will be executed before the callbacks inside the message queue. In order to deal with callback hell, libraries allowed programmers to clean up their syntax and write code that operated asynchronously but looked synchronous. This resulted in code that was easier to read and faster to run. With a promise, instead of bundling all dependencies into one code block and sending the entire thing off to the browser, we’re able to separate them out. We can send the asynchronous callback to the browser, and use .then() to hold all other dependencies. This allows us to code in a more modular, readable way, while still gaining the benefits of asynchronous programming.
 
-    DOM Events
-    The Message queue also contains the callbacks from the DOM events such as click events and keyboard events. In case of DOM events, the event listener sits in the web APIs environment waiting for a certain event (click event in this case) to happen, and when that event happens, then the callback function is placed in the message queue waiting to be executed. Again the event loop checks if the call stack is empty and pushes the event callback to the stack if it’s empty and the callback is executed.
+**Async / Await:**
+Promises were fantastic — so fantastic, in fact, that ES6 brought them into the language as a standard. Using promises still left asynchronous code looking and feeling slightly wonky, so we now have beautiful and stunning Async/Await to help us out! 
+Async/Await allows you to:
+- Continue using promises
+- Write asynchronous code that looks and feels synchronous
+- Cleans up your syntax and makes your code more human-readable
 
-    The Callstack is the immediate work your program will do.
-    WebAPI's are methods available from environments where JavaScript is run. In browsers, the window and its methods are apart of the WebAPI. When the WebAPI completes, it puts the callback on the Callback Queue. The Event Loop waits for the Callstack to complete the loaded work. Once the Event Loop notices the Callstack is clear it will add work to the Callstack from the Callback Queue. A callback executes once it is added to the Callstack. 
+**Execution Context:**
+An Execution Context is an abstract concept of an environment where the JavaScript code is evaluated and executed. Whenever any code is run in JavaScript, it’s run inside an execution context. The function code executes inside the function execution context, and the global code executes inside the global execution context. Each function has its own execution context.
 
-    Synchronous Operations:
-    Synchronous Operations that run block the next operation until it completes. Blocking operations may not always seem like an issue because computers are fast. Making synchronous calls to resources can lead to long response times locking up the UI until the resource responds. Making requests to your own services like a database can have the same effect. A common webpage will have many requests to make under unique circumstances, and as a developer, you'll want those requests to start as soon as possible but still allow the rest of the page to load what it can to enable the requests. This is when asynchronous operations become powerful. 
+**Call Stack:**
+The call stack as its name implies is a stack with a LIFO (Last in, First out) structure, which is used to store all the execution context created during the code execution. JavaScript has a single call stack because it’s a single-threaded programming language. The call stack has a LIFO structure which means that the items can be added or removed from the top of the stack only.
 
-    Asynchronous Operations:
-    Asynchronous Operations happen independently from the main program flow. A common use for asynchronous code is querying a database and using the result. Passing in a callback is a way to interact with the response or error. While the database loads and responds to the request, the rest of the page or other resources cannot load. 
+**Javascript has a:**
+- Callstack
+- WebAPI
+- Event Loop
+- Callback Queue
 
-    Promises and Asynchronous Operations:
-    Promises are another way to interact with asynchronous code. A Promise represents the work that is happening asynchronously. When the Promise resolves the result can be caught as an error, or used in a then method. then returns a Promise, this means then is chainable returning another Promise to the next then. 
-    ES6 introduced the concept of job queue/micro-task queue which is used by Promises in JavaScript. The difference between the message queue and the job queue is that the job queue has a higher priority than the message queue, which means that promise jobs inside the job queue/ micro-task queue will be executed before the callbacks inside the message queue.
+The event loop, the web APIs and the message queue / task queue are not part of the JavaScript engine, it’s a part of browser’s JavaScript runtime environment or Nodejs JavaScript runtime environment (in case of Nodejs). 
 
-    Asynchronous Operations happen independently from the main program flow. A common use for asynchronous code is querying a database and using the result. Passing in a callback is a way to interact with the response or error. 
+**The Event Loop:**
+The job of the Event loop is to look into the call stack and determine if the call stack is empty or not. If the call stack is empty, it looks into the message queue to see if there’s any pending callback waiting to be executed.
 
-    Understanding Synchronous vs Asynchronous:
-    Before understanding AJAX, let’s understand classic web application model and ajax web application model first.
+**DOM Events:**
+The Message queue also contains the callbacks from the DOM events such as click events and keyboard events. In case of DOM events, the event listener sits in the web APIs environment waiting for a certain event (click event in this case) to happen, and when that event happens, then the callback function is placed in the message queue waiting to be executed. Again the event loop checks if the call stack is empty and pushes the event callback to the stack if it’s empty and the callback is executed.
 
-    Synchronous (Classic Web-Application Model):
-    A synchronous request blocks the client until operation completes i.e. browser is unresponsive. In such case, javascript engine of the browser is blocked. 
+The Callstack is the immediate work your program will do.
+WebAPI's are methods available from environments where JavaScript is run. In browsers, the window and its methods are apart of the WebAPI. When the WebAPI completes, it puts the callback on the Callback Queue. The Event Loop waits for the Callstack to complete the loaded work. Once the Event Loop notices the Callstack is clear it will add work to the Callstack from the Callback Queue. A callback executes once it is added to the Callstack. 
 
-    Asynchronous (AJAX Web-Application Model):
-    An asynchronous request doesn’t block the client i.e. browser is responsive. At that time, user can perform another operations also. In such case, javascript engine of the browser is not blocked. 
-
-    Synchronous:
-    If an API call is synchronous, it means that code execution will block (or wait) for the API call to return before continuing. This means that until a response is returned by the API, your application will not execute any further, which could be perceived by the user as latency or performance lag in your app. 
-
-    Asynchronous:
-    Asynchronous calls do not block (or wait) for the API call to return from the server. Execution continues on in your program, and when the call returns from the server, a "callback" function is executed. The important point is that program execution will continue, and asynchronously, the callback function will be called once program execution completes.
-
-    SYNCHRONOUS Tasks:
-    JavaScript is single-threaded, that means only one statement is executed at a time. As the JS engine processes our script line by line, it uses this single Call-Stack to keep track of codes that are supposed to run in their respective order. Like what a stack does, a data structure which records lines of executable instructions and executes them in a LIFO manner. That’s how a script of synchronous tasks gets handled by our browser without involving anything other than the “legendary” Call Stack. But things get a little bit complex when JS engine encounters an asynchronous task.
-
-    ASYNCHRONOUS Tasks:
-    What does asynchronous means? Unlike synchronous, asynchronous is a behaviour. We need this behaviour when things are slow. Synchronous executions of code may seem straightforward but can be slow. Tasks like image processing can be slow, file operations can be really slow, making network request and waiting for response is definitely slow, making huge calculations like over a 100 million for-loop iteration is somewhat slow. So such slow things in Call stack results in “Blocking”. When call stack is blocked, the browser prevents user’s interrupts and other code statements from executing until the blocking statement is executed and the call stack is freed. Hence Asynchronous callbacks are used to handle such situations. So this is where Event Loop, Callback Queue and Web APIs (in browser) kicks in. 
-
-    Synchronous versus Asynchronous Execution:
-    Using callbacks is a very common way to implement asynchronous operations. When a callback function is specified, the CRUD operation is non-blocking which means that the next statement is called immediately even though the result from the database has not yet been fetched. Only when the result is available is the callback called. 
-
-    Synchronous Code:
-    As mentioned above, synchronous code is somewhat straightforward and as a novice programmer, it is the code we are most familiar with. The synchronous program starts with the first line, and each line of code is executed afterward. Even when encountering a function, the program execution waits until that specific function returns before continuing to the next line of code. There is no way to execute another function while waiting for other code to execute. 
-
-    Asynchronous Code:
-    As you may expect, asynchronous code performs much differently. With an async function, we are able to say “Since I know this function call may take some time to execute, let the function finish in the background. ” This behavior helps us avoid the bottleneck of having to wait for a function call to finish before continuing to the rest of the program. 
-
-    How Async Works:
-    For starters, a good rule of thumb is to remember that synchronous code will always run first. There are two parts in the Javascript engine, one that reads code and adds operations to queue, and another processes the queue. When an asynchronous operation is encountered, the operation is put in the queue with a callback to be run when the operation completes. The program continues to run synchronous code and once finished with synchronous operations, will check the queue for any other operations that need to be complete. At this point, the callback comes in handy as it is executed with its intended functionality. Asynchronous code can prove helpful and necessary when you don’t know how long a certain operation will take (ajax request, API call, query to database).
-
-    JavaScript is Synchronous
-    Spoiler: at its base, JavaScript is a synchronous, blocking, single-threaded language. That just means that only one operation can be in progress at a time. That’s not the entire story, though! When you hear folks say that JavaScript is an asynchronous language, what they mean is that you can manipulate JavaScript to behave in an asynchronous way. It’s not baked in, but it’s possible! 
-
-    Asynchronous Callbacks:
-    We use asynchronous callbacks to make our code non-blocking.
-    The earliest and most straightforward solution to being stuck in the synchronous world was asynchronous callbacks (think setTimeout()).
-    Let’s use a database request as an example: asynchronous callbacks allow you to invoke a callback function which sends a database request (and any other nested callbacks) off to your app, where it waits for the response from the database, freeing up the rest of your code to continue running. Once the database request completes, the results (and any other nested code) are sent to the queue, and then processed through the event loop. 
-
-    Promises:
-    In order to deal with callback hell, libraries like Bluebird or Q allowed programmers to clean up their syntax and write code that operated asynchronously but looked synchronous. This resulted in code that was easier to read and faster to run. With a promise, instead of bundling all dependencies into one code block and sending the entire thing off to the browser, we’re able to separate them out. We can send the asynchronous callback (Function C) to the browser, and use .then() to hold all other dependencies. This allows us to code in a more modular, readable way, while still gaining the benefits of asynchronous programming.
-
-    Async/Await:
-    Promises were fantastic — so fantastic, in fact, that ES6 brought them into the language as a standard. Using promises still left asynchronous code looking and feeling slightly wonky, so we now have beautiful and stunning Async/Await to help us out! 
-    Async/Await allows you to:
-    - Continue using promises
-    - Write asynchronous code that looks and feels synchronous
-    - Cleans up your syntax and makes your code more human-readable
-
-    Execution Context
-    An Execution Context is an abstract concept of an environment where the JavaScript code is evaluated and executed. Whenever any code is run in JavaScript, it’s run inside an execution context. The function code executes inside the function execution context, and the global code executes inside the global execution context. Each function has its own execution context.
-
-    Call Stack
-    The call stack as its name implies is a stack with a LIFO (Last in, First out) structure, which is used to store all the execution context created during the code execution. JavaScript has a single call stack because it’s a single-threaded programming language. The call stack has a LIFO structure which means that the items can be added or removed from the top of the stack only.
-
-    Asynchronicity in Programming Languages
-    Computers are asynchronous by design. Asynchronous means that things can happen independently of the main program flow.
-    JavaScript is synchronous by default and is single threaded. This means that code cannot create new threads and run in parallel.
-    But JavaScript was born inside the browser, its main job, in the beginning, was to respond to user actions, like onClick, onMouseOver, onChange, onSubmit and so on. How could it do this with a synchronous programming model? The answer was in its environment. The browser provides a way to do it by providing a set of APIs that can handle this kind of functionality.
-
-    Callbacks
-    You can’t know when a user is going to click a button, so what you do is, you define an event handler for the click event. This event handler accepts a function, which will be called when the event is triggered. This is the so-called callback.
-    A callback is a simple function that’s passed as a value to another function, and will only be executed when the event happens. We can do this because JavaScript has first-class functions, which can be assigned to variables and passed around to other functions (called higher-order functions)
-
-    The problem with callbacks
-    Callbacks are great for simple cases! However every callback adds a level of nesting, and when you have lots of callbacks, the code starts to be complicated very quickly
-
-    Alternatives to callbacks
-    Starting with ES6, JavaScript introduced several features that help us with asynchronous code that do not involve using callbacks:
-    - Promises (ES2015)
-    - Async/Await (ES2017): They make the code look like it’s synchronous, but it’s asynchronous and non-blocking behind the scenes.
+**Summary:**<br />
+In programming, synchronous operations block instructions until the task is completed, while asynchronous operations can execute without blocking other operations. Asynchronous operations are generally completed by firing an event or by calling a provided callback function. The difference between synchronous and asynchronous execution becomes important when dealing with many independent processes which are trying to interact with each other. When you execute something synchronously, you wait for it to finish before moving on to another task. When you execute something asynchronously, you can move on to another task before it finishes. A synchronous operation blocks a process until the operation completes. An asynchronous operation is non-blocking and only initiates the operation. The caller could discover completion by some other mechanism. Asynchronous Operations happen independently from the main program flow. 
 
 ## Programming languages
 
@@ -677,7 +730,7 @@ An external style sheet is used to define the style for many HTML pages. To use 
 ### Javascript
 
 #### What is javascript?
-JavaScript (JS) is a lightweight interpreted programming language with first-class functions (when functions in that language are treated like any other variable). JavaScript is a prototype-based, multi-paradigm, dynamic language, supporting object-oriented, imperative, and declarative (e.g. functional programming) styles. JavaScript runs on the client side of the web, which can be used to design / program how the web pages behave on the occurrence of an event. Another common application for JavaScript is as a (Web) server side scripting language. Node.js is a popular example of this.
+JavaScript (JS) is a lightweight interpreted programming language with first-class functions (when functions in that language are treated like any other variable). JavaScript is a prototype-based, multi-paradigm, dynamic language, supporting object-oriented, imperative, and declarative (e.g. functional programming) styles. JavaScript runs on the **client side** of the web, which can be used to design / program how the web pages behave on the occurrence of an event. Another common application for JavaScript is as a (Web) **server side** scripting language. Node.js is a popular example of this.
 
 The standard for JavaScript is ECMAScript. This specification is updated from time to time to contain modern features. After some time different javascript engines (for example in the browsers) implement these new features. ECMAScript 2015 (ES2015 or it was called ES6 some time ago) was a larger change. Current edition: 9th Edition - ECMAScript 2018.
 
@@ -748,6 +801,12 @@ JSON — JavaScript Object Notation — is a set of text formatting rules (strin
 ### Version control
 
 #### What type of branching strategy would you use?
+Branching is all about handling massive collaboration issues. But it's worthless, without using a workflow, in which the rules are kept by all participants. A very simple branching workflow is the **Feature branch** workflow, here you have one master branch and several branches for the features you are developing. 
+
+The core idea behind the **Feature Branch Workflow** is that all feature development should take place in a dedicated branch instead of the master branch. This encapsulation makes it easy for multiple developers to work on a particular feature without disturbing the main codebase. It also means the master branch will never contain broken code, which is a huge advantage for continuous integration environments. The Feature Branch Workflow assumes a central repository, and master represents the official project history. Instead of committing directly on their local master branch, developers create a new branch every time they start work on a new feature. Feature branches should have descriptive names, like animated-menu-items or issue-#1061. The idea is to give a clear, highly-focused purpose to each branch. Git makes no technical distinction between the master branch and feature branches, so developers can edit, stage, and commit changes to a feature branch.
+
+Encapsulating feature development also makes it possible to leverage **pull requests**, which are a way to initiate discussions around a branch. They give other developers the opportunity to sign off on a feature before it gets integrated into the official project. Or, if you get stuck in the middle of a feature, you can open a pull request asking for suggestions from your colleagues. The point is, pull requests make it incredibly easy for your team to comment on each other’s work.
+
 #### What would you do if you find a bug on the production code (master branch)?
 #### How can you move changes from one branch to another in GIT?
 #### How does a VCS help with code reviews?
@@ -842,6 +901,49 @@ Examples of computer applications that use the client–server model are Email, 
 ## Software Development Methodologies
 
 #### What kind of software development methodologies do you know? What are the main features of these?
+**Waterfall:** <br />
+The waterfall method is a sequential design process used in software development processes, in which progress is seen as flowing steadily downwards (like a waterfall) through the phases of conception, initiation, analysis, design, construction, testing, production/implementation and maintenance. The waterfall development model originates in the manufacturing and construction industries: highly structured physical environments in which after-the-fact changes are prohibitively costly, if not impossible. Because no formal software development methodologies existed at the time, this hardware-oriented model was simply adapted for software development.
+
+**Major advantages of the Waterfall Model:**
+- Simple and easy to understand and use
+- Easy to manage due to the rigidity of the model. Each phase has specific deliverables and a review process.
+- Phases are processed and completed one at a time.
+- Works well for smaller projects where requirements are very well understood.
+- Clearly defined stages.
+- Well understood milestones.
+- Easy to arrange tasks.
+- Process and results are well documented.
+
+**Major disadvantages of the Waterfall Model:**
+- No working software is produced until late during the life cycle.
+- High amounts of risk and uncertainty.
+- Not a good model for complex and object-oriented projects.
+- Poor model for long and ongoing projects.
+- Not suitable for the projects where requirements are at a moderate to high risk of changing. So, risk and uncertainty is high with this process model.
+- It is difficult to measure progress within stages.
+- Cannot accommodate changing requirements.
+- Adjusting scope during the life cycle can end a project.
+- Integration is done as a "big-bang. at the very end, which doesn't allow identifying any technological or business bottleneck or challenges early.
+
+In the past 10 years, waterfall model is used in less and less projects because of it's disadvantages. It's not a really good method for handling projects, where the requirements are not 100% clear, or where changes on the project's scope have to be handled regularly. 
+
+**Agile & Scrum:**<br />
+In the context of software development: Agile is a time boxed, iterative approach to software delivery that builds software incrementally from the start of the project, instead of trying to deliver it all at once near the end. It works by breaking projects down into little bits of user functionality called user stories, prioritizing them, and then continuously delivering them in short two week cycles called iterations. 
+
+**Features of Agile:**
+- Analysis, design, coding, and testing are continuous activities: You are never done analysis, design, coding and testing on an Agile project. So long as there are features to build, and the means to deliver them, these activities continue for the duration of the project.
+- Development is iterative: Iterative development means starting with something really simple, and adding to it incrementally over time.
+- Planning is adaptive: When reality disagrees with their plans, Agilists find it easier to change their plans than reality. They call this adaptive planning.
+- Roles blur: Roles really blur on Agile projects. When it’s done right, joining an Agile team is a lot like working in a mini-startup. People pitch in and do whatever it takes to make the project successful—regardless of title or role. On an agile project, narrowly defined roles like analyst, programmer, and tester don’t really exist - at least not in the traditional sense.
+- Requirements can change: Through a combination of modern software engineering practices, and open and honest planning, Agilsts accept and embrace change even late in delivery process.
+
+- Quality improves because testing starts from day one.
+- Visibility improves because you are 1/2 way through the project when you have built 1/2 the features.
+- Risk is reduced because you are getting feedback early, and
+- Customers are happy because they can make changes without paying exorbitant costs.
+
+**Scrum** is an agile way to manage a project, usually software development. Agile software development with Scrum is often perceived as a methodology; but rather than viewing Scrum as methodology, think of it as a framework for managing a process.
+
 #### What are the SCRUM roles?
 Scrum has three roles: product owner, scrum master and the development team members. 
 
@@ -872,3 +974,10 @@ Scrum Artifacts provide key information that the Scrum Team and the stakeholders
 Retrospectives typically last 90 minutes and are there to help us incorporate continuous improvement into our team culture and into our Sprint cadence. This is where the Scrum Team meets to reflect on their previous Sprint and to figure out how to improve as a team by asking – what went well, what did not and what can be improved. It allows the team to focus on its overall performance and identify strategies for continuous improvement, so that they can continuously learn and improve from each other.
 
 #### Explain, when would you recommend to use the waterfall methodology?
+**Some situations where the use of Waterfall model is most appropriate are:**
+- Requirements are very well documented, clear and fixed.
+- Product definition is stable.
+- Technology is understood and is not dynamic.
+- There are no ambiguous requirements.
+- Ample resources with required expertise are available to support the product.
+- The project is short.
