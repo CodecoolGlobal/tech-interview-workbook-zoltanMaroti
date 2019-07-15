@@ -501,6 +501,75 @@ variable = function
 **NOT** variable = function(), because it calls the function and stores the return value. It does not store the function. 
 
 #### List the ways of defining a callable logical unit in JavaScript!
+**1. Function declaration:**<br />
+A function declaration is made of function keyword, followed by an obligatory function name, a list of parameters in a pair of parenthesis (para1, ..., paramN) and a pair of curly braces {...} that delimits the body code. The function declaration creates a variable in the current scope with the identifier equal to function name. This variable holds the function object. The function variable is hoisted up to the top of the current scope, which means that the function can be invoked before the declaration. The created function is named, which means that name property of the function object holds its name. It is useful when viewing the call stack: in debugging or error messages reading. 
+
+```javascript
+// function declaration
+function isEven(num) {
+  return num % 2 === 0;
+}
+isEven(24); // => true
+isEven(11); // => false
+```
+
+**2. Function expression:**<br />
+A function expression is determined by a function keyword, followed by an optional function name, a list of parameters in a pair of parenthesis (para1, ..., paramN) and a pair of curly braces { ... } that delimits the body code. When the expression has the name specified, this is a **named function expression**. 
+
+```javascript
+const count = function(array) { // Function expression
+  return array.length;
+}
+```
+
+A function is anonymous when it does not have a name (name property is an empty string ''). This is an **anonymous function**, which name is an empty string.
+
+```javascript
+function(variable) {return typeof variable; }
+```
+
+**4. Arrow function:**<br />
+An arrow function is defined using a pair of parenthesis that contains the list of parameters (param1, param2, ..., paramN), followed by a fat arrow => and a pair of curly braces {...} that delimits the body statements.
+When the arrow function has only one parameter, the pair of parenthesis can be omitted. When it contains a single statement, the curly braces can be omitted too. The arrow function is anonymous.
+
+```javascript
+const absValue = (number) => {
+  if (number < 0) {
+    return -number;
+  }
+  return number;
+}
+absValue(-10); // => 10
+absValue(5);   // => 5
+```
+
+**5. Generator function:**<br />
+The generator function in JavaScript returns a Generator object. Its syntax is similar to function expression, function declaration or method declaration, just that it requires a star character *.
+
+```javascript
+function* indexGenerator(){
+  var index = 0;
+  while(true) {
+    yield index++;
+  }
+}
+```
+
+**6. new Function:**<br />
+In JavaScript functions are first class objects - a function is a regular object of type function. The function object type has a **constructor: Function.** When Function is invoked as a constructor new Function(arg1, arg2, ..., argN, bodyString), a new function is created. The arguments arg1, args2, ..., argN passed to constructor become the parameter names for the new function and the last argument bodyString is used as the function body code. The functions created this way don’t have access to current scope, thus closures cannot be created. They are always created in the global scope.
+
+```javascript
+const sumFunction = new Function(numberA, numberB, 
+   'return numberA + numberB'
+);
+sumFunction(10, 15) // => 25
+```
+
+**Which to use?**<br />
+- If the function uses this from the enclosing function, the arrow function is a good solution. When the callback function has one short statement, the arrow function is a good option too, because it creates short and light code.
+- For a shorter syntax when declaring methods on object literals, the shorthand method declaration is preferable.
+- new Function way to declare functions generally should not be used. Mainly because it opens potential security risks, doesn’t allow code auto-complete in editors and lose the engine optimizations.
+
 #### What is an event listener? How to attach one?
 In the browser most code is event-driven and writing interactive applications in JavaScript is often about waiting for and reacting to events to alter the behavior of the browser in some way. Events occur when the page loads, when user interacts (clicks, hovers, changes) and many other times, and can be triggered manually too. To register to an event you listen for it and supply a function which will be called by the browser when the event occurs. This function is known as an event listener (aka event handler) which is a type of callback.
 When an event is happening we say the event has been triggered or fired. When js catch an event then we say the event is handled => event handling. 
@@ -597,6 +666,32 @@ In programming, synchronous operations block instructions until the task is comp
 ### SQL
 
 #### How can you connect your application to a database server? What are the possible ways?
+Connections are built by supplying an underlying driver or provider with a connection string, which is a way of addressing a specific database or server and instance as well as user authentication credentials (for example, Server=sql_box;Database=Common;User ID=uid;Pwd=password;). Once a connection has been built it can be opened and closed at will, and properties (such as the command time-out length, or transaction, if one exists) can be set. The Connection String is composed of a set of key/value pairs as dictated by the data access interface and data provider being used.
+
+Many databases (such as PostgreSQL) only allow one operation to be performed at a time on each connection. If a request for data (a SQL Select statement) is sent to the database and a result set is returned, the connection is open but not available for other operations until the client finishes consuming the result set. Other databases, like SQL Server 2005 (and later), do not impose this limitation. However, databases that provide multiple operations per connection usually incur far more overhead than those that permit only a single operation task at a time.
+
+```python
+# setup connection string
+user_name = "your db username"
+password = "your password"
+host = "usually it is: localhost"
+database_name = "name of the db you want to open"
+
+# this string describes all info for psycopg2 to connect to the database
+connect_str = "postgresql://{user_name}:{password}@{host}/{database_name}".format(
+    user_name=user_name,
+    password=password,
+    host=host,
+    database_name=database_name
+)
+# connection describes and maintaines a connection to the database
+# to get a connection you can call the connect function of psycopg2
+connection = psycopg2.connect(connect_str)
+
+# set autocommit option, to do every query when we call it
+connection.autocommit = True
+```
+
 #### When do you use the DISTINCT keyword in SQL?
 Inside a table, a column often contains many duplicate values; and sometimes you only want to list the different (distinct) values. The SELECT DISTINCT statement is used to return only distinct (different) values.
 
@@ -718,11 +813,121 @@ An external style sheet is used to define the style for many HTML pages. To use 
 ```
 
 #### How to select an element using its id in CSS?
+The CSS ID selector matches an element based on the value of its id attribute. In order for the element to be selected, its ID attribute must match exactly the value given in the selector.
+
+**Syntax:**<br />
+```css
+#id_value { style properties }
+```
+**Example:**<br />
+```css
+/* The element with id="demo" */
+#demo {
+  border: red 2px solid;
+}
+```
+```html
+<div id="demo">This div has a special ID on it!</div>
+```
+
 #### How to select elements using their class in CSS?
+The CSS class selector matches elements based on the contents of their class attribute.
+
+**Syntax:**<br />
+```css
+.class_name { style properties }
+```
+**Example:**<br />
+```css
+.red {
+  color: #f33;
+}
+
+.yellow-bg {
+  background: #ffa;
+}
+
+/* All elements with class="spacious" */
+.spacious {
+  margin: 2em;
+}
+
+/* All <li> elements with class="spacious" */
+li.spacious {
+  margin: 2em;
+}
+```
+
+```html
+<p class="red">This paragraph has red text.</p>
+<p class="red yellow-bg">This paragraph has red text and a yellow background.</p>
+```
+
 #### How to select elements which have the ‘alpha’ and ‘beta’ classes in CSS?
+```css
+/* All elements with class="alpha" */
+.alpha {
+  style properties
+}
+/* All elements with class="beta" */
+.beta {
+  style properties
+}
+```
+
 #### How to select all list items in all ordered lists on the page in CSS?
+```css
+.li.ol {
+  style properties
+}
+```
+
 #### How to select elements using their attributes in CSS?
+The CSS attribute selector matches elements based on the presence or value of a given attribute.
+
+**Example:**
+```css
+/* <a> elements with a title attribute */
+a[title] {
+  color: purple;
+}
+
+/* <a> elements with an href matching "https://example.org" */
+a[href="https://example.org"] {
+  color: green;
+}
+
+/* <a> elements with an href containing "example" */
+a[href*="example"] {
+  font-size: 2em;
+}
+
+/* <a> elements with an href ending ".org" */
+a[href$=".org"] {
+  font-style: italic;
+}
+
+/* Internal links, beginning with "#" */
+a[href^="#"] {
+  background-color: gold;
+}
+```
+
 #### What are UX and UI?
+UX Design refers to the term User Experience Design, while UI Design stands for User Interface Design. Both elements are crucial to a product and work closely together. Where UX Design is a more analytical and technical field, UI Design is closer to what we refer to as graphic design, though the responsibilities are somewhat more complex.
+
+**What is User Experience Design?**<br />
+- User experience design is a human-first way of designing products.
+- User experience design (UXD or UED) is the process of enhancing customer satisfaction and loyalty by improving the usability, ease of use, and pleasure provided in the interaction between the customer and the product. 
+- User Experience Design is the process of development and improvement of quality interaction between a user and all facets of a company.
+- User Experience Design is responsible for being hands on with the process of research, competitor and customer analysis, testing, wireframing, development, content, and prototyping to test for quality results.
+- User Experience Design is in theory a non-digital (cognitive science) practice, but used and defined predominantly by digital industries.
+
+**What is UI Design?**<br />
+- User Interface Design is responsible for the transference of a brand’s strengths and visual assets to a product’s interface as to best enhance the user’s experience.
+- User Interface Design is a process of visually guiding the user through a product’s interface via interactive elements and across all sizes/platforms. It is responsible for the transference of a product’s development, research, content and layout into an attractive, guiding and responsive experience for users.
+- User Interface Design is a digital field, which includes responsibility for cooperation and work with developers or code.
+
 #### Please list some points that an application should fulfill to have good UX.
 #### What is XML, XSLT, DTD?
 #### What is the difference between HTML and XML?
