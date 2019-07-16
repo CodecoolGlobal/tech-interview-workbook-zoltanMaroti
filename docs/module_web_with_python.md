@@ -1071,9 +1071,84 @@ var myObj = JSON.parse(myJSON);
 ```
 
 #### What is TCP/IP? What layers does it define, what are they responsible for?
+TCP (Transmission Control Protocol) is an important network protocol that lets two hosts connect and exchange data streams. TCP guarantees the delivery of data and packets in the same order as they were sent. TCP role is to ensure the packets are reliably delivered, error free.  The widely used term “TCP/IP” refers to TCP over IP.
+
+TCP/IP (Transmission Control Protocol/Internet Protocol) is widely used throughout the world to provide network communications. TCP/IP communications are composed of four layers that work together. When a user wants to transfer data across networks, the data is passed from the highest layer through intermediate layers to the lowest layer, with each layer adding information. At each layer, the logical units are typically composed of a header and a payload. The payload consists of the information passed down from the previous layer, while the header contains layer-specific information such as addresses. 
+
+- **Application Layer:** This layer sends and receives data for particular applications, such as Domain Name System (DNS), HyperText Transfer Protocol (HTTP), and Simple Mail Transfer Protocol (SMTP).
+- **Transport Layer:** This layer provides connection-oriented or connectionless services for transporting application layer services between networks. Transmission Control Protocol (TCP) and User Datagram Protocol (UDP) are commonly used transport layer protocols.
+- **Network Layer:** This layer routes packets across networks.  Internet Protocol (IP) is the fundamental network layer protocol for TCP/IP. 
+- **Data Link Layer:** This layer handles communications on the physical network components.  The best-known data link layer protocol is Ethernet.
+
 #### What’s the difference between TCP and UDP?
+Both TCP and UDP are protocols used for sending bits of data — known as packets — over the Internet. They both build on top of the Internet protocol. In other words, whether you are sending a packet via TCP or UDP, that packet is sent to an IP address.
+
+**TCP:**<br />
+TCP stands for Transmission Control Protocol. It is the most commonly used protocol on the Internet. When you load a web page, your computer sends TCP packets to the web server’s address, asking it to send the web page to you. The web server responds by sending a stream of TCP packets, which your web browser stitches together to form the web page and display it to you. When you click a link, sign in, post a comment, or do anything else, your web browser sends TCP packets to the server and the server sends TCP packets back. TCP is not just one way communication — the remote system sends packets back to acknowledge it is received your packets. TCP guarantees the recipient will receive the packets in order by numbering them. The recipient sends messages back to the sender saying it received the messages. If the sender does not get a correct response, it will resend the packets to ensure the recipient received them. Packets are also checked for errors. TCP is all about this reliability — packets sent with TCP are tracked so no data is lost or corrupted in transit. This is why file downloads do not become corrupted even if there are network hiccups.
+
+**UDP:**<br />
+UDP stands for User Datagram Protocol — a datagram is the same thing as a packet of information. The UDP protocol works similarly to TCP, but it throws all the error-checking stuff out. All the back-and-forth communication and deliverability guarantees slow things down. When using UDP, packets are just sent to the recipient. The sender will not wait to make sure the recipient received the packet — it will just continue sending the next packets. UDP is used when speed is desirable and error correction is not necessary. For example, UDP is frequently used for live broadcasts and online games.
+
 #### How does an HTTP Request look like? What are the most relevant HTTP header fields?
+**Sending a client request:**<br />
+Once the connection is established, the user-agent can send the request. A client request consists of text directives, separated by CRLF (carriage return, followed by line feed), divided into three blocks:
+- The first line contains a request method followed by its parameters
+- Subsequent lines represent an HTTP header, giving the server information about what type of data is appropriate (e.g., what language, what MIME types), or other data altering its behavior
+- The final block is an optional data block, which may contain further data mainly used by the POST method.
+
+**Example requests:**<br />
+```http
+GET / HTTP/1.1
+Host: developer.mozilla.org
+Accept-Language: fr
+```
+
+```http
+POST /contact_form.php HTTP/1.1
+Host: developer.mozilla.org
+Content-Length: 64
+Content-Type: application/x-www-form-urlencoded
+
+name=Joe%20User&request=Send%20me%20one%20of%20your%20catalogue
+```
+
+**Request methods:**<br />
+HTTP defines a set of request methods indicating the desired action to be performed upon a resource. Although they can also be nouns, these requests methods are sometimes referred as HTTP verbs. The most common requests are GET and POST:
+- The GET method requests a data representation of the specified resource. Requests using GET should only retrieve data.
+- The POST method sends data to a server so it may change its state. This is the method often used for HTML Forms.
+
+**HTTP request headers:**<br />
+HTTP headers allow the client and the server to pass additional information with the request or the response.
+Host, User-Agent, Accept, Accept-Language, Referer, Connection, Cookie...
+
+**Note:**<br />
+The client-server model does not allow the server to send data to the client without an explicit request for it. To work around this problem, web developers use several techniques: ping the server periodically via the XMLHTTPRequest, Fetch APIs, using the WebSockets API, or similar protocols.
+
 #### How does an HTTP Response look like? What are the most relevant HTTP header fields?
+```http
+200 OK
+Access-Control-Allow-Origin: *
+Connection: Keep-Alive
+Content-Encoding: gzip
+Content-Type: text/html; charset=utf-8
+Date: Mon, 18 Jul 2016 16:06:00 GMT
+Etag: "c561c68d0ba92bbeb8b0f612a9199f722e3a621a"
+Keep-Alive: timeout=5, max=997
+Last-Modified: Mon, 18 Jul 2016 02:36:04 GMT
+Server: Apache
+Set-Cookie: mykey=myvalue; expires=Mon, 17-Jul-2017 16:06:00 GMT; Max-Age=31449600; Path=/; secure
+Transfer-Encoding: chunked
+Vary: Cookie, Accept-Encoding
+X-Backend-Server: developer2.webapp.scl3.mozilla.com
+X-Cache-Info: not cacheable; meta data too large
+X-kuma-revision: 1085259
+x-frame-options: DENY
+```
+
+**HTTP response headers:**<br />
+A response header is an HTTP header that can be used in an HTTP response and that doesn't relate to the content of the message.
+Connection, Content-Type, Keep-Alive, Server, Set-Cookie, Age, Location, Content-Length...
+
 #### What is DNS? How does it work?
 Domain Name Servers are like an address book for websites. When you type a web address in your browser, the browser looks at the DNS to find the website's real address before it can retrieve the website. The browser needs to find out which server the website lives on, so it can send HTTP messages to the right place. The Domain Name System (DNS) is a hierarchical and decentralized naming system for computers, services or other resources connected to the Internet or a private network. Web browsers interact through Internet Protocol (IP) addresses. DNS translates domain names to IP addresses so browsers can load Internet resources. Each device connected to the Internet has a unique IP address which other machines use to find the device. The process of DNS resolution involves converting a hostname (such as www.example.com) into a computer-friendly IP address (such as 192.168.1.1). A DNS name server is a server that stores the DNS records for a domain; a DNS name server responds with answers to queries against its database.
 
@@ -1100,8 +1175,28 @@ Examples of computer applications that use the client–server model are Email, 
     the website's files to the browser as a series of small chunks called data packets.
 4. The browser assembles the small chunks into a complete website and displays it to you.
 
+In client-server protocols, like HTTP, sessions consist of three phases:
+
+1. The client establishes a TCP connection (or the appropriate connection if the transport layer is not TCP).
+2. The client sends its request, and waits for the answer.
+3. The server processes the request, sending back its answer, providing a status code and appropriate data.
+
+**Establishing a connection:**<br />
+In client-server protocols, it is the client which establishes the connection. Opening a connection in HTTP means initiating a connection in the underlying transport layer, usually this is TCP. With TCP the default port, for an HTTP server on a computer, is port 80. Other ports can also be used, like 8000 or 8080.
+
 #### What would you use a session for?
+Http is stateless protocol, that means that it doesn't store anything on client or server side about the connection (whether we send a request or waiting for something) so normally we don't know anything about any previous requests when we do a request to a web server. 
+Because HTTP is stateless, in order to associate a request to any other request, you need a way to store user data between HTTP requests.
+However, sometimes (actually quite often) we need to preserve state, that means we want to know something that happened before our current http request. The simplest example is the user login mechanisms of various sites. 
+
+Cookies or URL parameters ( for ex. like http://example.com/myPage?asd=lol&boo=no ) are both suitable ways to transport data between 2 or more request. However they are not good in case you don't want that data to be readable/editable on client side. The cookies are client side storage mechanism, but what if we want to store some data about the user and we don't want the user modifying it or we want the data to be only accessible by the server?
+
+The solution is to store data on the server side, so it cannot be reached by the user, we can store data that can be trusted. Session allows you to store information specific to a user from one request to the next. This is implemented on top of cookies for you and signs the cookies cryptographically. What this means is that the user could look at the contents of your cookie but not modify it, unless they know the secret key used for signing. In order to use sessions you have to set a secret key.
+
 #### What would you use a cookie for?
+Using the Set-Cookie header field, an HTTP server can pass name/value pairs and associated metadata (called cookies) to a user agent. When the user agent makes subsequent requests to the server, the user agent uses the metadata and other information to determine whether to return the name/value pairs in the Cookie header. So a cookie is a small piece of data sent from a website and stored on the user's computer by the user's web browser while the user is browsing. Since it is stored on the client side, it can be deleted or modified by the user or the user can disable the whole cookie feature in her browser.
+
+Cookies are supported by all browsers, can expire, but have a limitations of storing only around 4KB of data. Cookies are mainly used for simple data that shouldn't be trusted (since the user can tamper with it), mainly for preferences settings on a site (but cookies are used for e.g. showing you personalized ads as well). So cookies are stored on client side, but can be set on server side.
 
 ## Software Development Methodologies
 
