@@ -1050,6 +1050,18 @@ An API (Application Programming Interface) is a set of features and rules that e
 Web APIs: DOM, Fetch API, Web Storage API...
 
 #### What is REST API?
+n computing, representational state transfer (REST) or RESTful is an architectural style used for web development. Systems and sites designed using this style aim for fast performance, reliability and the ability to scale (to grow and easily support extra users). To achieve these goals, developers work with reusable components that can be managed and updated without affecting the system as a whole while it is running. ... APIs that adhere to the REST architectural constraints are called RESTful APIs. Representational State Transfer (REST) refers to a group of software architecture design constraints that bring about efficient, reliable, and scalable distributed systems. A system is called RESTful when it adheres to those constraints.
+
+**Key REST principles:**<br />
+- Give every “thing” an ID: Use URIs to identify everything that merits being identifiable, specifically, all of the “high-level” resources that your application provides. For example: http://example.com/products?color=green 
+
+- Link things together: Use links to refer to identifiable things (resources) wherever possible. Hyperlinking is what makes the Web the Web.
+
+- Use standard methods: For clients to be able to interact with your resources, they should implement the default application protocol (HTTP) correctly, i.e. make use of the standard methods GET, PUT, POST, DELETE.
+
+- Resources with multiple representations: Provide multiple representations of resources for different needs.
+- Communicate statelessly
+
 #### What is JSON? When to use?
 JSON (JavaScript Object Notation) is a lightweight data-interchange format. It is easy for humans to read and write. JSON is a text format that is completely language independent. JSON is a syntax for storing and exchanging data. When exchanging data between a browser and a server, the data can only be text. JSON is text, and we can convert any JavaScript object into JSON, and send JSON to the server. We can also convert any JSON received from the server into JavaScript objects. This way we can work with the data as JavaScript objects, with no complicated parsing and translations. JSON uses JavaScript syntax, but the JSON format is text only. Text can be read and used as a data format by any programming language.
 
@@ -1153,6 +1165,20 @@ Connection, Content-Type, Keep-Alive, Server, Set-Cookie, Age, Location, Content
 Domain Name Servers are like an address book for websites. When you type a web address in your browser, the browser looks at the DNS to find the website's real address before it can retrieve the website. The browser needs to find out which server the website lives on, so it can send HTTP messages to the right place. The Domain Name System (DNS) is a hierarchical and decentralized naming system for computers, services or other resources connected to the Internet or a private network. Web browsers interact through Internet Protocol (IP) addresses. DNS translates domain names to IP addresses so browsers can load Internet resources. Each device connected to the Internet has a unique IP address which other machines use to find the device. The process of DNS resolution involves converting a hostname (such as www.example.com) into a computer-friendly IP address (such as 192.168.1.1). A DNS name server is a server that stores the DNS records for a domain; a DNS name server responds with answers to queries against its database.
 
 #### What is a web server?
+"Web server" can refer to hardware or software, or both of them working together.
+
+1. On the hardware side, a web server is a computer that stores web server software and a website's component files (e.g. HTML documents, images, CSS stylesheets, and JavaScript files). It is connected to the Internet and supports physical data interchange with other devices connected to the web.
+
+2. On the software side, a web server includes several parts that control how web users access hosted files, at minimum an HTTP server. An HTTP server is a piece of software that understands URLs (web addresses) and HTTP (the protocol your browser uses to view webpages). It can be accessed through the domain names (like mozilla.org) of websites it stores, and delivers their content to the end-user's device.
+
+At the most basic level, whenever a browser needs a file which is hosted on a web server, the browser requests the file via HTTP. When the request reaches the correct web server (hardware), the HTTP server (software) accepts request, finds the requested document (if it doesn't then a 404 response is returned), and sends it back to the browser, also through HTTP. To publish a website, you need either a static or a dynamic web server.
+
+A **static web server**, or stack, consists of a computer (hardware) with an HTTP server (software). We call it "static" because the server sends its hosted files "as-is" to your browser.
+
+A **dynamic web server** consists of a static web server plus extra software, most commonly an application server and a database. We call it "dynamic" because the application server updates the hosted files before sending them to your browser via the HTTP server.
+
+For example, to produce the final webpages you see in the browser, the application server might fill an HTML template with contents from a database. Sites like MDN or Wikipedia have many thousands of webpages, but they aren't real HTML documents, only a few HTML templates and a giant database. This setup makes it easier and quicker to maintain and deliver the content.
+
 #### Explain the client-server architecture.
 Computers connected to the web are called clients and servers. 
 **Clients** are the typical web user's internet-connected devices (for example, your computer connected to your Wi-Fi, 
