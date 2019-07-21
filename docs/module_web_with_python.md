@@ -244,6 +244,29 @@ Space complexity is the amount of memory used by the algorithm. We try to answer
 - What is the memory footprint of one element in the collection(s) (for example an integer is usually calculated as 4bytes)
 
 #### Explain the process of calculating the average value in a linked list of numbers!
+**Linked list** is a linear collection of data elements, whose order is not given by their physical placement in memory. Instead, each element points to the next. It is a data structure consisting of a collection of nodes which together represent a sequence. In its most basic form, each node contains: data, and a reference (in other words, a link) to the next node in the sequence. This structure allows for efficient insertion or removal of elements from any position in the sequence during iteration.
+
+Like arrays, Linked List is a linear data structure. Unlike arrays, linked list elements are not stored at a contiguous location; the elements are linked using pointers. Linked lists are among the simplest and most common data structures. They can be used to implement several other common abstract data types, including lists, stacks, queues, associative arrays, and S-expressions, though it is not uncommon to implement those data structures directly without using a linked list as the basis.
+
+**Advantages over arrays:**<br />
+1) Dynamic size
+2) Ease of insertion/deletion
+
+Key Differences Between Array and Linked List:
+- An array is the data structure that contains a collection of similar type data elements whereas the Linked list is considered as non-primitive data structure contains a collection of unordered linked elements known as nodes.
+- In the array the elements belong to indexes, i.e., if you want to get into the fourth element you have to write the variable name with its index or location within the square bracket.
+- In a linked list though, you have to start from the head and work your way through until you get to the fourth element.
+- Accessing an element in an array is fast, while Linked list takes linear time, so it is quite a bit slower. 
+- Operations like insertion and deletion in arrays consume a lot of time. On the other hand, the performance of these operations in Linked lists is fast.
+- Arrays are of fixed size. In contrast, Linked lists are dynamic and flexible and can expand and contract its size.
+
+**Program to find average of all nodes in a Linked List:**<br />
+**Iterative Solution:**
+1. Initialise a pointer 'ptr' with the head of the linked list and a 'sum' variable with 0.
+2. Start traversing the linked list using a loop until all the nodes get traversed.
+3. Add the value of current node to the sum i.e. sum += ptr -> data.
+4. Increment the pointer to the next node of linked list i.e. ptr = ptr ->next.
+5. Divide sum by total number of node and Return the average.
 
 ### Procedural
 #### How the CASE condition works in SQL?
@@ -602,6 +625,14 @@ function clickHandler(event) {
 CallBack Function is a function which is passed into another function as an argument and is expected to execute after some kind of event. The purpose of the callback is to inform a class Sync/Async if some work in other class is done. This is very useful when working with Asynchronous tasks. For example when we want to perform some routine tasks like perform some operation or display content after some clicking a button, or fetching data from internet. This is also used in event handling, as we get notified when a button is clicked via callback function. 
 
 #### What is a Python decorator? How does it work? Tell some examples of its usage.
+In Python, functions are the first class objects, which means that:
+- Functions are objects; they can be referenced to, passed to a variable and returned from other functions as well.
+- Functions can be defined inside another function and can also be passed as argument to another function.
+
+Decorators are very powerful and useful tool in Python since it allows programmers to modify the behavior of function or class. Decorators allow us to wrap another function in order to extend the behavior of wrapped function, without permanently modifying it. In Decorators, functions are taken as the argument into another function and then called inside the wrapper function.
+
+Simply put, decorators wrap a function, modifying its behavior.
+
 #### What is the difference between synchronous and asynchronous execution?
 **Synchronous (Classic Web-Application Model) execution:**<br />
 Synchronous program execution in most high-level languages is usually very straightforward. Your program starts at the first line of source code and each line of code executed sequentially thereafter. Each time a function is called, program execution waits until that function returns before continuing to the next line of code. This method of execution can have undesirable ramifications. Blocking operations may not always seem like an issue because computers are fast. Making synchronous calls to resources can lead to long response times locking up the UI until the resource responds. Making requests to your own services like a database can have the same effect.  Suppose a function is called to start a time consuming process. What if you want to stop the lengthy process? With synchronous execution, your program is “stuck,” waiting for the process to end, with no way out. A synchronous request blocks the client until operation completes i.e. browser is unresponsive. In such case, javascript engine of the browser is blocked. If an API call is synchronous, it means that code execution will block (or wait) for the API call to return before continuing. This means that until a response is returned by the API, your application will not execute any further, which could be perceived by the user as latency or performance lag in your app. Asynchronous execution avoids this bottleneck. You are essentially saying, “I know this function call is going to take a great deal of time, but my program doesn’t want to wait around while it executes.”
@@ -761,7 +792,7 @@ WHERE city = "Miskolc";
 ```
 
 #### How would you keep track of what kind of data has changed after an UPDATE or DELETE operation in a table?
-
+????
 ### HTML & CSS
 
 #### What’s the difference between XML, XHTML and HTML?
@@ -929,8 +960,56 @@ UX Design refers to the term User Experience Design, while UI Design stands for 
 - User Interface Design is a digital field, which includes responsibility for cooperation and work with developers or code.
 
 #### Please list some points that an application should fulfill to have good UX.
+1. Design Should Concentrate on User Experience:
+Graphics, layout, text, and interactive elements work in synergy to present the user with an experience, not just present them with information.
+2. Websites Are Scanned, Not Read:
+It is a must that your website is scannable because people do not read websites, they scan them. Infographics and visuals have become the way for anyone trying to convey instructions or data.
+3. Users Want Clarity and Simplicity:
+Don’t make it difficult to find action buttons. Visually focus attention on the main button versus a bunch of buttons on the home page.
+4. Common Design Elements Versus Creativity:
+When design elements are common elsewhere, don’t reinvent them by becoming creative with new UI patterns. Making users think too hard to figure out your UI interface is not what you want.
+5. Know the Audience:
+You must have a good idea of who the audience is for the intended website or app before you create it. When you’ve identified your audience, remember to incorporate their feedback into your design. Considering end user’s actionable feedback is significantly valuable.
+6. Visual Hierarchy:
+When putting the most important elements on the interface, highlight them so that users focus on them.
+7. User Experience Qualities:
+- Useful – Content should be original and fulfill a need
+- Usable – Site must be easy to find
+- Desirable – Design elements bring about emotion and appreciation
+- Findable – Content needs to be locatable and navigable offsite and onsite
+- Accessible – Content needs to be accessible to people with disabilities
+- Credible – Users must believe and trust what you tell them.
+
 #### What is XML, XSLT, DTD?
+**XML:**<br />
+eXtensible Markup Language (XML) is a generic markup language specified by the W3C, similar to HTML. Moreover, HTML is a presentation language, whereas XML is a data-description language. This means, unlike other markup languages, XML is not predefined so you must define your own tags. XML tags resemble HTML tags, but XML is much more flexible because it lets users define their own tags. In this way XML acts like a meta-language—that is, it can be used to define other languages, such as RSS. The primary purpose of the language is the sharing of data across different systems, such as the Internet. There are many languages based on XML; Some examples are XHTML, MathML, SVG, XUL, XBL, RSS, and RDF. You can also create your own. This means that XML has far broader applications than just the Web. For example, Web services can use XML to exchange requests and responses.
+
+**XSLT:**<br />
+Extensible Stylesheet Language Transformations (XSLT) is an XML-based language used, in conjunction with specialized processing software, for the transformation of XML documents. Although the process is referred to as "transformation," the original document is not changed; rather, a new XML document is created based on the content of an existing document. Then, the new document may be serialized (output) by the processor in standard XML syntax or in another format, such as HTML or plain text. XSLT is most often used to convert data between different XML schemas or to convert XML data into web pages or PDF documents.
+
+**DTD:**<br />
+Document Type Declaration. In HTML, the doctype is the required ```<!DOCTYPE html>``` preamble found at the top of all documents. Its sole purpose is to prevent a browser from switching into so-called “quirks mode” when rendering a document. DOCTYPEs are required for legacy reasons. When omitted, browsers tend to use a different rendering mode that is incompatible with some specifications. Including the DOCTYPE in a document ensures that the browser makes a best-effort attempt at following the relevant specifications.
+
 #### What is the difference between HTML and XML?
+**HTML:**<br />
+- HTML (Hypertext Markup Language) is the markup language for constructing web pages. The markup commands employed in the web-based content signifies structure of the document and its layout to the browser. 
+- HTML is predefined markup language
+- Purpose of the language: Presentation of the data
+
+**XML:**<br />
+- XML (Extensible Markup Language) is a language that enables a user to define a representation of data or data structure where values are assigned in each field in the structure.
+- Provides a framework for specifying markup languages
+- Purpose of the language: Transfer of information		
+
+**Key Differences Between XML and HTML:**<br />
+1. XML is a text-based markup language which has the self-describing structure and can effectively define another markup language. On the other hand, HTML is a predefined markup language and has a limited capability.
+2. XML provides logical structuring of the document while HTML structure is predefined where “head” and “body” tags are used.
+3. When it comes to language type HTML is case insensitive. As against, XML is case sensitive.
+4. HTML was designed with the emphasis on the presentational features of the data. In contrast, XML is data specific where the data storage and transfer was the prior concern.
+5. XML does not permit any mistake if there are some errors in the code it could not be parsed. Inversely, in HTML small errors can be neglected.
+6. Whitespaces in XML are used for a specific use as XML considers every single character. On the contrary, HTML can ignore the whitespaces.
+7. The tags in XML are mandatory to be closed, whereas in HTML an open tag can also work completely fine.
+8. Nesting in XML should be done correctly, it has a big importance in XML syntax. Conversely, HTML does not care much about nesting.
 
 ### Javascript
 
@@ -1013,15 +1092,48 @@ The core idea behind the **Feature Branch Workflow** is that all feature develop
 Encapsulating feature development also makes it possible to leverage **pull requests**, which are a way to initiate discussions around a branch. They give other developers the opportunity to sign off on a feature before it gets integrated into the official project. Or, if you get stuck in the middle of a feature, you can open a pull request asking for suggestions from your colleagues. The point is, pull requests make it incredibly easy for your team to comment on each other’s work.
 
 #### What would you do if you find a bug on the production code (master branch)?
+1. create a new branch (in our repository) forked off the master branch, called, e.g., issue-1722
+2. develop the fix in this branch
+3. when the fix is ready, merge it into master
+
 #### How can you move changes from one branch to another in GIT?
+You can create a new branch pointing to the current commit using ```git branch branchname``` (or ```git checkout -b branchname``` if you want to check it out directly). This will basically duplicate your master branch, so you can continue working on there.
+
 #### How does a VCS help with code reviews?
+- Commit Comments: commit each milestone and add a commit message describing the milestone.
+- Pull Request Preamble: write a detailed Pull Request description of the purpose of your pull request with text and pictures.
+- History: Browse commits, comments, and references related to your pull request in a timeline-style interface.
+- Diffs: Preview changes in context with your code to see what is being proposed.
+
 #### What is your favorite git command? Why?
+git commit -m "some comments about my recent code"
+
 #### What does remote/local mean in Git? 
+Git has two repository types: local and remote.  The local repo is on your computer for only your direct use.  The remote repo is typically elsewhere and for your indirect use.  Git supports multiple remote repositories.
+
+**Local Repo:**<br />
+The local repo is on your computer and has all the files and their commit history, enabling full diffs, history review, and committing when offline.  This is one of the key features of a “distributed” version control system (DVCS), locally having the full repository history.
+
+**Remote Repo:**<br />
+Git refers to the centralized server as a “remote repository”.  The remote repo is usually not on your machine and is the one shared by the team. The team “pushes” commits to it when ready to share with the team. While one of your remote repos could be another team member’s local repo, in a corporate environment at least one (or the only!) is typically a Git repo on a server anointed as the central/official repo. Note that a remote repo is optional.  When not sharing code with others, there is technically no need for a remote repo (you may want one for backup or CI).  There is also no need for a remote repo if your local repo is considered the central one by all team members (which means your local repo is their remote repo).
 
 ### DevOps
 
 #### Why is it good to use a package manager software?
+A package manager or package-management system is a collection of software tools that automates the process of installing, upgrading, configuring, and removing computer programs for a computer's operating system. Package Managers are used to automate the process of installing, upgrading, configuring, and removing programs. There are many package managers today for Unix/Linux-based systems. Package managers are designed to eliminate the need for manual installs and updates. This can be particularly useful for large enterprises whose operating systems are based on Linux and other Unix-like systems, typically consisting of hundreds or even tens of thousands of distinct software packages. Package managers are also used for installing and managing modules for languages such as Python, Ruby, etc.
+
+A package manager deals with packages, distributions of software and data in archive files. A package is simply an archive that contains binaries of software, configuration files, and information about dependencies. Packages contain metadata, such as the software's name, description of its purpose, version number, vendor, checksum, and a list of dependencies necessary for the software to run properly. They work closely with software repositories, binary repository managers, and app stores. Packages gets downloaded from software repositories, often simply called repos. These repos are available online at well-defined locations and they serve as a central distribution point for packages. For performance and redundancy, these repos may be mirrored by many other locations worldwide.
+
+The basic functions of the PM are the following:
+- Working with file archivers to extract package archives
+- Ensuring the integrity and authenticity of the package by verifying their digital certificates and checksums
+- Looking up, downloading, installing or updating existing software from a software repository or app store
+- Managing dependencies to ensure a package is installed with all packages it requires, thus avoiding dependency hell
+
 #### Why is it good to use a virtual environment for a project?
+Package installation may lead to having incompatibility issues or make other applications unworkable. And you may discover that your code does not work on some machines while it just works flawlessly on your local machine. Why? Python environment.
+
+So, not to have a daily nightmare about incompatibility issues, individual python environment needs to be created for a project. A virtual environment is a bunch of scripts and directories that can run python isolated. By using a virtual environment, each python project can have its own dependencies regardless of other projects and system python environments.
 
 ### Networks
 
