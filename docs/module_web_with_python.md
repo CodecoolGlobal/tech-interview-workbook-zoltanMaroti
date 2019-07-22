@@ -94,7 +94,7 @@ XSS (Cross-site scripting) is a security exploit which allows an attacker to inj
 - Content-Security-Policy: The HTTP Content-Security-Policy response header allows web site administrators to control resources the user agent is allowed to load for a given page. This helps guard against cross-site scripting attacks (XSS). For example, it disables the use of inline JavaScript ('unsafe-inline').
 
 #### How to properly store passwords?
-The best way to protect passwords is to employ salted password hashing. 
+The best way to protect passwords is to employ salted password hashing. <br />
 **Salt:** We can randomize the hashes by appending or prepending a random string, called a salt, to the password before hashing. To check if a password is correct, we need the salt, so it is usually stored in the user account database along with the hash, or as part of the hash string itself.
 
 The general workflow for account registration and authentication in a hash-based account system is the following:
@@ -119,7 +119,7 @@ Hashing is a one-way function where data is mapped to a fixed-length value. Hash
 The key is that encryption is reversible. Hashing is not.
 
 #### What encryption methods do you know?
-AES, RSA, ECC, PGP
+AES, RSA, ECC, PGP, Blowfish
 
 #### What hashing methods do you know?
 Well-designed key stretching algorithms such as PBKDF2, bcrypt, and scrypt. **DO NOT** use for password hashing: Fast cryptographic hash functions such as MD5, SHA1, SHA256, SHA512, RipeMD, WHIRLPOOL, SHA3, etc.
@@ -493,7 +493,11 @@ First of all, you need to include type="module" in the script element, to declar
 
 ### Functional
 #### What is recursion?
-? Recursion in computer science is a method of solving a problem where the solution depends on solutions to smaller instances of the same problem (as opposed to iteration). The process in which a function calls itself directly or indirectly is called recursion and the corresponding function is called as recursive function.? A method or function that calls itself until some exit condition is reached.
+Recursion in computer science is a method of solving a problem where the solution depends on solutions to smaller instances of the same problem (as opposed to iteration). The process in which a function calls itself directly or indirectly is called recursion and the corresponding function is called as recursive function. A method or function that calls itself until some exit condition is reached.
+
+Recursion simply means “self reference”. When something refers to itself or describes itself, it is called recursive. In programming, recursive function is a function that calls itself.
+
+In computer programming, the term recursive describes a function or method that repeatedly calculates a smaller part of itself to arrive at the final result. It is similar to iteration, but instead of repeating a set of operations, a recursive function accomplishes repetition by referring to itself in its own definition. Using recursive logic can have some downfalls, including the creation of an endless loop in programming. For this reason, ensuring there is an escape condition (like a do until) in the programming helps reduce, if not eliminate, the chance of an endless loop from occurring.
 
 #### Write a recursive function which calculates the Fibonacci numbers!
 **In Python:** 
@@ -774,7 +778,39 @@ column3 datatype constraint,
 A cursor is a temporary work area created in the system memory when a SQL statement is executed. This temporary work area is used to store the data retrieved from the database, and manipulate this data. A cursor can hold more than one row, but can process only one row at a time. A database cursor can be thought of as a pointer to a specific row within a query result. The pointer can be moved from one row to the next.
 
 #### What are database indexes? When to use?
+Indexes are special lookup tables that the database search engine can use to speed up data retrieval. Simply put, an index is a pointer to data in a table. An index in a database is very similar to an index in the back of a book. A database index allows a query to efficiently retrieve data from a database.  Indexes are related to specific tables and consist of one or more keys.  A table can have more than one index built from it. PostgreSQL provides several index types: B-tree, Hash, GiST, SP-GiST and GIN. Each Index type uses a different algorithm that is best suited to different types of queries. By default, the CREATE INDEX command creates B-tree indexes, which fit the most common situations. An index helps to speed up SELECT queries and WHERE clauses; however, it slows down data input, with UPDATE and INSERT statements. Indexes can be created or dropped with no effect on the data. Indexes are automatically created for primary key constraints and unique constraints (Implicit indexes).
+
+**Sequential Scanning:**<br />
+You go over all of the records, until you find the person whose phone number you are looking for, this is super inefficient. 
+
+**Index Scanning:**<br />
+Simply said, Postgres will issue a scan based on the indexes, therefore finding the exact location of the user that we are looking for and returning it. This is a much cheaper operation then using a sequential scan.
+
+**Clustered Indexes:**<br />
+Clustering means that the data is in a distinct order, resulting the row data to be stored in order. Also, clustered indexes increase the write time, because when new data arrives, all of the data has to be rearranged. But on the bright side - they can greatly increase the reading speed of the table. To summarize - clustered indexes order the data physically (on disk) in clusters.
+
+**Non-clustered Indexes:**<br />
+Non-clustered indexes are indexes that keep a separate ordering list that has pointers to the physical rows. So, to summarize - non-clustered indexes do not order the data physically, they just keep a list of the data order.
+
+**When Should Indexes be Avoided?**<br />
+Although indexes are intended to enhance a database's performance, there are times when they should be avoided. 
+- Indexes should not be used on small tables.
+- Tables that have frequent, large batch update or insert operations.
+- Indexes should not be used on columns that contain a high number of NULL values.
+- Columns that are frequently manipulated should not be indexed.
+
 #### What are database transactions? When to use?
+A transaction is a unit of work that is performed against a database. Transactions are units or sequences of work accomplished in a logical order, whether in a manual fashion by a user or automatically by some sort of a database program. For example, if you are creating a record, updating a record, or deleting a record from the table, then you are performing transaction on the table. It is important to control transactions to ensure data integrity and to handle database errors.
+
+**Transaction Isolation in PostgreSQL:**<br />
+PostgreSQL comes with solid, time-tested features that lets you define exactly what should happen when multiple clients try to update the same data concurrently. One of them is the isolation level of transactions. Transactions are the fundamental way to mutate data in an RDBMS. Modern RDBMS allow more than one transaction to run concurrently. Transaction isolation levels and pessimistic locks are two such tools.
+The isolation level of a transaction, in PostgreSQL, can be one of:
+- **Read Committed:** What happens when one (unfinished) transaction inserts rows in a table and the other (also unfinished) transaction tries to read all rows in the table? The read committed isolation level guarantees that dirty reads will never happen.
+- **Repeatable Read:** These happen when a transaction reads a row, and then reads it again a bit later but gets a different result – because the row was updated in between by another transaction. PostgreSQL will then ensure that the second (or any) read will also return the same result as the first read. 
+- **Serializable:** Updates performed in one transaction can be “lost”, or overwritten by another transaction that happens to run concurrently. PostgreSQL places a lock to prevent another update until the first transaction is finished.
+
+Every transaction has it’s isolation level set to one of these when it is created. The default level is “read committed”.
+
 #### What kind of database relations do you know? How to define them?
 **One-to-One:** A row in table A can have only one matching row in table B, and vice versa.
 
@@ -792,7 +828,11 @@ WHERE city = "Miskolc";
 ```
 
 #### How would you keep track of what kind of data has changed after an UPDATE or DELETE operation in a table?
-????
+Database security is always an essential issue in any database application. Especially when critical data is stored, it might be interesting to know who has changed which data when and how. To track those changes made to tables in PostgreSQL you can write yourself a generic changelog trigger. The easiest way to do that is to write a generic PL/pgSQL function and use it for all tables in the system. As PostgreSQL provides good support for stored procedures. At the basic database level you can track changes by having a separate table that gets an entry added to it via triggers on INSERT/UPDATE/DELETE statements. Thats the general way of tracking changes to a database table.
+
+**Creating a table to store some history:**<br />
+The point of this table is to keep track of all changes made to a table. We want to know which operation has been taking place. 
+
 ### HTML & CSS
 
 #### What’s the difference between XML, XHTML and HTML?
