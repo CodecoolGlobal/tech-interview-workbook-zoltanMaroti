@@ -66,7 +66,14 @@
 #### If you have a variable, that shall store a positive whole number between 0 and 200, what primitive type would you use to store it?
 #### What is the "golden rule" of variable scoping in Java? What is the lifetime of variables?
 #### What is the purpose of the ‘equals()’ method?
+In Java, string ```equals()``` method compares the two given strings based on the data/content of the string. If all the contents of both the strings are same then it returns true. If all characters are not matched then it returns false.
+
 #### What is the difference between '==' and 'equals()'?
+In general both equals() and “==” operator in Java are used to compare objects to check equality but here are some of the differences between the two:
+
+- Main difference between .equals() method and == operator is that one is method and other is operator.
+- We can use == operators for reference comparison (address comparison) and .equals() method for content comparison. In simple words, == checks if both objects point to the same memory location whereas .equals() evaluates to the comparison of values in the objects.
+
 #### What does the ‘static’ keyword mean?
 Everything in Java must have a type. ```static``` tells Java compiler that this is a method that is part of the class, but is not a method for any other instance of the class. We can apply java ```static``` keyword with variables, methods, blocks and nested class. ?Csak az adott osztály hívhatja meg a függvényt.?
 
@@ -95,6 +102,10 @@ Minden Java változat két disztribúcióban érhető el:
 #### What is the difference between long and Long?
 #### Can a long store bigger numbers than a Long?
 #### What kind of packages do you know under java.util.* ? Bring at least 3 examples.
+- java.util.Arrays
+- java.util.Scanner
+- java.util.Collections
+
 #### What are the access modifiers in Java? Which one could we use for class?
 Access modifiers in Java helps to restrict the scope of a class, constructor, variable, method or data member. There are four types of access modifiers available in Java:
 
