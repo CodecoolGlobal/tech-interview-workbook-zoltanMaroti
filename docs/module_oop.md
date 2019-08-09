@@ -20,6 +20,11 @@
 ### Other
 
 #### What is a garbage collector, in a nutshell?
+Automatic garbage collection is the process of looking at heap memory, identifying which objects are in use and which are not, and deleting the unused objects. An in use object, or a referenced object, means that some part of your program still maintains a pointer to that object. An unused object, or unreferenced object, is no longer referenced by any part of your program. So the memory used by an unreferenced object can be reclaimed. Garbage Collection tracks each and every object available in the JVM heap space and removes unused ones. In a programming language like C, allocating and deallocating memory is a manual process. In Java, process of deallocating memory is handled automatically by the garbage collector. 
+
+**Advantages:**
+- No manual memory allocation/deallocation handling
+- Automatic Memory Leak management
 
 ## Programming paradigms
 
