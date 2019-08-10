@@ -135,6 +135,8 @@ Access modifiers in Java helps to restrict the scope of a class, constructor, va
 #### Which interfaces extend the Collection interface in Java. Which classes?
 #### What is the connection between equals() and hashCode()? How are they used in HashMap?
 #### What is the difference between checked exceptions and unchecked exceptions? Could you bring example for each?
+There are two exception types, checked and unchecked (also called runtime). The main difference is that checked exceptions are checked when compiled, while unchecked exceptions are checked at runtime.
+
 #### What is Error in Java and how does it relate to Exception?
 #### When does 'finally' block run? What it is used for? Could you give an example from your projects when you would use 'finally'?
 #### What is the largest number you can work with in Java?
