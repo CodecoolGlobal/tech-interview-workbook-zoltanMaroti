@@ -175,6 +175,14 @@ In general both equals() and “==” operator in Java are used to compare objec
 Everything in Java must have a type. ```static``` tells Java compiler that this is a method that is part of the class, but is not a method for any other instance of the class. We can apply java ```static``` keyword with variables, methods, blocks and nested class. ?Csak az adott osztály hívhatja meg a függvényt.?
 
 #### Why is the main() method declared as static? Explain.
+In Java, to start a program is to call an existing public static void
+main(String[] args) method on a class.
+
+- It must be public to be reachable from the outer world.
+- It must be static to be callable before creating any objects.
+- It is void since by design it does not return anything when the program ends normally.
+- It is possible to pass (multiple) arguments after the name of the class to the java runtime – these arguments are visible by the method through the args parameter.
+
 #### What is the default access modifier in a class?
 Default – No keyword required: When no access modifier is specified for a class, method or data member – It is said to be having the default access modifier by default. Classes having default access modifier are accessible only within the same package.
 
