@@ -36,11 +36,103 @@ Automatic garbage collection is the process of looking at heap memory, identifyi
 ### Object-oriented
 
 #### What is a class?
+In summary, in object oriented programming, each object has three dimensions: identity, attributes, and behavior. 
+Attributes describe the object's current state, and what the object is capable of doing is demonstrated through the object's behavior.
+
+A class describes what the object will be, but is separate from the object itself. In other words, classes can be described as blueprints, descriptions, or definitions for an object. You can use the same class as a blueprint for creating multiple objects (it's called instantiation - is the realization of a predefined object). The first step is to define the class, which then becomes a blueprint for object creation. Each class has a name, and each is used to define attributes and behavior. In other words, an object is an instance of a class.
+
+A class has attributes and methods.
+- Methods: Methods define behavior. A method is a collection of statements that are grouped together to perform an operation.
+- The attributes are basically variables within a class.
+
+![alt text](http://sce2.umkc.edu/BIT/burrise/pl/oop/car-objects.gif "Object")
+
 #### What is an object?
+Software objects are conceptually similar to real-world objects: they consist of state and behavior. An object stores its state in fields (variables in some programming languages) and exposes its behavior through methods (functions in some programming languages). Methods operate on an object's internal state and serve as the primary mechanism for object-to-object communication. Hiding internal state and requiring all interaction to be performed through an object's methods is known as data encapsulation — a fundamental principle of object-oriented programming.
+
+Bundling code into individual software objects provides a number of benefits, including:
+
+- Modularity: The source code for an object can be written and maintained independently of the source code for other objects. Once created, an object can be easily passed around inside the system.
+- Information-hiding: By interacting only with an object's methods, the details of its internal implementation remain hidden from the outside world.
+- Code re-use: If an object already exists (perhaps written by another software developer), you can use that object in your program.
+- Pluggability and debugging ease: If a particular object turns out to be problematic, you can simply remove it from your application and plug in a different object as its replacement.
+
+![alt text](https://docs.oracle.com/javase/tutorial/figures/java/concepts-object.gif "Object")
+
 #### What is a constructor?
+Constructors are special methods invoked when an object is created and are used to initialize them. A constructor can be used to provide initial values for object attributes. A constructor name must be the same as its class name. A constructor must have no explicit return type. You can think of constructors as methods that will set up your class by default, so you don’t need to repeat the same code every time. The constructor is called when you create an object using the new keyword. A single class can have multiple constructors with different numbers of parameters. Java automatically provides a default constructor, so all classes have a constructor, whether one is specifically defined or not.
+
+**Constructor Overloading:**<br>
+Sometimes there is a need of initializing an object in different ways. This can be done using constructor overloading. Overloaded constructor is called based upon the parameters specified when new is executed. If we want to have different ways of initializing an object using different number of parameters, then we must do constructor overloading.
+
+![alt text](https://static.javatpoint.com/images/core/java-constructor.png "Constructor")
+
 #### Do we require parameter for constructors?
 #### What is an interface?
+An interface is a completely abstract class that contains only abstract methods.
+
+**Some specifications for interfaces:**<br>
+- Defined using the interface keyword.
+- May contain only static final variables.
+- Cannot contain a constructor because interfaces cannot be instantiated.
+- Interfaces can extend other interfaces.
+- A class can implement any number of interfaces.
+
+**An example of a simple interface:**<br>
+```java
+interface Animal {
+    public void eat();
+    public void makeSound();
+}
+```
+Interfaces have the following properties:
+- An interface is implicitly abstract. You do not need to use the abstract keyword while declaring an interface.
+- Each method in an interface is also implicitly abstract, so the abstract keyword is not needed.
+- Methods in an interface are implicitly public.
+- A class can inherit from just one superclass, but can implement multiple interfaces!
+- When you implement an interface, you need to override all of its methods.
+
+Use the implements keyword to use an interface with your class.
+```java
+interface Animal {
+    public void eat();
+    public void makeSound();
+}
+
+class Cat implements Animal {
+    public void makeSound() {
+        System.out.println("Meow");
+    }
+    public void eat() {
+        System.out.println("omnomnom");
+    }
+}
+```
+
 #### What are access modifiers?
+Access modifiers in Java helps to restrict the scope of a class, constructor, variable, method or data member. Access level modifiers determine whether other classes can use a particular field or invoke a particular method. There are two levels of access control:
+
+- At the top level—public, or package-private (no explicit modifier).
+- At the member level—public, private, protected, or package-private (no explicit modifier).
+
+A class may be declared with the modifier public, in which case that class is visible to all classes everywhere. If a class has no modifier (the default, also known as package-private), it is visible only within its own package. 
+
+At the member level, you can also use the public modifier or no modifier (package-private) just as with top-level classes, and with the same meaning. For members, there are two additional access modifiers: private and protected. The private modifier specifies that the member can only be accessed in its own class. The protected modifier specifies that the member can only be accessed within its own package (as with package-private) and, in addition, by a subclass of its class in another package.
+
+**Tips on Choosing an Access Level:**<br> 
+- Use the most restrictive access level that makes sense for a particular member. Use private unless you have a good reason not to.
+- Avoid public fields except for constants.
+
+- **Default – No keyword required:** When no access modifier is specified for a class, method or data member – It is said to be having the default access modifier by default. Having default access modifier are accessible only within the same package.
+
+- **Private** - The methods or data members declared as private are accessible only within the class in which they are declared. Any other class of same package will not be able to access these members. Top level Classes or interface can not be declared as private, they apply only to nested classes.
+
+- **Protected:** The methods or data members declared as protected are accessible within the same package or sub classes in different packages.
+
+- **Public:** The public access modifier has the widest scope among all other access modifiers. Classes, methods or data members which are declared as public are accessible from everywhere in the program. There is no restriction on the scope of a public data members.
+
+![alt text](http://net-informations.com/java/basics/img/access-modifier.png "Constructor")
+
 #### What is data hiding?
 #### Can a static method use non-static members?
 #### What is the difference between hiding a static method and overriding an instance method?
