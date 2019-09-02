@@ -134,6 +134,8 @@ At the member level, you can also use the public modifier or no modifier (packag
 ![alt text](http://net-informations.com/java/basics/img/access-modifier.png "Constructor")
 
 #### What is data hiding?
+Encapsulation is a central design principle of OOP. It means that the internal structure and the implementation of a class should be hidden from the world. This can be done by restricting the access to these parts. Every Object Oriented language provides access modifiers to set the visibility of classes and its members (fields, constructors, and methods) separately. This is called data hiding.
+
 #### Can a static method use non-static members?
 #### What is the difference between hiding a static method and overriding an instance method?
 #### Define the following terms: Instantiation, Attribute, Method
@@ -146,9 +148,33 @@ At the member level, you can also use the public modifier or no modifier (packag
 #### What are base class, subclass and superclass?
 #### Draw an object oriented family (as entities, with relations) on the whiteboard.
 #### Difference between overloading and overriding?
+Overloading is about same function have different signatures. Overriding is about same function, same signature but different classes connected through inheritance. Overloading is an example of compiler time polymorphism and overriding is an example of run time polymorphism.
+
+![alt text](http://cdncontribute.geeksforgeeks.org/wp-content/uploads/OverridingVsOverloading.png "overloading vs overriding")
+
 #### What are the Object Oriented Principles? Explain the concepts with realistic examples!
 #### What is method overloading?
+If a class has multiple methods having same name but different in parameters, it is known as Method Overloading. Overloading allows different methods to have the same name, but different signatures where the signature can differ by the number of input parameters or type of input parameters or both. Overloading is related to compile time (or static) polymorphism.
+
+**Advantage of method overloading:**<br>
+Method overloading increases the readability of the program. We don’t have to create and remember different names for functions doing the same thing.
+
+**Different ways to overload the method:**<br>
+- By changing number of arguments
+- By changing the data type
+
 #### What is method overriding?
+If subclass (child class) has the same method as declared in the parent class, it is known as method overriding in Java. In other words, if a subclass provides the specific implementation of the method that has been declared by one of its parent class, it is known as method overriding.
+
+**Usage of Java Method Overriding:**<br>
+- Method overriding is used to provide the specific implementation of a method which is already provided by its superclass.
+- Method overriding is used for runtime polymorphism
+
+**Rules for Java Method Overriding:**<br>
+- The method must have the same name as in the parent class
+- The method must have the same parameter as in the parent class.
+- There must be an IS-A relationship (inheritance).
+
 #### Explain how object oriented languages attempt to simplify memory management for Programmers.
 #### Explain the “Single Responsibility” principle!
 #### What is an object oriented program? Explain, show.
@@ -161,6 +187,10 @@ At the member level, you can also use the public modifier or no modifier (packag
 
 #### What is autoboxing and unboxing?
 #### If you have a variable, that shall store a positive whole number between 0 and 200, what primitive type would you use to store it?
+short (-32768 to 32767)
+
+![alt text](http://4.bp.blogspot.com/-KviSh6mjDrs/VqoNwwxeWhI/AAAAAAAABao/46T-QGCGdyk/s1600/Primitive-Data-Types-in-Java-Programming-Language.png "primitive data types")
+
 #### What is the "golden rule" of variable scoping in Java? What is the lifetime of variables?
 #### What is the purpose of the ‘equals()’ method?
 In Java, string ```equals()``` method compares the two given strings based on the data/content of the string. If all the contents of both the strings are same then it returns true. If all characters are not matched then it returns false.
@@ -242,10 +272,21 @@ There are two exception types, checked and unchecked (also called runtime). The 
 #### What is the largest number you can work with in Java?
 #### When you use method overriding, can you change the access level of the method, from protected to public? Why?When you use method overriding, can you change the access level of the method, from public to protected? Why?
 #### Can the main method be overridden? Explain your answer!
+No, because the main is a static method and a static method cannot be overridden.
+
 #### When you use method overriding, can you throw fewer exceptions in the subclass than in the parent class? Why?
 #### When you use method overriding, can you throw more exceptions in the subclass than in the parent class? Why?
 #### What does "final" mean in case of a variable, method or a class?
 #### What is the super keyword?
+The super keyword in Java is a reference variable which is used to refer immediate parent class object. Whenever you create the instance of subclass, an instance of parent class is created implicitly which is referred by super reference variable. We can use super keyword to access the data member or field of parent class. It is used if parent class and child class have same fields. The super keyword can also be used to invoke parent class method. It should be used if subclass contains the same method as parent class. In other words, it is used if method is overridden.
+
+**Usage of Java super Keyword:**<br>
+- super can be used to refer immediate parent class instance variable.
+- super can be used to invoke immediate parent class method.
+- super() can be used to invoke immediate parent class constructor: default constructor is provided by compiler automatically if there is no constructor. But, it also adds super() as the first statement.
+
+
+
 #### What are “generics”? When to use? Show examples.
 #### What is the benefit of having “generic” containers?
 #### Given two Java programs on two different machines. How can you communicate between the two? What are the possible ways?
