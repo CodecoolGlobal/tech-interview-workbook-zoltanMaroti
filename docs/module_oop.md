@@ -15,6 +15,8 @@
 #### What is a linked list? How to find if a linked list has a loop?
 #### What is the Big O time complexity of the common operations in an ArrayList, LinkedList, HashMap? And of a bubble sort, quicksort, finding items in a Binary Search tree?
 #### How does HashMap work?
+HashMap in Java works on hashing principle. It is a data structure which allows us to store object and retrieve it in constant time O(1) provided we know the key. In hashing, hash functions are used to link key and value in HashMap. Objects are stored by calling ```put(key, value)``` method of HashMap and retrieved by calling ```get(key)``` method. When we call put method, ```hashcode()``` method of the key object is called so that hash function of the map can find a bucket location to store value object, which is actually an index of the internal array, known as the table. HashMap internally stores mapping in the form of Map.Entry object which contains both key and value object. When you want to retrieve the object, you call the ```get()``` method and again pass the key object. This time again key object generate same hash code (it's mandatory for it to do so to retrieve the object and that's why HashMap keys are immutable e.g. String) and we end up at same bucket location.
+
 #### Why is it important for keys in a map to have an immutable type? (Consider String for example.)
 
 ### Other
@@ -32,6 +34,7 @@ Automatic garbage collection is the process of looking at heap memory, identifyi
 
 #### What is casting? What is the difference between up vs downcasting?
 #### Which order should we catch the exceptions? Why?
+The order is whatever matches first, gets executed. If the first catch matches the exception, it executes, if it doesn't, the next one is tried and on and on until one is matched or none are. If the exceptions have parent-child relationship, the catch blocks must be sorted by the most specific exceptions first, then by the most general ones. So, when catching exceptions you want to always catch the most specific first and then the most generic (as RuntimeException or Exception).
 
 ### Object-oriented
 
@@ -68,6 +71,8 @@ Sometimes there is a need of initializing an object in different ways. This can 
 ![alt text](https://static.javatpoint.com/images/core/java-constructor.png "Constructor")
 
 #### Do we require parameter for constructors?
+A constructor should establish the initial invariant of your object, that is, put it in a valid and usable state. If it's impossible to provide all the information needed up-front to construct your object properly, you may want to consider some sort of builder to gather state incrementally before instantiating the object. You should favor parameterless constructors. Typically, the constructor initializes the fields of the object that need initialization. Java constructors can also take parameters, so fields can be initialized in the object at creation time.
+
 #### What is an interface?
 An interface is a completely abstract class that contains only abstract methods.
 
@@ -139,13 +144,26 @@ Encapsulation is a central design principle of OOP. It means that the internal s
 #### Can a static method use non-static members?
 #### What is the difference between hiding a static method and overriding an instance method?
 #### Define the following terms: Instantiation, Attribute, Method
+**Instantiating a Class:** The phrase "instantiating a class" means the same thing as "creating an object." When you create an object, you are creating an "instance" of a class, therefore "instantiating" a class. The new operator instantiates a class by allocating memory for a new object and returning a reference to that memory. The new operator also invokes the object constructor.
+
+**Attribute:** An attribute is another term for a field. It’s typically a public field that can be accessed directly.
+
+**Method:** A method is a collection of statements that perform some specific task and return the result to the caller. A method can perform some specific task without returning anything. A method is a block of code which only runs when it is called, and they are also known as functions. Methods allow us to reuse the code without retyping the code. In Java, every method must be part of some class which is different from languages like C, C++, and Python. A method must be declared within a class.
+
+![alt text](https://media.geeksforgeeks.org/wp-content/uploads/methods-in-java.png "method")
+
 #### Could we access a static variable (or method) from a non-static method? Why?
 #### Could we access a non-static variable (or method) from a static method? Why?
 #### How many instances you have of a static variable of a given class?
 #### Why is it not a good practice to write a lot of static methods?
 #### What are the features of static attributes and static methods of a class? What are the benefits, when to use them?
 #### What is the ‘this’ reference?
+‘this’ is a reference variable that refers to the current object. Within an instance method or a constructor, 'this' is a reference to the current object — the object whose method or constructor is being called. You can refer to any member of the current object from within an instance method or a constructor by using 'this'.
+
 #### What are base class, subclass and superclass?
+The class from which the subclass is derived is called a superclass (also a base class or a parent class).</ br>
+A class that is derived from another class is called a subclass (also a derived class, extended class, or child class). The class from which the subclass is derived is called a superclass (also a base class or a parent class). Excepting Object, which has no superclass, every class has one and only one direct superclass (single inheritance). In the absence of any other explicit superclass, every class is implicitly a subclass of Object. Classes can be derived from classes that are derived from classes that are derived from classes, and so on, and ultimately derived from the topmost class, Object. Such a class is said to be descended from all the classes in the inheritance chain stretching back to Object.
+
 #### Draw an object oriented family (as entities, with relations) on the whiteboard.
 #### Difference between overloading and overriding?
 Overloading is about same function have different signatures. Overriding is about same function, same signature but different classes connected through inheritance. Overloading is an example of compiler time polymorphism and overriding is an example of run time polymorphism.
@@ -177,9 +195,20 @@ If subclass (child class) has the same method as declared in the parent class, i
 
 #### Explain how object oriented languages attempt to simplify memory management for Programmers.
 #### Explain the “Single Responsibility” principle!
+Every module or class should have responsibility over a single part of the functionality provided by the software, and that responsibility should be entirely encapsulated by the class. A class or module should have one, and only one, reason to be changed. This principle states that if we have 2 reasons to change for a class, we have to split the functionality in two classes. Each class will handle only one responsibility and if in the future we need to make one change we are going to make it in the class which handles it. When we need to make a change in a class having more responsibilities the change might affect the other functionality related to the other responsibility of the class.
+
 #### What is an object oriented program? Explain, show.
 #### How do you make a class immutable? What do you need to watch out for?
+To create an immutable class in java, you have to do following steps:
+- Declare the class as final so it can’t be extended.
+- Make all fields private so that direct access is not allowed.
+- Don’t provide setter methods for variables
+- Make all mutable fields final so that it’s value can be assigned only once.
+- Initialize all the fields via a constructor performing deep copy.
+- Perform cloning of objects in the getter methods to return a copy rather than returning the actual object reference.
+
 #### How many instances can be created for an abstract class?
+You cannot create an instance of an abstract class because it does not have a complete implementation. The purpose of an abstract class is to function as a base for subclasses. It acts like a template, or an empty or partially empty structure, you should extend it and build on it before you can use it.
 
 ## Programming languages
 
@@ -284,8 +313,6 @@ The super keyword in Java is a reference variable which is used to refer immedia
 - super can be used to refer immediate parent class instance variable.
 - super can be used to invoke immediate parent class method.
 - super() can be used to invoke immediate parent class constructor: default constructor is provided by compiler automatically if there is no constructor. But, it also adds super() as the first statement.
-
-
 
 #### What are “generics”? When to use? Show examples.
 #### What is the benefit of having “generic” containers?
