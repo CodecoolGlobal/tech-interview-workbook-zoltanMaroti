@@ -5,6 +5,18 @@
 ### Error handling
 
 #### What does 'fail fast' mean in terms of exception handling? Why is it a good practice?
+Some people recommend making your software robust by working around problems automatically. This results in the software “failing slowly.”
+The program continues working right after an error but fails in strange ways later on. A system that fails fast does exactly the opposite: when a problem occurs, it fails immediately and visibly. If something unusually or unexpectedly occurs, let the software fail immediately instead of postponing the failure or working around the failure. The fail fast principle stands for stopping the current operation as soon as any unexpected error occurs. Adhering to this principle generally results in a more stable solution. The opposite to fail-fast is fail-silently. In most cases, adhering to the fail fast principle means we should shut down the application (probably, with a polite apology) in case of any unexpected situation. 
+
+**Why Fail-Fast?**
+- Bugs are earlier to detect, easier to reproduce and faster to fix.  
+- It’s faster to stabilize softwares.
+- Fewer bugs and defects will go into production, thus leading to higher-quality and more production-ready software.
+- The cost of failures and bugs are reduced.
+
+The longer it takes for a bug to appear on the surface, the longer it takes to fix and the greater it costs. Fail-fast is the principle behind many Agile practices:
+- **Test-driven development:** Writing tests to cover all the cases in which it would fail and all the requirements it has to meet, before even implementing it.
+- **Continuous integration:** An Agile practice in software development, where developers are required to integrate their current works into shared repository/branch several times a days. Each integration is verified by an automated builds, thus helping team to find and fix problems early.
 
 ## Computer Science
 
@@ -13,11 +25,39 @@
 #### How to find the middle element of singly linked list in O(n)?
 #### Given an array of integers going from 1 to 100 (both inclusive) there is a duplicated entry. How to find it?
 #### What is a linked list? How to find if a linked list has a loop?
+A linked list is a linear data structure where each element is a separate object. Each element (we will call it a node) of a list is comprising of two items - the data and a reference to the next node. The last node has a reference to null. The entry point into a linked list is called the head of the list. It should be noted that head is not a separate node, but the reference to the first node. If the list is empty then the head is a null reference.
+
+![alt text](https://people.engr.ncsu.edu/efg/210/s99/Notes/LLdefs.gif "Linked list")
+
+A linked list is a dynamic data structure. The number of nodes in a list is not fixed and can grow and shrink on demand. Any application which has to deal with an unknown number of objects will need to use a linked list.
+
+One disadvantage of a linked list against an array is that it does not allow direct access to the individual elements. If you want to access a particular item then you have to start at the head and follow the references until you get to that item.
+
+Another disadvantage is that a linked list uses more memory compare with an array - we extra 4 bytes (on 32-bit CPU) to store a reference to the next node.
+
+**Types of Linked Lists:**
+- A singly linked list is described above
+- A doubly linked list is a list that has two references, one to the next node and another to previous node.
+- Another important type of a linked list is called a circular linked list where last node of the list points back to the first node (or the head) of the list.
+
+**Linked List vs Array:**
+When an array is created, it needs a certain amount of memory. On the other hand, when a linked list is born, it doesn’t need memory all in one place. Linked lists don’t need to take up a single block of memory; instead, the memory that they use can be scattered throughout.
+
+The fundamental difference between arrays and linked lists is that arrays are static data structures, while linked lists are dynamic data structures. A static data structure needs all of its resources to be allocated when the structure is created; this means that even if the structure was to grow or shrink in size and elements were to be added or removed, it still always needs a given size and amount of memory. On the other hand, a dynamic data structure can shrink and grow in memory. It doesn’t need a set amount of memory to be allocated in order to exist, and its size and shape can change, and the amount of memory it needs can change as well.
+
+**How to find if a linked list has a loop?**
+Use Hashing: Traverse the list one by one and keep putting the node addresses in a Hash Table. At any point, if NULL is reached then return false and if next of current node points to any of the previously stored nodes in Hash then return true.
+
 #### What is the Big O time complexity of the common operations in an ArrayList, LinkedList, HashMap? And of a bubble sort, quicksort, finding items in a Binary Search tree?
 #### How does HashMap work?
 HashMap in Java works on hashing principle. It is a data structure which allows us to store object and retrieve it in constant time O(1) provided we know the key. In hashing, hash functions are used to link key and value in HashMap. Objects are stored by calling ```put(key, value)``` method of HashMap and retrieved by calling ```get(key)``` method. When we call put method, ```hashcode()``` method of the key object is called so that hash function of the map can find a bucket location to store value object, which is actually an index of the internal array, known as the table. HashMap internally stores mapping in the form of Map.Entry object which contains both key and value object. When you want to retrieve the object, you call the ```get()``` method and again pass the key object. This time again key object generate same hash code (it's mandatory for it to do so to retrieve the object and that's why HashMap keys are immutable e.g. String) and we end up at same bucket location.
 
 #### Why is it important for keys in a map to have an immutable type? (Consider String for example.)
+HashMap is a data-structure where data is organized as key and values pairs. i.e. for every value there must be a  key to be produced to be stored into the hashmap. Keys are normally generated using hashcode() method.
+
+Key’s hash code is used primarily in conjunction to its equals() method, for putting a key in map and then searching it back from map. So if hash code of key object changes after we have put a key-value pair in map, then its almost impossible to fetch the value object back from map. It is a case of memory leak. To avoid this, map keys should be immutable.
+
+If immutable, the object's hashcode wont change and it allows caching the hashcode of different keys which makes the overall retrieval process very fast. String, Integer and other wrapper classes are best for HashMap key, and String is most frequently used key as well because String is immutable and final, and overrides equals and hashcode() method.
 
 ### Other
 
@@ -33,6 +73,26 @@ Automatic garbage collection is the process of looking at heap memory, identifyi
 ### Procedural
 
 #### What is casting? What is the difference between up vs downcasting?
+Upcasting is casting to a supertype, while downcasting is casting to a subtype. Upcasting is always allowed, but downcasting involves a type check and can throw a ClassCastException.
+
+Downcasting would be something like this:
+``` java
+Animal animal = new Dog();
+Dog castedDog = (Dog) animal;
+```
+
+Basically what you're doing is telling the compiler that you know what the runtime type of the object really is. The compiler will allow the conversion, but will still insert a runtime sanity check to make sure that the conversion makes sense. In this case, the cast is possible because at runtime animal is actually a Dog even though the static type of animal is Animal.
+
+However, if you were to do this:
+```java
+Animal animal = new Animal();
+Dog notADog = (Dog) animal;
+```
+
+You'd get a ClassCastException. The reason why is because animal's runtime type is Animal, and so when you tell the runtime to perform the cast it sees that animal isn't really a Dog and so throws a ClassCastException.
+
+![alt text](https://i.stack.imgur.com/Lkn0S.png "Upcastings vs downcasting")
+
 #### Which order should we catch the exceptions? Why?
 The order is whatever matches first, gets executed. If the first catch matches the exception, it executes, if it doesn't, the next one is tried and on and on until one is matched or none are. If the exceptions have parent-child relationship, the catch blocks must be sorted by the most specific exceptions first, then by the most general ones. So, when catching exceptions you want to always catch the most specific first and then the most generic (as RuntimeException or Exception).
 
@@ -142,6 +202,13 @@ At the member level, you can also use the public modifier or no modifier (packag
 Encapsulation is a central design principle of OOP. It means that the internal structure and the implementation of a class should be hidden from the world. This can be done by restricting the access to these parts. Every Object Oriented language provides access modifiers to set the visibility of classes and its members (fields, constructors, and methods) separately. This is called data hiding.
 
 #### Can a static method use non-static members?
+The static modifier is used for creating static class methods and variables. The keyword static lets a method run without any instance of the class. A static method belongs to the class, so there’s no need to create an instance of the class to access it.
+
+**Characteristics of Static methods:** <br>
+- A static method is called using the class (className.methodName) as opposed to to an instance reference (new instanceOfClass = class; instanceOfClass.methodName.)
+- Static methods can’t use non-static instance variables: a static method can’t refer to any instance variables of the class. The static method doesn’t know which instance’s variable value to use.
+- Static methods can’t call non-static methods: non-static methods usually use instance variable state to affect their behaviour. Static methods can’t see instance variable state, so if you try to call a non-static method from a static method the compiler will complain regardless if the non-static method uses an instance variable or not.
+
 #### What is the difference between hiding a static method and overriding an instance method?
 #### Define the following terms: Instantiation, Attribute, Method
 **Instantiating a Class:** The phrase "instantiating a class" means the same thing as "creating an object." When you create an object, you are creating an "instance" of a class, therefore "instantiating" a class. The new operator instantiates a class by allocating memory for a new object and returning a reference to that memory. The new operator also invokes the object constructor.
@@ -153,9 +220,19 @@ Encapsulation is a central design principle of OOP. It means that the internal s
 ![alt text](https://media.geeksforgeeks.org/wp-content/uploads/methods-in-java.png "method")
 
 #### Could we access a static variable (or method) from a non-static method? Why?
+Yes, a non-static method can access a static variable or call a static method in Java. There is no problem with that because of static members i.e. both static variable and static methods belongs to a class and can be called from anywhere, depending upon their access modifier.
+
+**The opposite is not exact:** you can access static members from non-static context, but you cannot access a non-static variable or method from a static method in Java.
+
 #### Could we access a non-static variable (or method) from a static method? Why?
 #### How many instances you have of a static variable of a given class?
+Java Language Specification states the following:
+
+If a field is declared static, there exists exactly one incarnation of the field, no matter how many instances (possibly zero) of the class may eventually be created. A static field, sometimes called a class variable, is incarnated when the class is initialized.
+
 #### Why is it not a good practice to write a lot of static methods?
+One reason that static methods aren't very OO is that interfaces and abstract classes only define non-static methods. Static methods thus don't fit very well into inheritance. Static methods do not have access to "super", which means that static methods cannot be overridden in any real sense. Actually, they can't be overridden at all, only hidden.
+
 #### What are the features of static attributes and static methods of a class? What are the benefits, when to use them?
 #### What is the ‘this’ reference?
 ‘this’ is a reference variable that refers to the current object. Within an instance method or a constructor, 'this' is a reference to the current object — the object whose method or constructor is being called. You can refer to any member of the current object from within an instance method or a constructor by using 'this'.
@@ -215,6 +292,8 @@ You cannot create an instance of an abstract class because it does not have a co
 ### Java
 
 #### What is autoboxing and unboxing?
+Autoboxing is the automatic conversion that the Java compiler makes between the primitive types and their corresponding object wrapper classes. For example, converting an int to an Integer, a double to a Double, and so on. If the conversion goes the other way, this is called unboxing. Converting a primitive value (an int, for example) into an object of the corresponding wrapper class (Integer) is called autoboxing. Autoboxing and unboxing lets developers write cleaner code, making it easier to read.
+
 #### If you have a variable, that shall store a positive whole number between 0 and 200, what primitive type would you use to store it?
 short (-32768 to 32767)
 
@@ -264,6 +343,8 @@ Minden Java változat két disztribúcióban érhető el:
 ![alt text](https://s3.shunyafoundation.com/s3/1578452c3f66d8fd0d04d5d195328ae1359d8caa/jdk-jvm.png "JRE vs JDK")
 
 #### What is the difference between long and Long?
+Long is a wrapper class around the primitive long. Therefore Long is an object; objects can be null, primitives can not. After auto-boxing feature is released in java the primitive long can be automatically converted to Long, which is an object.
+
 #### Can a long store bigger numbers than a Long?
 #### What kind of packages do you know under java.util.* ? Bring at least 3 examples.
 - java.util.Arrays
@@ -283,8 +364,16 @@ Access modifiers in Java helps to restrict the scope of a class, constructor, va
 #### Can an “enum” contain methods in Java? Explain.
 #### When would you use a private/protected/public attribute? What is the difference?
 #### How do you prevent developers from subclassing a class?
+Officially, the Java language provides the keyword 'final' that is supposed to fulfill this task. You can also use private constructors.
+
 #### How do you prevent developers from overriding a method in a subclass?
+final modifier can be used to prevent method overriding in Java because there is no way someone can override final methods. Apart from final modifier, you can also use static and private modifier to prevent a method from being overridden.
+
+private method is not accessible in subclass, which means they can not be overridden as well, because overriding happens at child class. Similarly, static methods can not be overridden in Java, because they are resolved and bonded during compile time, while overriding takes place at runtime. They are resolved based upon the type and not object. Overriding happens due to polymorphic property of objects.
+
 #### How do you prevent developers from changing the value of a variable?
+Use final keyword.
+
 #### Think about money ;) How would you store a currency value, that shall support decimal parts? Think it through again, and try to think outside of the box!
 #### What happens if you try to call something, that you have no access to, because of data hiding?
 #### What happens if you try to delete/drop an item from an array, while you are iterating over it?
@@ -293,12 +382,31 @@ Access modifiers in Java helps to restrict the scope of a class, constructor, va
 #### If you need to access the iterator variable after a for loop, how would you do it?
 #### Which interfaces extend the Collection interface in Java. Which classes?
 #### What is the connection between equals() and hashCode()? How are they used in HashMap?
+**equals(Object obj):** a method provided by java.lang.Object that indicates whether some other object passed as an argument is "equal to" the current instance. The default implementation provided by the JDK is based on memory location — two objects are equal if and only if they are stored in the same memory address. If two objects are equal, they MUST have the same hash code.
+
+**hashcode():** a method provided by java.lang.Object that returns an integer representation of the object memory address.
+
+HashMap uses hashCode(), == and equals() for entry lookup. The lookup sequence for a given key 'k' is as follows:
+
+- Use k.hashCode() to determine which bucket the entry is stored
+- If found, for each entry's key k1 in that bucket, if k == k1 || k.equals(k1), then return k1's entry
+- Any other outcomes, no corresponding entry
+
+When you ‘put’ in a hashmap, first the map finds a place in an array(bucket) based on the hashcode of the key. All entries of keys having same hashcode are placed in the same bucket. Once the bucket is identified, the equals method of the key comes into play. It checks, if any other key in the bucket is equal, if it is equal, it overrides that entry of value, else it adds a new entry of key value pair.
+
+When we ‘get’ from hashMap, first it finds the hashcode of the key, using hashcode, finds the location/bucket of all keys having same hashcode. Then it uses the equals method of the key to identify which key value pair to be fetched from the bucket.
+
 #### What is the difference between checked exceptions and unchecked exceptions? Could you bring example for each?
 There are two exception types, checked and unchecked (also called runtime). The main difference is that checked exceptions are checked when compiled, while unchecked exceptions are checked at runtime.
 
 #### What is Error in Java and how does it relate to Exception?
 #### When does 'finally' block run? What it is used for? Could you give an example from your projects when you would use 'finally'?
 #### What is the largest number you can work with in Java?
+Built-in Java primitive type, Double MAX_VALUE
+
+```public static final double MAX_VALUE```
+A constant holding the largest positive finite value of type double.
+
 #### When you use method overriding, can you change the access level of the method, from protected to public? Why?When you use method overriding, can you change the access level of the method, from public to protected? Why?
 #### Can the main method be overridden? Explain your answer!
 No, because the main is a static method and a static method cannot be overridden.
