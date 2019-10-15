@@ -23,7 +23,76 @@ The longer it takes for a bug to appear on the surface, the longer it takes to f
 ### Data structures
 
 #### How to find the middle element of singly linked list in O(n)?
+If we need to find the middle element in only one pass, the best method is to create two pointers. As we traverse the list starting from the first element, at each step one of the pointers is moved by one, while the other is moved by two. At the moment, when the second pointer reaches the end of the list, the first pointer will be right on the middle element.
+
+```java
+class LinkedList {
+    Node head; // head of linked list
+ 
+    class Node {
+        int data;
+        Node next;
+        Node(int d) {
+            data = d;
+            next = null;
+        }
+    }
+ 
+    /* Function to print middle of linked list */
+    void printMiddle() {
+        Node slow_ptr = head;
+        Node fast_ptr = head;
+        if (head != null) {
+            while (fast_ptr != null && fast_ptr.next != null) {
+                fast_ptr = fast_ptr.next.next;
+                slow_ptr = slow_ptr.next;
+            }
+            System.out.println("The middle element is " + slow_ptr.data + ".");
+        }
+    }
+ }
+ ```
+
 #### Given an array of integers going from 1 to 100 (both inclusive) there is a duplicated entry. How to find it?
+**Solution 1 – Sorting**<br>
+We sort the array and then we compare each element to the previous element.
+
+```java
+class Solution {
+    public int findDuplicate(int[] nums) {
+        Arrays.sort(nums);
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] == nums[i-1]) {
+                return nums[i];
+            }
+        }
+        return -1;
+    }
+}
+```
+Time complexity: O(n*lgn)<br>
+Space complexity: O(1) (or O(n) if we are not allowed to modify the input array)
+
+**Solution 2 – Using a set**<br>
+We store each element in a set as we iterate over the array, before saving a new element we simply check if it's already in the set.
+
+```java
+class Solution {
+    public int findDuplicate(int[] nums) {
+        Set<Integer> seen = new HashSet<Integer>();
+        for (int num : nums) {
+            if (seen.contains(num)) {
+                return num;
+            }
+        seen.add(num);
+        }
+        return -1;
+    }
+}
+```
+Time complexity: O(n)<br>
+Space complexity: O(n)
+
 #### What is a linked list? How to find if a linked list has a loop?
 A linked list is a linear data structure where each element is a separate object. Each element (we will call it a node) of a list is comprising of two items - the data and a reference to the next node. The last node has a reference to null. The entry point into a linked list is called the head of the list. It should be noted that head is not a separate node, but the reference to the first node. If the list is empty then the head is a null reference.
 
@@ -49,6 +118,35 @@ The fundamental difference between arrays and linked lists is that arrays are st
 Use Hashing: Traverse the list one by one and keep putting the node addresses in a Hash Table. At any point, if NULL is reached then return false and if next of current node points to any of the previously stored nodes in Hash then return true.
 
 #### What is the Big O time complexity of the common operations in an ArrayList, LinkedList, HashMap? And of a bubble sort, quicksort, finding items in a Binary Search tree?
+**ArrayList:**
+- adding to the beginning (or near the beginning): the whole list needs to be "re-indexed": **O(n)**
+- adding to the end (or near to the end): **O(1)**
+- remove from the end: **O(1)**
+- remove from elsewhere: "re-indexing": **O(n)**
+- get (by index): **O(1)**
+- contains: **O(n)**
+
+**LinkedList:**
+- adding to the beginning or end: **O(1)**
+- adding elsewhere (somewhere middle): **O(n)**
+- remove: **O(n)**
+- get: **O(n)**
+- contains: **O(n)**
+
+**HashMap:**
+- every task takes a single operation (except in edge cases, like hash clash).
+
+**Bubble Sort:**
+-needs a nested for loop: **O(n^2)**
+
+**Quicksort:**
+- on average: **O(log n)**
+- worst case: **O(n^2)**
+
+**Binary Search Tree:**
+- **O(log n)**
+- worst case (degenerate tree): **O(n)**
+
 #### How does HashMap work?
 HashMap in Java works on hashing principle. It is a data structure which allows us to store object and retrieve it in constant time O(1) provided we know the key. In hashing, hash functions are used to link key and value in HashMap. Objects are stored by calling ```put(key, value)``` method of HashMap and retrieved by calling ```get(key)``` method. When we call put method, ```hashcode()``` method of the key object is called so that hash function of the map can find a bucket location to store value object, which is actually an index of the internal array, known as the table. HashMap internally stores mapping in the form of Map.Entry object which contains both key and value object. When you want to retrieve the object, you call the ```get()``` method and again pass the key object. This time again key object generate same hash code (it's mandatory for it to do so to retrieve the object and that's why HashMap keys are immutable e.g. String) and we end up at same bucket location.
 
@@ -210,6 +308,16 @@ The static modifier is used for creating static class methods and variables. The
 - Static methods can’t call non-static methods: non-static methods usually use instance variable state to affect their behaviour. Static methods can’t see instance variable state, so if you try to call a non-static method from a static method the compiler will complain regardless if the non-static method uses an instance variable or not.
 
 #### What is the difference between hiding a static method and overriding an instance method?
+**Instance Methods**<br>
+An instance method in a subclass with the same signature and return type as an instance method in the superclass overrides the superclass's method. This ability of a subclass (to override a method) allows a class to inherit from a superclass and modify behaviour as needed. The overriding method has the same name, number and type of parameters, and return type as the method that it overrides. An overriding method can also return a subtype of the type returned by the overridden method. This subtype is called a covariant return type.
+
+**Static Methods**<br>
+If a subclass defines a static method with the same signature as a static method in the superclass, then the method in the subclass hides the one in the superclass.
+
+**Differences**<br>
+- Overridden Instance Methods: the method in the subclass gets invoked. (Unless it is called from the subclass with super.myMethod.)
+- Hidden Static methods: it depends on whether it gets invoked from the superclass or the subclass.
+
 #### Define the following terms: Instantiation, Attribute, Method
 **Instantiating a Class:** The phrase "instantiating a class" means the same thing as "creating an object." When you create an object, you are creating an "instance" of a class, therefore "instantiating" a class. The new operator instantiates a class by allocating memory for a new object and returning a reference to that memory. The new operator also invokes the object constructor.
 
@@ -225,6 +333,8 @@ Yes, a non-static method can access a static variable or call a static method in
 **The opposite is not exact:** you can access static members from non-static context, but you cannot access a non-static variable or method from a static method in Java.
 
 #### Could we access a non-static variable (or method) from a static method? Why?
+No. A static method can only access other static methods and variables. If we need to access a non-static variable or method from within a static method, we must first instantiate the class that the non-static method or variable belongs to.
+
 #### How many instances you have of a static variable of a given class?
 Java Language Specification states the following:
 
@@ -234,6 +344,8 @@ If a field is declared static, there exists exactly one incarnation of the field
 One reason that static methods aren't very OO is that interfaces and abstract classes only define non-static methods. Static methods thus don't fit very well into inheritance. Static methods do not have access to "super", which means that static methods cannot be overridden in any real sense. Actually, they can't be overridden at all, only hidden.
 
 #### What are the features of static attributes and static methods of a class? What are the benefits, when to use them?
+Static attributes are also known class attributes. They are useful for example for counting IDs for created objects. Common use for static methods is to access static variables. Another good example is the singleton pattern’s getInstance() method, which is static as well.
+
 #### What is the ‘this’ reference?
 ‘this’ is a reference variable that refers to the current object. Within an instance method or a constructor, 'this' is a reference to the current object — the object whose method or constructor is being called. You can refer to any member of the current object from within an instance method or a constructor by using 'this'.
 
@@ -248,8 +360,38 @@ Overloading is about same function have different signatures. Overriding is abou
 ![alt text](http://cdncontribute.geeksforgeeks.org/wp-content/uploads/OverridingVsOverloading.png "overloading vs overriding")
 
 #### What are the Object Oriented Principles? Explain the concepts with realistic examples!
+**Encapsulation:** The implementation and state of each object are privately held inside a defined boundary, or class. Other objects do not have access to this class or the authority to make changes but are only able to call a list of public functions, or methods. This characteristic of data hiding provides greater program security and avoids unintended data corruption. Another way to think about encapsulation is, it is a protective shield that prevents the data from being accessed by the code outside this shield. Technically in encapsulation, the variables or data of a class is hidden from any other class and can be accessed only through any member function of own class in which they are declared. As in encapsulation, the data in a class is hidden from other classes, so it is also known as data-hiding. Encapsulation can be achieved by Declaring all the variables in the class as private and writing public methods in the class to set and get the values of variables. 
+
+Encapsulation is the mechanism of hiding of data implementation by restricting access to public methods. Instance variables are kept private and accessor methods are made public to achieve this.
+
+Az adatok és a metódusok osztályba való összezárását jelenti. Tulajdonképpen az objektum egységbezárja az állapotot (adattagok értékei) a viselkedésmóddal (műveletekkel). Következmény: az objektum állapotát csak a műveletein keresztül módosíthatjuk. Az objektum elrejti az adatait és bizonyos műveleteit. Ez azt jelenti, hogy nem tudjuk pontosan, hogy egy objektumban hogyan vannak az adatok ábrázolva, sőt a
+műveletek implementációit sem ismerjük. Az információk elrejtése az objektum biztonságát szolgálja, amelyeket csak a ellenőrzött műveleteken keresztül érhetünk el.
+
+**Abstraction:** Objects only reveal internal mechanisms that are relevant for the use of other objects, hiding any unnecessary implementation code. This concept helps developers make changes and additions over time more easily. Only the essential details are displayed to the user.The trivial or the non-essentials units are not displayed to the user. Ex: A car is viewed as a car rather than its individual components. Data Abstraction may also be defined as the process of identifying only the required characteristics of an object ignoring the irrelevant details. Consider a real-life example of a man driving a car. The man only knows that pressing the accelerators will increase the speed of car or applying brakes will stop the car but he does not know about how on pressing the accelerator the speed is actually increasing, he does not know about the inner mechanism of the car or the implementation of accelerator, brakes etc in the car. This is what abstraction is. In Java, abstraction is achieved by interfaces and abstract classes. We can achieve 100% abstraction using interfaces.
+
+Abstract means a concept or an Idea which is not associated with any particular instance. Using abstract class/Interface we express the intent of the class rather than the actual implementation. In a way, one class should not know the inner details of another in order to use it, just knowing the interfaces should be good enough. Its main goal is to handle complexity by hiding unnecessary details from the user. That enables the user to implement more complex logic on top of the provided abstraction without understanding or even thinking about all the hidden complexity. Objects in an OOP language provide an abstraction that hides the internal implementation details. Similar to the coffee machine in your kitchen, you just need to know which methods of the object are available to call and which input parameters are needed to trigger a specific operation. But you don’t need to understand how this method is implemented and which kinds of actions it has to perform to create the expected result. 
+
+Elvonatkoztatás. Segítségével privát implementációkat rejthetünk el egy nyilvános interfész mögé. 
+
+Interfész: Viselkedésmódot definiál. Gyakorlatilag egy művelethalmaz deklarációját jelenti. Ha egy osztály implementál egy adott interfészt, akkor példányai az interfészben meghatározott viselkedéssel fognak rendelkezni. Csak konstans adattagokat tartalmazhat és minden tagja nyilvános. 
+
+**Inheritance:** Relationships and subclasses between objects can be assigned, allowing developers to reuse a common logic while still maintaining a unique hierarchy. This property of OOP forces a more thorough data analysis, reduces development time and ensures a higher level of accuracy. It is the mechanism in Java by which one class is allow to inherit the features(fields and methods) of another class.
+
+Inheritances expresses “is-a” and/or “has-a” relationship between two objects. Using Inheritance, In derived classes we can reuse the code of existing super classes. In Java, concept of “is-a” is based on class inheritance (using extends) or interface implementation (using implements).
+
+Olyan osztályok között értelmezett viszony, amely segítségével egy általánosabb típusból (ősosztály) egy sajátosabb típust tudunk létrehozni (utódosztály). Az utódosztály adatokat és műveleteket (viselkedésmódot) örököl, kiegészíti ezeket saját adatokkal és műveletekkel, illetve felülírhat bizonyos műveleteket. A kód újrafelhasználásának egyik módja. Megkülönböztetünk egyszeres és többszörös örökítést.
+
+**Polymorphism:** Objects are allowed to take on more than one form depending on the context. The program will determine which meaning or usage is necessary for each execution of that object, cutting down on the need to duplicate code. Polymorphism in Java are mainly of 2 types:
+Overloading and Overriding.
+
+It means one name many forms. It is further of two types — static and dynamic. Static polymorphism is achieved using method overloading and dynamic polymorphism using method overriding. It is closely related to inheritance. We can write a code that works on the superclass, and it will work with any subclass type as well.
+
 #### What is method overloading?
 If a class has multiple methods having same name but different in parameters, it is known as Method Overloading. Overloading allows different methods to have the same name, but different signatures where the signature can differ by the number of input parameters or type of input parameters or both. Overloading is related to compile time (or static) polymorphism.
+
+Több azonos nevű, különböző szignatúrájú függvény. A függvényhívás aktuális paraméterei meghatározzák, hogy melyik függvény fog meghívódni. Ezt már a fordításidőben eldől (statikus, fordításidejű kötés).
+
+Statikus (korai) kötés - Static (Early) Binding: Fordításidejű hozzárendelése a hívott metódusnak az objektumhoz. 
 
 **Advantage of method overloading:**<br>
 Method overloading increases the readability of the program. We don’t have to create and remember different names for functions doing the same thing.
@@ -261,6 +403,8 @@ Method overloading increases the readability of the program. We don’t have to 
 #### What is method overriding?
 If subclass (child class) has the same method as declared in the parent class, it is known as method overriding in Java. In other words, if a subclass provides the specific implementation of the method that has been declared by one of its parent class, it is known as method overriding.
 
+Egy osztályhierarchián belül az utódosztály újradefiniálja az ősosztály metódusát. (azonos név, azonos szignatúra). Ha ősosztály típusú mutatón vagy referencián keresztül érjük el az osztályhierarchia példányait és ezen keresztül meghívjuk a felülírt metódust, akkor futási időben dől el, hogy pontosan melyik metódus kerül meghívásra. (dinamikus, futásidejű kötés).
+
 **Usage of Java Method Overriding:**<br>
 - Method overriding is used to provide the specific implementation of a method which is already provided by its superclass.
 - Method overriding is used for runtime polymorphism
@@ -271,10 +415,20 @@ If subclass (child class) has the same method as declared in the parent class, i
 - There must be an IS-A relationship (inheritance).
 
 #### Explain how object oriented languages attempt to simplify memory management for Programmers.
+// TODO Java has automatic memory management, a nice and quiet garbage collector that works in the background to clean up the unused objects and free up some memory.
+
 #### Explain the “Single Responsibility” principle!
+Single Responsibility principle is a basic concept of programming, which means every class has only one task to do. That makes the code cleaner, more readable and easier to test or debug.
+
 Every module or class should have responsibility over a single part of the functionality provided by the software, and that responsibility should be entirely encapsulated by the class. A class or module should have one, and only one, reason to be changed. This principle states that if we have 2 reasons to change for a class, we have to split the functionality in two classes. Each class will handle only one responsibility and if in the future we need to make one change we are going to make it in the class which handles it. When we need to make a change in a class having more responsibilities the change might affect the other functionality related to the other responsibility of the class.
 
 #### What is an object oriented program? Explain, show.
+In object oriented programming, importance is given to data rather than just writing instructions to complete a task. An object is a thing or idea that you want to model in your program. An object can be anything, example, employee, bank account, car etc.
+
+Object-oriented programming (OOP) is a programming language model in which programs are organized around data, or objects, rather than functions and logic. An object can be defined as a data field that has unique attributes and behavior. Examples of an object can range from physical entities, such as a human being that is described by properties like name and address, down to small computer programs, such as widgets. This opposes the historical approach to programming where emphasis was placed on how the logic was written rather than how to define the data within the logic.
+
+![alt text](https://miro.medium.com/max/1510/1*szU8ngrWSXmBNPYReMyK5w.png "oop program")
+
 #### How do you make a class immutable? What do you need to watch out for?
 To create an immutable class in java, you have to do following steps:
 - Declare the class as final so it can’t be extended.
@@ -300,6 +454,19 @@ short (-32768 to 32767)
 ![alt text](http://4.bp.blogspot.com/-KviSh6mjDrs/VqoNwwxeWhI/AAAAAAAABao/46T-QGCGdyk/s1600/Primitive-Data-Types-in-Java-Programming-Language.png "primitive data types")
 
 #### What is the "golden rule" of variable scoping in Java? What is the lifetime of variables?
+General convention for a variable’s scope is, it is accessible only within the block in which it is declared.
+
+**Instance variables:**<br>
+A variable which is declared inside a class and outside all the methods and blocks is an instance variable. Lifetime of an instance variable is until the object stays in memory.
+
+**Class variables:**<br>
+A variable which is declared inside a class, outside all the blocks and is marked static is known as a class variable. The lifetime of a class variable is until the end of the program or as long as the class is loaded in memory.
+
+**Local variables:**<br>
+All other variables which are not instance and class variables are treated as local variables including the parameters in a method. The lifetime of a local variable is until the control leaves the block in which it is declared.
+
+![alt text](https://www.startertutorials.com/corejava/wp-content/uploads/2014/09/Scope-and-lifetime-summary.jpg "variable scoping")
+
 #### What is the purpose of the ‘equals()’ method?
 In Java, string ```equals()``` method compares the two given strings based on the data/content of the string. If all the contents of both the strings are same then it returns true. If all characters are not matched then it returns false.
 
@@ -346,6 +513,8 @@ Minden Java változat két disztribúcióban érhető el:
 Long is a wrapper class around the primitive long. Therefore Long is an object; objects can be null, primitives can not. After auto-boxing feature is released in java the primitive long can be automatically converted to Long, which is an object.
 
 #### Can a long store bigger numbers than a Long?
+No, because long has the same maximum value like Long, 2^63-1. If you want to store bigger number you should use BigInteger.
+
 #### What kind of packages do you know under java.util.* ? Bring at least 3 examples.
 - java.util.Arrays
 - java.util.Scanner
@@ -362,7 +531,13 @@ Access modifiers in Java helps to restrict the scope of a class, constructor, va
 ![alt text](http://net-informations.com/java/basics/img/access-modifier.png "access modifiers")
 
 #### Can an “enum” contain methods in Java? Explain.
+It can contain constructors. If you create for example a ColorType.SPADES enum, it calls its constructor, and gives values to its fields (suitNumber -> 3, suitName -> “spades”). This constructor must be private or default (package-private). Enum can contain getters either. With them you can reach the values of the fields. It is possible to create setters as well if the fields are not final. It may not be a good idea, considering enums should be constants. You can also create methods that make calculations based on the field values of the enum constant.
+
 #### When would you use a private/protected/public attribute? What is the difference?
+- **private** scope when you want your property/method to be visible in its own class only.
+- **protected** scope when you want to make your property/method visible in all classes that extend current class including the parent class.
+- **public** scope to make that property/method available from anywhere, other classes and instances of the object.
+
 #### How do you prevent developers from subclassing a class?
 Officially, the Java language provides the keyword 'final' that is supposed to fulfill this task. You can also use private constructors.
 
@@ -375,12 +550,47 @@ private method is not accessible in subclass, which means they can not be overri
 Use final keyword.
 
 #### Think about money ;) How would you store a currency value, that shall support decimal parts? Think it through again, and try to think outside of the box!
+A BigDecimal is an exact way of representing numbers. A Double has a certain precision. Working with doubles of various magnitudes (say d1=1000.0 and d2=0.001) could result in the 0.001 being dropped altogether when summing as the difference in magnitude is so large. With BigDecimal this would not happen. The disadvantage of BigDecimal is that it's slower, and it's a bit more difficult to program algorithms that way (due to + - * and / not being overloaded).
+
+If you are dealing with money, or precision is a must, use BigDecimal. Otherwise Doubles tend to be good enough.
+
 #### What happens if you try to call something, that you have no access to, because of data hiding?
+The compiler throws an error: ". . . has private access in . . ."
+It is illegal to access a variable declared private outside its class.
+
 #### What happens if you try to delete/drop an item from an array, while you are iterating over it?
+The length of an array is fixed after creation, therefore it is not possible to remove any elements while iterating, or just picked by value or index. However there is a method removeElement() in class ArrayUtils. This creates a new array without the element we want to remove. This works via iterating.
+
 #### What happens if you try to delete/drop/add an item from a List, while you are iterating over it?
+If you want to delete the item you are currently at while iterating, it will cause a ConcurrentModificationException, unless you are using an iterator and say iterator.remove(). Essentially, the ConcurrentModificationException is used to fail-fast when something we are iterating on is modified. 
+
 #### What happens if you try to add an item to the end of an array, while you are iterating over it?
+It is not possible, because arrays has a fixed size after they are created. It you want to add an element to the end of an array, you have to create a new array with length n + 1 (if the original list’s length was n), copy the original list elements to the new one, and add your element to the end of the new list.
+
 #### If you need to access the iterator variable after a for loop, how would you do it?
+I’d simply define the iterator variable before the loop, so after the loop I’d still have the latest value.
+
+```java
+int i;
+for (i = 0; i < numbers.size(); i++) {
+    sum += numbers.get(i);
+}
+```
+
 #### Which interfaces extend the Collection interface in Java. Which classes?
+The Java Collections Framework hierarchy consists of two distinct interface trees:
+- Collection interface
+- Map interface
+
+The **Collection** interface provides the basic functionality used by all collections, such as add and remove methods. Its subinterfaces the Set, List, and Queue, provide for more specialized collections.
+- The Set interface does not allow duplicate elements. 
+- SortedSet is a subinterface of Set interface, that provides for ordering of elements in the set.
+- The List interface provides for an ordered collection, for situations in which you need precise control over where each element is inserted.
+- The Queue is a collection for holding elements prior to processing. Elements in a Queue are typically ordered in on a FIFO (first-in-first-out) basis.
+- The Deque is a subinterface of Queue, a double-ended-queue. The elements can be used in both LIFO and FIFO.
+
+![alt text](https://static.javatpoint.com/images/java-collection-hierarchy.png "collection interface")
+
 #### What is the connection between equals() and hashCode()? How are they used in HashMap?
 **equals(Object obj):** a method provided by java.lang.Object that indicates whether some other object passed as an argument is "equal to" the current instance. The default implementation provided by the JDK is based on memory location — two objects are equal if and only if they are stored in the same memory address. If two objects are equal, they MUST have the same hash code.
 
@@ -400,7 +610,13 @@ When we ‘get’ from hashMap, first it finds the hashcode of the key, using ha
 There are two exception types, checked and unchecked (also called runtime). The main difference is that checked exceptions are checked when compiled, while unchecked exceptions are checked at runtime.
 
 #### What is Error in Java and how does it relate to Exception?
+Both errors and exceptions are subclasses of the throwable class. Exceptions are related to the application itself while errors are related to the environment (JVM) in which the application is running.
+
+Errors cannot and should not be handled or caught. They signal severe problems during runtime that should stop execution. Two most common examples are stack overflow and out-of-memory errors.
+
 #### When does 'finally' block run? What it is used for? Could you give an example from your projects when you would use 'finally'?
+The code we defined in the finally block runs whether there was a caught exception or not. We usually use finally block to clean up the resources - e.g. we are reading from a file in the try block, we want to close the file no matter what.
+
 #### What is the largest number you can work with in Java?
 Built-in Java primitive type, Double MAX_VALUE
 
@@ -408,12 +624,29 @@ Built-in Java primitive type, Double MAX_VALUE
 A constant holding the largest positive finite value of type double.
 
 #### When you use method overriding, can you change the access level of the method, from protected to public? Why?When you use method overriding, can you change the access level of the method, from public to protected? Why?
+A sub-class can always widen the access modifier, because it is still a valid substitution for the super-class. From the Java specification about Requirements in Overriding and Hiding:
+
+The access modifier of an overriding or hiding method must provide at least as much access as the overridden or hidden method, as follows:
+- If the overridden or hidden method is public, then the overriding or hiding method must be public; otherwise, a compile-time error occurs.
+- If the overridden or hidden method is protected, then the overriding or hiding method must be protected or public; otherwise, a compile-time error occurs.
+- If the overridden or hidden method has default (package) access, then the overriding or hiding method must not be private; otherwise, a compile-time error occurs.
+
 #### Can the main method be overridden? Explain your answer!
 No, because the main is a static method and a static method cannot be overridden.
 
 #### When you use method overriding, can you throw fewer exceptions in the subclass than in the parent class? Why?
+The overriding method must NOT throw checked exceptions that are new or broader than those declared by the overridden method. For example, a method that declares a FileNotFoundException cannot be overridden by a method that declares a SQLException, Exception, or any other non-runtime exception unless it's a subclass of FileNotFoundException.
+
+It means that if a method declares to throw a given exception, the overriding method in a subclass can only declare to throw that exception or its subclass.
+
 #### When you use method overriding, can you throw more exceptions in the subclass than in the parent class? Why?
+The overriding method must NOT throw checked exceptions that are new or broader than those declared by the overridden method. 
+
 #### What does "final" mean in case of a variable, method or a class?
+- A final variable’s value cannot be modified or if it is a reference to an object, you cannot refer to another object with it.
+- A final method cannot be overridden.
+- A final class cannot be extended.
+
 #### What is the super keyword?
 The super keyword in Java is a reference variable which is used to refer immediate parent class object. Whenever you create the instance of subclass, an instance of parent class is created implicitly which is referred by super reference variable. We can use super keyword to access the data member or field of parent class. It is used if parent class and child class have same fields. The super keyword can also be used to invoke parent class method. It should be used if subclass contains the same method as parent class. In other words, it is used if method is overridden.
 
@@ -423,9 +656,49 @@ The super keyword in Java is a reference variable which is used to refer immedia
 - super() can be used to invoke immediate parent class constructor: default constructor is provided by compiler automatically if there is no constructor. But, it also adds super() as the first statement.
 
 #### What are “generics”? When to use? Show examples.
+Using java generics programmers are able to write more general methods. It means that it is not necessary to specify the input type of a method, therefore it can handle Strings, Integers, Doubles and so on. It is very useful when for example we want to implement a sorting method. If we use generics our method will handle more type of Lists. Generics also provide compile-time type safety that allows programmers to catch invalid types at compile time.
+
+```java
+public class GenericMethodTest {
+    // generic method printArray
+    public static < E > void printArray ( E[] inputArray ) {
+        // Display array elements
+        for (E element : inputArray) {
+            System.out.printf("%s ", element);
+        }
+        System.out.println();
+    }
+}
+```
+
 #### What is the benefit of having “generic” containers?
+//TODO
+
+```java
+public class Container<T> {
+    private final T value;
+
+    public Container(T value) {
+        this.value = value;
+    }
+
+    public T getValue() {
+        return value;
+    }
+}
+```
+
 #### Given two Java programs on two different machines. How can you communicate between the two? What are the possible ways?
+//TODO
+
 #### What is an annotation? What can be annotated and how? Show examples.
+Java Annotations allow us to add metadata information into our source code, although they are not a part of the program itself. Annotations can be applied to the classes, interfaces, methods and fields.
+
+- Instructions to the compiler: There are three built-in annotations available in Java (@Deprecated, @Override & @SuppressWarnings) that can be used for giving certain instructions to the compiler.
+
+- Compile-time instructors: Annotations can provide compile-time instructions to the compiler that can be further used by software build tools for generating code, XML files etc.
+
+- Runtime instructions: We can define annotations to be available at runtime which we can access using java reflection and can be used to give instructions to the program at runtime.
 
 ### C&#35;
 
@@ -478,4 +751,26 @@ The super keyword in Java is a reference variable which is used to refer immedia
 ### Database
 
 #### How can you connect your application to a database server? What are the possible ways?
+You would need a database engine first. A database engine (or storage engine) is the underlying software component that a database management system (DBMS) uses to create, read, update and delete (CRUD) data from a database. 
+
+**Connection**<br>
+Connections are built by supplying an underlying driver or provider with a connection string, which is used to address a specific database or server and to provide instance and user authentication credentials.
+
+Once a connection has been built, it can be opened and closed at will, and properties (such as the command time-out length, or transaction, if one exists) can be set. The connection string consists of a set of key-value pairs, dictated by the data access interface of the data provider. Some databases, such as PostgreSQL, only allow one operation to be performed at a time on each connection. If a request for data (a SQL Select statement) is sent to the database and a result set is returned, the connection is open but not available for other operations until the client finishes consuming the result set.  
+
+Connections are a key concept in data-centric programming. Since some DBMSs require considerable time to connect, connection pooling is used to improve performance. No command can be performed against a database without an "open and available" connection to it.
+
+**Pooling:**<br> 
+Database connections are finite and expensive and can take a disproportionately long time to create relative to the operations performed on them. It is very inefficient for an application to create and close a database connection whenever it needs to update a database. Connection pooling is a technique designed to alleviate this problem. A pool of database connections is created and then shared among the applications that need to access the database. When an application needs database access, it requests a connection from the pool. When it is finished, it returns the connection to the pool, where it becomes available for use by other applications. This approach encourages the practice of opening a connection in an application only when needed, and closing it as soon as the work is done, rather than holding a connection open for the entire life of the application. In this manner, a relatively small number of connections can service a large number of requests. 
+
+In a client–server architecture, on the other hand, a persistent connection is typically used so that server state can be managed. This "state" includes server-side cursors, connection-specific functional settings, and so on. Examples to connect to db: Psycopg2 in Python and JDBC in Java.
+
 #### What do you know about database normalization?
+Database normalization is the process of structuring a relational database in accordance with a series of so-called normal forms in order to reduce data redundancy and improve data integrity. Normalization entails organizing the columns (attributes) and tables (relations) of a database to ensure that their dependencies are properly enforced by database integrity constraints. 
+
+In relational database design, the process of organizing data to minimize redundancy. Normalization usually involves dividing a database into two or more tables and defining relationships between the tables. The objective is to isolate data so that additions, deletions, and modifications of a field can be made in just one table and then propagated through the rest of the database via the defined relationships.
+
+There are three main normal forms, each with increasing levels of normalization:
+- **First Normal Form (1NF):** Each field in a table contains different information. For example, in an employee list, each table would contain only one birthdate field.
+- **Second Normal Form (2NF):** Each field in a table that is not a determiner of the contents of another field must itself be a function of the other fields in the table.
+- **Third Normal Form (3NF):** No duplicate information is permitted. So, for example, if two tables both require a birthdate field, the birthdate information would be separated into a separate table, and the two other tables would then access the birthdate information via an index field in the birthdate table. Any change to a birthdate would automatically be reflect in all tables that link to the birthdate table.
