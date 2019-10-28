@@ -703,9 +703,50 @@ Java Annotations allow us to add metadata information into our source code, alth
 ### C&#35;
 
 #### Explain the purpose of IL and how does it relate to CLR?
+
+**Code Compilation & Intermediate Language**<br>
+Source code written in C# is compiled into an intermediate language (IL) that conforms to the CLI specification. The binaries this created are known as Intermediate Language (IL) or Microsoft Intermediate Language (MSIL) or Common Intermediate Language (CIL).
+
+**Common Language Runtime (CLR)**<br>
+Common Language Runtime or CLR is a Virtual Machine that is controlled by the .Net framework. CLR is used to run a binary created by compiling the code. It is the run-time enviornment in the .NET Framework that runs the codes and helps in making the development process easier by providing the various services (Memory management - Garbage collection, Code Verification). CLR takes up the Intermediate Language and converts it into native instructions that are understood by the CPU. The code that runs under the Common Language Runtime is termed as the Managed Code. In other words, you can say that CLR provides a managed execution enviornment for the .NET programs by improving the security, including the cross language integration and a rich set of class libraries etc. CLR is present in every .NET framework verison. CLR provides a common runtime or execution environment as there are more than 60 .NET programming languages.
+
+**Main componenets of CLR:**<br>
+
+- Common Language Specification (CLS)
+- Common Type System (CTS)
+- Garbage Collection (GC)
+- Just In – Time Compiler (JIT)
+
+**JIT (Just In Time Compiler):**<br>
+It is responsible for converting the CIL(Common Intermediate Language ) into machine code or native code using the Common Language Runtime environment.
+
+**Process:**<br>
+
+1. Suppose you have written a C# program and save it in a file which is known as the Source Code.
+2. Language specific compiler compiles the source code into the MSIL(Microsoft Intermediate Language) which is also know as the CIL(Common Intermediate Language) or IL(Intermediate Language) along with its metadata. Metadata includes the all the types, actual implementation of each function of the program. MSIL is machine independent code.
+3. Now CLR comes into existence. CLR provides the services and runtime environment to the MSIL code. Internally CLR includes the JIT(Just-In-Time) compiler which converts the MSIL code to machine code which further executed by CPU. CLR also uses the .NET Framework class libraries. Metadata provides information about the programming language, environment, version, and class libraries to the CLR by which CLR handles the MSIL code.
+
+![alt text](https://media.geeksforgeeks.org/wp-content/uploads/Working_CLR.jpg "CLR")
+
+![alt text](http://social.technet.microsoft.com/wiki/resized-image.ashx/__size/550x0/__key/communityserver-wikis-components-files/00-00-00-00-05/6082.CLR.jpg "CLR")
+
 #### What does “managed code” mean?
+Managed code is a code whose execution is managed by Common Language Runtime. CLR gets the managed code and compiles it into machine code. After that, the code is executed. The runtime here i.e. CLR provides automatic memory management, type safety, etc. Managed code is written in high-level languages run on top of .NET. This can be C#, F#, etc. A code compiled in any of this language with their compilers, a machine code is not generated. However, you will get the Intermediate Language code, compiled and executed by runtime
+
+C/C++ code, called "unmanaged code” do not have that privilege. Unmanaged code is code that is not under .NET that compiles to direct machine code.
+
+Managed Code is what Visual Basic .NET and C# compilers create. It compiles to Intermediate Language (IL), not to machine code that could run directly on your computer. The CIL is kept in a file called an assembly, along with metadata that describes the classes, methods, and attributes (such as security requirements) of the code you've created.
+
 #### What is an assembly?
+An assembly is the compiled output of your code, typically a DLL, but your EXE is also an assembly. It's the smallest unit of deployment for any .NET project. The assembly typically contains .NET code in MSIL (Microsoft Intermediate language) that will be compiled to native code ("JITted" - compiled by the Just-In-Time compiler) the first time it is executed on a given machine. That compiled code will also be stored in the assembly and reused on subsequent calls. The assembly can also contain resources like icons, bitmaps, string tables and so on. Furthermore, the assembly also contains metadata in the assembly manifest - information like version number, strong name, culture, referenced assemblies and so forth. 
+
 #### What is the difference between an EXE and a DLL?
+**EXE**<br>
+An Exe is executable file and is not a supportive file rather itself an application. An Exe will contain an entry point (main function) so runs individually. An application with Main creates an EXE after compilation. OS creates a separate process for each EXE it executes.
+
+**DLL**<br>
+A Dll is a Dynamic Link Library, which can not run itself, it is used as a supportive file to other applications. The library functions are linked to the application at runtime (dynamically), so the name is Dll. A Dll does not contain an entry point (main function) so can not run individually.
+
 #### What is strong-typing versus weak-typing? Which is preferred? Why?
 #### What is a namespace?
 #### Explain sealed class in C#?
