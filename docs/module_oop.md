@@ -748,20 +748,128 @@ An Exe is executable file and is not a supportive file rather itself an applicat
 A Dll is a Dynamic Link Library, which can not run itself, it is used as a supportive file to other applications. The library functions are linked to the application at runtime (dynamically), so the name is Dll. A Dll does not contain an entry point (main function) so can not run individually.
 
 #### What is strong-typing versus weak-typing? Which is preferred? Why?
+Strong typing means that the type check is done at compile time and weak typing means that the type check is done at run time. .NET languages incorporate strong typing.
+
+**Strong typing:** It checks the type of variables  as soon as possible, usually at compile time. It  prevents mixing operations between mismatched types. Strongly typed means there is a compiler, and it wants you an explicit cast from string to integer.
+
+```
+(int) "12345" * 1 === 12345
+```
+
+A strong-typed programming language is one in which:
+- All variables (or data types) are known at compile time
+- There is strict enforcement of typing rules (a String can't be used where an Integer would be expected)
+- All exceptions to typing rules results in a compile time error
+
+**Weak Typing:** While weak typing is delaying checking the types of the system as late as possible, usually to run-time. In this you can mix types without an explicit conversion. Weakly typed means the compiler, if applicable, doesn't enforce correct typing.
+```
+"12345" * 1 === 12345  // string * number => number
+```
+
+Which is preferred depeneds on what you want. For scripts, you will usually want weak typing, because you want to write as much less code as possible. In big programs, strong typing can reduce errors at compile time.
+
+
 #### What is a namespace?
+Namespaces are used to organize the classes. It helps to control the scope of methods and classes in larger .Net programming projects. Namespaces are heavily used in C# programming in two ways. The namespace keyword is used to declare a scope that contains a set of related objects. You can use a namespace to organize code elements and to create globally unique types. First, the .NET Framework uses namespaces to organize its many classes, as follows:
+```C#
+System.Console.WriteLine("Hello World!");
+```
+System is a namespace and Console is a class in that namespace. Second, declaring your own namespaces can help you control the scope of class and method names in larger programming projects. Use the namespace keyword to declare a namespace. They organize large code projects. Whether or not you explicitly declare a namespace in a C# source file, the compiler adds a default namespace. This unnamed namespace, sometimes referred to as the global namespace, is present in every file. 
+
 #### Explain sealed class in C#?
+Sealed classes are used to restrict the users from inheriting the class. A class can be sealed by using the sealed keyword. The keyword tells the compiler that the class is sealed, and therefore, cannot be extended. No class can be derived from a sealed class.
+
 #### What is explicit vs. implicit conversion? Give examples of both of them.
+**Implicit conversions:** No special syntax is required because the conversion is type safe and no data will be lost. Examples include conversions from smaller to larger integral types, and conversions from derived classes to base classes.
+
+``` C#
+// Implicit conversion. A long can
+// hold any value an int can hold, and more!
+int num = 2147483647;
+long bigNum = num;
+```
+
+**Explicit conversions (casts):** Explicit conversions require the cast operator (). Casting is required when information might be lost in the conversion, or when the conversion might not succeed for other reasons. Typical examples include numeric conversion to a type that has less precision or a smaller range, and conversion of a base-class instance to a derived class.
+
+```C#
+double x = 1234.7;
+int a;
+// Cast double to int.
+a = (int)x;
+```
+
 #### Is a struct stored on the heap or stack?
+A struct in C# is referred to as a value type. Variables of this type are not pointers, but the objects themselves. If you create a struct as a function-local variable, its memory will be allocated on the stack. If the struct instance is a class member, its memory will be allocated contiguously as part of the class instance’s memory on the heap.
+
 #### Can a struct have methods?
+Structs are mainly useful to hold small data values. A structure can be defined using the struct operator. It can contain parameterized constructor, static constructor, constants, fields, methods, properties, indexers, operators, events and nested types.
+
 #### Can DateTimes be null?
+DateTime is a value type, which, just like int and double, has no meaningful null value. DateTime is a Value Type like int, double etc. so there is no way to assigned a null value. By default DateTime is not nullable because it is a Value Type, using the nullable operator introduced in C# 2, you can achieve this.
+
+Using a question mark (?) after the type or using the generic style Nullable.
+```C#
+DateTime? nullDateTime = null; 
+```
+
 #### List out the differences between Array and ArrayList in C#?
+**Arrays** are strongly-typed collections of the same data type and have a fixed length that cannot be changed during runtime. We can access the Array elements by numeric index. The array indexes start at zero. The default value of numeric array elements is set to zero, and the reference elements are set to null.
+
+**ArrayList** is not a strongly-typed collection. It can store the values of different data types or same datatype. The size of an array list increases or decreases dynamically so it can take any size of values from any data type. ArrayList is one of the most flexible data structures from C# Collections. ArrayList contains a simple list of values. ArrayList implements the IList interface using an array and very easily we can add, insert, delete, view etc. It is very flexible because we can add without any size information that is it will grow dynamically and also shrink.
+
+- Array is strongly typed. This means that an array can store only specific type of items \ elements.
+- ArrayList can store any type of items \ elements.
+- In arrays we can store only one datatype either int, string, char etc…
+- In arraylist we can store all the datatype values
+- Array can't accept null	
+- ArrayList collection accepts null
+- Arrays belong to System.Array namespace
+- Arraylist belongs to System.Collection namespaces
+
 #### How is the using() pattern useful? What is IDisposable? How does it support deterministic finalization?
+**IDisposable Interface:** Provides a mechanism for releasing unmanaged resources. 
+The primary use of this interface is to release unmanaged resources. The garbage collector automatically releases the memory allocated to a managed object when that object is no longer used. However, it is not possible to predict when garbage collection will occur. Use the Dispose method of this interface to explicitly release unmanaged resources in conjunction with the garbage collector. The consumer of an object can call this method when the object is no longer needed.
+
+**using()** statement provides a convenient syntax that ensures the correct use of IDisposable objects. The using statement ensures that Dispose is called even if an exception occurs within the using block. You can achieve the same result by putting the object inside a try block and then calling Dispose in a finally block; in fact, this is how the using statement is translated by the compiler.
+
 #### How can you make sure that objects using dedicated resources (database connection, files, hardware, OS handle, etc.) are released as early as possible?
 #### Why to use keyword “const” in C#? Give an example.
+You use the const keyword to declare a constant field or a constant local. Constant fields and locals aren't variables and may not be modified. Constants can be numbers, Boolean values, strings, or a null reference. Don’t create a constant to represent information that you expect to change at any time. 
+
 #### What is the difference between “const” and “readonly” variables in C#?
+The difference is when we assign the values to constant variables. You can say, Const is a compile-time constant variable, whereas, the readonly is a runtime constant variable. 
+
+**const** is the compile-time constants and has to be initialized during the time of declaration only.
+**read-only** is a runtime constant for which initialization of readonly can be done during declaration as well within the public constructor of the same class.
+
 #### What is a property in C#?
+A property is a member that provides a flexible mechanism to read, write, or compute the value of a private field. Properties can be used as if they are public data members, but they are actually special methods called accessors. This enables data to be accessed easily and still helps promote the safety and flexibility of methods. Properties enable a class to expose a public way of getting and setting values, while hiding implementation or verification code.
+
 #### List out two different types of errors in C#?
+All the exception classes are directly or indirectly derived from the Exception class. There are two main classes for exceptions - SystemException and ApplicationException. SystemException is a base class for all CLR generated errors whereas ApplicationException serves as a base class for all application related exceptions, which you want to raise on business rule violation.
+
+The following is a hierarchy of some of the exception classes in .Net:
+
+![alt text](https://www.tutorialsteacher.com/Content/images/csharp/exception-hierarchy.png "Errors")
+
 #### What is the difference between “out” and “ref” parameters in C#?
+
+**ref:** The ref keyword passes arguments by reference. It means any changes made to this argument in the method will be reflected in that variable when control returns to the calling method. 
+
+**out:** The out keyword passes arguments by reference. 
+
+**Ref Vs Out**
+
+**Ref:**
+- The parameter or argument must be initialized first before it is passed to ref.	
+- Passing a parameter value by Ref is useful when the called method is also needed to modify the pass parameter.	
+- It is not compulsory to initialize a parameter value before using it in a calling method.	
+
+**Out:**
+- It is not compulsory to initialize a parameter or argument before it is passed to an out.
+- Declaring a parameter to an out method is useful when multiple values need to be returned from a function or method.
+- A parameter value must be initialized within the calling method before its use.
+
 #### Can we override private virtual method in C#?
 #### What's the difference between IEquatable and just overriding Object.Equals()?
 #### Explain the differences between public, protected, private and internal. Explain access modifier – “protected internal” in C#!
