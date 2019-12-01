@@ -114,9 +114,40 @@ public void Add_EmptyString_ReturnsZero()
 ### Threaded programming
 
 #### When do you need to use threads in an application?
+Multithreading is a widespread programming and execution model that allows multiple threads to exist within the context of one process. These threads share the process's resources, but are able to execute independently. The threaded programming model provides developers with a useful abstraction of concurrent execution. Multithreaded applications have the following advantages:
+- Responsiveness
+- Faster execution
+- Lower resource consumption
+- Parallelization: applications looking to use multicore or multi-CPU systems can use multithreading to split data and tasks into parallel subtasks and let the underlying architecture manage how the threads run
+
 #### What is a daemon thread?
+Daemon thread is a low priority thread that runs in background to perform tasks such as garbage collection. Traditionally daemon processes in UNIX were those that were constantly running in background, much like services in Windows. A daemon thread in Java is one that doesn't prevent the JVM from exiting. Specifically the JVM will exit when only daemon threads remain.
+
 #### What is the difference between concurrent and parallel execution of code?
+Concurrency and parallelism are two related but distinct concepts.
+
+**Concurrency** means that two or more calculations happen within the same time frame, and there is usually some sort of dependency between them. It's a form of computing in which several computations are executed during overlapping time periods — concurrently —instead of sequentially. A concurrent system is one where a computation can advance without waiting for all other computations to complete. (async-await)
+
+**Parallelism** means that two or more calculations happen simultaneously. Parallel programming means using a set of resources to solve some problem in less time by dividing the work. This is the abstract definition and it relies on this part: solve some problem in less time by dividing the work (source). Code running in parallel can utilize threads, but code can be executed on different physical machines as well, crossing "thread-boundaries" (cluster)
+
+Put boldly, concurrency describes a problem (two things need to happen together), while parallelism describes a solution (two processor cores are used to execute two things simultaneously).
+
 #### What is the most important problem developers are faced when using threads?
+- Resource contention - a conflict over access to a shared resource 
+- Race condition - because resource contention exists program can and do arise when multiple threads are executing. They're racing for accessing a database or file. 
+- Synchronization. With the use of Locks, Semaphores, Queues, etc. programmers can avoid or control race conditions.
+- Deadlock - a deadlock occurs when a thread enters a waiting state because a requested system resource is held by another waiting process.
+
 #### In what kind of situations can deadlocks occur?
+A deadlock occurs when a thread enters a waiting state because a requested system resource is held by another waiting process, which in turn is waiting for another resource held by another waiting process. Held in this context means that there's some locking or synchronization in place. A deadlock is a state in which each member of a group is waiting for another member, including itself, to take action, such as sending a message or more commonly releasing a lock. Deadlock is a common problem in multiprocessing systems, parallel computing, and distributed systems, where software and hardware locks are used to arbitrate shared resources and implement process synchronization
+
 #### What are possible ways to prevent deadlocks from occurring?
+Deadlock prevention works by preventing one of the four Coffman conditions from occurring.
+
+- Eliminate Mutual Exclusion: no process will have exclusive access to a resource. Algorithms that avoid mutual exclusion are called non-blocking synchronization algorithms.
+- Eliminate Hold and wait: requiring processes to request all the resources they will need before starting up. 
+- Eliminate No Preemption: Preempt resources from the process when resources required by other high priority processes.
+- Eliminate Circular Wait: disabling interrupts during critical sections and using a hierarchy to determine a partial ordering of resources. Each resource will be assigned with a numerical number. A process can request the resources in the order of numbering.
+
 #### What does critical section or critical region mean in the context of concurrent programming?
+In concurrent programming, concurrent accesses to shared resources can lead to unexpected behavior, so parts of the program where the shared resource is accessed need to be protected in ways that avoid the concurrent access. This protected section is the critical section or critical region. It cannot be executed by more than one process at a time. Typically, the critical section accesses a shared resource, such as a data structure, a peripheral device, or a network connection, that would not operate correctly in the context of multiple concurrent accesses.
