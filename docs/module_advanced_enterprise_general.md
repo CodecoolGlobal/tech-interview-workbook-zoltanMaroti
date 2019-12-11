@@ -7,9 +7,55 @@
 #### What is n-tier (or multi-tier) architecture?
 #### What are microservices? Advantages and disadvantages?
 #### What is Separation of Concerns?
+Separation of concerns is a software architecture design pattern / principle for separating an application into distinct sections, so each section addresses a separate concern. Separation of concerns is the idea that each module or layer in an application should only be responsible for one thing and should not contain code that deals with other things. It reduces code complexity by breaking a large application down into many smaller units of encapsulated functionality. It is achieved by the establishment of boundaries. A boundary is any logical or physical constraint which delineates a given set of responsibilities. Some examples of boundaries would include the use of methods, objects, components, and services to define core behavior within an application; projects, solutions, and folder hierarchies for source organization; application layers and tiers for processing organization.
+
+Separation of concerns - advantages:
+- Lack of duplication and singularity of purpose - the overall system easier to maintain.
+- The system becomes more stable as a byproduct of the increased maintainability.
+- The decoupling which results from requiring components to focus on a single purpose leads to components which are more easily reused in other systems, or different contexts within the same system.
+
 #### What is a layered design and why is it important in enterprise applications?
 #### What is Dependency Injection?
+Dependency Injection is passing dependency to other objects or framework (dependency injector). Dependency injection is basically providing the objects that an object needs (its dependencies) instead of having it construct them itself. It's a very useful technique for testing, since it allows dependencies to be mocked or stubbed out. The intent behind dependency injection is to achieve Separation of Concerns of construction and use of objects. This can increase readability and code reuse. Dependency injection separates the creation of a client's dependencies from the client's behavior, which allows program designs to be loosely coupled and to follow the dependency inversion and single responsibility principles.
+
+```c#
+public SomeClass() {
+    myObject = Factory.getObject();
+}
+```
+
+**Problem:** If myObject involves services such as disk access or network access, it is hard to do unit test on SomeClass(). Programmers have to mock myObject.
+
+**Alternative solution:** Passing myObject in as an argument to the constructor.
+
+```c#
+public SomeClass (MyClass myObject) {
+    this.myObject = myObject;
+}
+```
+
+Dependencies can be injected into objects by many means (such as constructor injection or setter injection). One can even use specialized dependency injection frameworks (e.g. Spring) to do that, but they certainly aren't required.
+
 #### What is the DAO pattern? When and how to implement?
+The Data Access Object (DAO) pattern is a structural pattern that allows us to isolate the application / business layer from the persistence layer (usually a relational database, but it could be any other persistence mechanism) using an abstract API. The functionality of this API is to hide from the application all the complexities involved in performing CRUD operations in the underlying storage mechanism. This permits both layers to evolve separately without knowing anything about each other.
+
+The participants in Data Access Object Pattern:
+
+- **Data Access Object Interface** - The interfaces which provides a flexible design. This interface defines the standard operations to be performed on a model object(s).
+
+- **Data Access Object concrete class** - This class implements above interface. This class is responsible to get data from a data source which can be database / xml or any other storage mechanism.
+
+- **Model Object or Value Object** - The model which is transferred from one layer to the other. This object is simple POJO containing get/set methods to store data retrieved using DAO class.
+
+**Example:**
+With above mentioned components, let’s try to implement the DAO pattern. We will use 3 components here:
+
+- The Book model which is transferred from one layer to the other.
+- The BookDao interface that provides a flexible design and API to implement.
+- BookDaoImpl concrete class that is an implementation of the BookDao interface.
+
+![alt text](https://cdn.journaldev.com/wp-content/uploads/2017/11/DAO-Pattern.png "dao")
+
 #### What is SOA? When to use?
 
 ### Testing
@@ -106,10 +152,25 @@ public void Add_EmptyString_ReturnsZero()
 ### Security
 
 #### What is OAuth2?
+OAuth 2 is an authorization framework that enables applications to obtain limited access to user accounts on an HTTP service, such as Facebook, GitHub, Amazon... It works by delegating user authentication to the service that hosts the user account, and authorizing third-party applications to access the user account. It is commonly used as a way for Internet users to grant websites or applications access to their information on other websites but without giving them the passwords. OAuth essentially allows access tokens to be issued to third-party clients by an authorization server, with the approval of the resource owner. The third party then uses the access token to access the protected resources hosted by the resource server. OAuth 2 provides authorization flows for web and desktop applications, and mobile devices.
+
+![alt text](https://assets.digitalocean.com/articles/oauth/abstract_flow.png
+ "oauth")
+
 #### What is Basic Authentication?
 #### What is CORS, why it’s needed in browsers?
+Cross-Origin Resource Sharing (CORS) is a mechanism that uses additional HTTP headers to tell browsers to give a web application running at one origin, access to selected resources from a different origin. A web application executes a cross-origin HTTP request when it requests a resource that has a different origin (domain, protocol, or port) from its own. An example of a cross-origin request: the front-end JavaScript code served from https://domain-a.com uses XMLHttpRequest to make a request for https://domain-b.com/data.json.
+
+CORS is a way to bypass the "Same Origin Policy" which is the security measure preventing you from making ajax requests to a different domain.
+
+**Same Origin Policy**
+For security reasons, browsers restrict cross-origin HTTP requests initiated from scripts. The Same Origin Policy states that a website on one domain cannot make an xhr request to another domain. This prevents a malicious website from making requests to a known website (think Facebook or Google). For example, XMLHttpRequest and the Fetch API follow the same-origin policy.
+
 #### How can you initialize a CSRF attack?
 #### What is JWT used for? Where to store it on client side?
+JSON Web Token (JWT) is an Internet standard for creating JSON-based access tokens that assert some number of claims. For example, a server could generate a token that has the claim "logged in as admin" and provide that to a client. The client could then use that token to prove that it is logged in as admin. The tokens are signed by one party's private key (usually the server's), so that both parties (the other already being, by some suitable and trustworthy means, in possession of the corresponding public key) are able to verify that the token is legitimate.
+
+In authentication, when the user successfully logs in using their credentials, a JSON Web Token will be returned and must be saved locally (typically in local or session storage, but cookies can also be used), instead of the traditional approach of creating a session in the server and returning a cookie.
 
 ### Threaded programming
 
