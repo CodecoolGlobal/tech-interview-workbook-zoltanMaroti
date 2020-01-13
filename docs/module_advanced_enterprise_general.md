@@ -7,35 +7,34 @@
 #### What is n-tier (or multi-tier) architecture?
 #### What are microservices? Advantages and disadvantages?
 #### What is Separation of Concerns?
-Separation of concerns is a software architecture design pattern / principle for separating an application into distinct sections, so each section addresses a separate concern. Separation of concerns is the idea that each module or layer in an application should only be responsible for one thing and should not contain code that deals with other things. It reduces code complexity by breaking a large application down into many smaller units of encapsulated functionality. It is achieved by the establishment of boundaries. A boundary is any logical or physical constraint which delineates a given set of responsibilities. Some examples of boundaries would include the use of methods, objects, components, and services to define core behavior within an application; projects, solutions, and folder hierarchies for source organization; application layers and tiers for processing organization.
-
-Separation of concerns - advantages:
-- Lack of duplication and singularity of purpose - the overall system easier to maintain.
-- The system becomes more stable as a byproduct of the increased maintainability.
-- The decoupling which results from requiring components to focus on a single purpose leads to components which are more easily reused in other systems, or different contexts within the same system.
+Separation of concerns (SoC) is a design principle for separating a computer program into distinct sections such that each section addresses a separate concern. At a low level, this principle is closely related to the Single Responsibility Principle of object oriented programming. For example the business logic of the application is a concern and the user interface is another concern. Changing the user interface should not require changes to business logic and vice versa. The design will be more maintainable, less tightly coupled, and less likely to violate the Don’t Repeat Yourself principle. When concerns are well-separated, individual sections can be reused, as well as developed and updated independently. At an architectural level, separation of concerns is a key component of building layered applications.
 
 #### What is a layered design and why is it important in enterprise applications?
 #### What is Dependency Injection?
-Dependency Injection is passing dependency to other objects or framework (dependency injector). Dependency injection is basically providing the objects that an object needs (its dependencies) instead of having it construct them itself. It's a very useful technique for testing, since it allows dependencies to be mocked or stubbed out. The intent behind dependency injection is to achieve Separation of Concerns of construction and use of objects. This can increase readability and code reuse. Dependency injection separates the creation of a client's dependencies from the client's behavior, which allows program designs to be loosely coupled and to follow the dependency inversion and single responsibility principles.
+Dependency injection is a technique whereby one object supplies the dependencies of another object. Dependency injection is basically providing the objects that an object needs (its dependencies) instead of having it construct them itself. 
 
-```c#
-public SomeClass() {
-    myObject = Factory.getObject();
-}
-```
+Dependencies can be injected into objects by many means:
+1. constructor injection
+2. setter injection
+3. interface injection
+4. dependency injection frameworks (e.g. Spring)
 
-**Problem:** If myObject involves services such as disk access or network access, it is hard to do unit test on SomeClass(). Programmers have to mock myObject.
+So now its the dependency injection’s responsibility to:
 
-**Alternative solution:** Passing myObject in as an argument to the constructor.
+- Create the objects
+- Know which classes require those objects
+- And provide them all those objects
 
-```c#
-public SomeClass (MyClass myObject) {
-    this.myObject = myObject;
-}
-```
+If there is any change in objects, then DI looks into it and it should not concern the class using those objects. This way if the objects change in the future, then its DI’s responsibility to provide the appropriate objects to the class.
 
-Dependencies can be injected into objects by many means (such as constructor injection or setter injection). One can even use specialized dependency injection frameworks (e.g. Spring) to do that, but they certainly aren't required.
+Inversion of control —the concept behind DI
+This states that a class should not configure its dependencies statically but should be configured by some other class from outside.
 
+Benefits of using DI:
+- Helps in Unit testing.
+- Boiler plate code is reduced, as initializing of dependencies is done by the injector - component.
+- Extending the application becomes easier.
+- Helps to enable loose coupling, which is important in application programming.
 #### What is the DAO pattern? When and how to implement?
 The Data Access Object (DAO) pattern is a structural pattern that allows us to isolate the application / business layer from the persistence layer (usually a relational database, but it could be any other persistence mechanism) using an abstract API. The functionality of this API is to hide from the application all the complexities involved in performing CRUD operations in the underlying storage mechanism. This permits both layers to evolve separately without knowing anything about each other.
 
@@ -80,6 +79,20 @@ Code Coverage is a measurement of how many lines / blocks / arcs of your code ar
 Mocking is primarily used in unit testing. An object under test may have dependencies on other (complex) objects. To isolate the behavior of the object you want to replace the other objects by mocks that simulate the behavior of the real objects. This is useful if the real objects are impractical to incorporate into the unit test. In short, mocking is creating objects that simulate the behavior of real objects.
 
 #### What is a test case? What is an assertion? Give examples!
+An assertion is a boolean expression at a specific point in a program which will be true unless there is a bug in the program. A test assertion is defined as an expression, which encapsulates some testable logic specified about a target under test. Usually the logic for each test assertion is limited to one single aspect specified. An assertion allows testing the correctness of any assumptions that have been made in the program. If an assertion fails, the method call does not return and an error is reported. If a test contains multiple assertions, any that follow the one that failed will not be executed. For this reason, it's usually best to try for one assertion per test.
+
+Example:
+
+public int Add (int num1, int num2)
+{
+    return num1 + num2 
+}
+
+
+int expected = 5
+Int actual = Add(2, 3)
+
+Assert.AreEqual(expected, actual);
 #### What is TDD? What are the benefits?
 TDD is an innovative software development approach where tests are written before writing the bare minimum of code required for the test to be fulfilled. The code will then be refactored, as often as necessary, in order to pass the test, with the process being repeated for each piece of functionality. With TDD, tests will be automated, saving a lot of time compared to manually testing functionality. Writing tests, followed by minimum code changes after each test run, will make sure there is good unit test coverage for the software which will again contribute to the overall quality of the product. Tests written ahead of time will also ensure good code quality.
 
@@ -118,11 +131,38 @@ public void Add_EmptyString_ReturnsZero()
 
 ### DevOps
 #### What is continuous integration? Why is CI important?
+Continuous Integration (CI) is a development practice that requires developers to integrate code into a shared repository several times a day. Each check-in is then verified by an automated build, allowing teams to detect problems early. By integrating regularly, you can detect errors quickly, and locate them more easily. Integrate as often as possible, this will lead to small or non-existent merge conflicts and bugs.
 #### Why are tests important in the CI workflow?
+Developers practicing continuous integration merge their changes back to the main branch as often as possible. The developer's changes are validated by creating a build and running automated tests against the build. By doing so, you avoid the integration hell that usually happens when people wait for release day to merge their changes into the release branch.
+
+Continuous integration puts a great emphasis on testing automation to check that the application is not broken whenever new commits are integrated into the main branch.
+
+A nicely working CI process needs the following:
+
+- Good unit testing coverage
+- Automation: tests need to run with every commit / merge automatically.
+- Ideally many kinds of tests: integration testing, UI testing, acceptance testing.
+
 #### Name some software that help the CI workflow!
+The most popular CI tools are:
+
+- Jenkins
+- Travis
+- Lots of hosted CI services: Gitlab CI, AWS CI, Microsoft VSTS CI...
 #### What is Continuous Delivery?
+Continuous delivery is an extension of continuous integration to make sure that you can release new changes to your customers quickly in a sustainable way. This means that on top of having automated your testing, you also have automated your release process and you can deploy your application at any point of time by clicking on a button.
 #### What is Continuous Deployment?
+Continuous deployment goes one step further than continuous delivery. With this practice, every change that passes all stages of your production pipeline is released to your customers. There's no human intervention, and only a failed test will prevent a new change to be deployed to production.
+
+Continuous deployment is an excellent way to accelerate the feedback loop with your customers and take pressure off the team as there isn't a Release Day anymore. Developers can focus on building software, and they see their work go live minutes after they've finished working on it.
 #### What is DevOps?
+DevOps (a compound word made from "Development" and "Operations") is a new practice and job role in Software development that emerged from the birth of the cloud and agile methodologies. It can be seen as an evolution of the SysAdmin role, but requires much more knowledge.
+
+Typical tasks of a DevOps person is everything IT related except actually writing the software. In practice this means the following:
+- Build systems that enable CI/CD workflows
+- Manage the "cloud", set up its infrastructure, security, install and configure apps
+- Make sure that there are monitoring and alerting systems in place in case of issues
+- Automate everything: deployments, releases, upgrades.
 
 ### Software Methodologies
 #### What kind of software-lifecycle models do you know?
