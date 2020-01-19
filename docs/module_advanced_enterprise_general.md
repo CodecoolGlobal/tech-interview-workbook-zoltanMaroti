@@ -166,12 +166,74 @@ Typical tasks of a DevOps person is everything IT related except actually writin
 
 ### Software Methodologies
 #### What kind of software-lifecycle models do you know?
+A software lifecycle model is a standardised format for planning, organising and running a new development project. 
+
+Agile, Lean, Waterfall, Iterative, Spiral, DevOps, Extreme Programming, Rapid Prototyping
 #### What is a UML diagram? What kind of diagram types do you know?
+The Unified Modeling Language is a standard visual modeling language intended to be used for modeling business and similar processes, analysis, design, and implementation of software-based systems. UML is a common language for business analysts, software architects and developers used to describe, specify, design, and document existing or new business processes, structure and behavior of artifacts of software systems.
+
+There are two main categories; structure diagrams and behavioral diagrams:
+1. Structure Diagrams
+- Class Diagram
+- Component Diagram
+- Deployment Diagram
+- Object Diagram
+...
+
+2. Behavioral Diagrams
+- Use Case Diagram
+- Activity Diagram
+- State Machine Diagram
+- Sequence Diagram
+- Communication Diagram
+- Timing Diagram
+...
 #### What is a UML class diagram? What are the typical elements?
+A class diagram in the Unified Modeling Language (UML) is a type of static structure diagram that describes the structure of a system by showing the system's classes, their attributes, methods, and the relationships among objects.
+
+The class diagram is the main building block of object-oriented modeling.
+
+Elements:
+- Class
+- Attribute
+- Generalization
+- Association
+- Multiplicity
+- Aggregation
 #### What kind of design patterns do you know? Bring at least 3 examples.
+**Factory Pattern** - In Factory pattern, we create object without exposing the creation logic to the client and refer to newly created object using a common interface.
+
+**Singleton Pattern** - This pattern involves a single class which is responsible to create an object while making sure that only single object gets created. This class provides a way to access its only object which can be accessed directly without need to instantiate the object of the class.
+
+**Iterator Pattern** - This pattern is used to get a way to access the elements of a collection object in sequential manner without any need to know its underlying representation. The elements of an aggregate object can be accessed and traversed without exposing its representation (data structures).
+
+**MVC Pattern** - MVC Pattern stands for Model-View-Controller Pattern. This pattern is used to separate application's concerns. 
 #### What is the purpose of the Iterator Pattern?
+This pattern is used to get a way to access the elements of a collection object in sequential manner without any need to know its underlying representation. The elements of an aggregate object can be accessed and traversed without exposing its representation (data structures).
 #### What do you know about the SOLID principles?
+These 5 principles were introduced by Robert C. Martin (Uncle Bob), in his 2000 paper Design Principles and Design Patterns. The intention of these principles is to make software designs more understandable, easier to maintain and easier to extend.
+
+**S — Single responsibility principle**
+Every module or class should have responsibility over a single part of the functionality provided by the software.
+
+**O — Open/closed principle**
+"Software entities ... should be open for extension, but closed for modification."
+We can make sure that our code is compliant with the open/closed principle by utilizing inheritance and/or implementing interfaces that enable classes to polymorphically substitute for each other.
+
+**L — Liskov substitution principle**
+"Objects in a program should be replaceable with instances of their subtypes without altering the correctness of that program."
+If S is a subtype of T, then objects of type T may be replaced (or substituted) with objects of type S. More generally it states that objects in a program should be replaceable with instances of their subtypes without altering the correctness of that program.
+
+**I — Interface segregation principle**
+"Many client-specific interfaces are better than one general-purpose interface."
+No client should be forced to depend on methods it does not use. Put more simply: Do not add additional functionality to an existing interface by adding new methods. Instead, create a new interface and let your class implement multiple interfaces if needed.
+
+**D - Dependency inversion principle**
+"One should "depend upon abstractions, [not] concretions."
+Dependency inversion principle is a way to decouple software modules. This principle states that High-level modules should not depend on low-level modules. Both should depend on abstractions. Abstractions should not depend on details. Details should depend on abstractions.
+
 #### How would you separate data storage code and business logic code (which uses stored data) in an application?
+I would use MVC design pattern
 
 ## Computer science
 
