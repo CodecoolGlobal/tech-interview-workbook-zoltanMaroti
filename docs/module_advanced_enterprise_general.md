@@ -296,7 +296,7 @@ The above properties of Binary Search Tree provide an ordering among keys so tha
 Breadth-First Search (BFS) is an algorithm used to traverse through all of the nodes within a graph, tree, etc. It uses a Queue, which is a list of the nodes the algorithm is going to visit, and the algorithm ends when the Queue is empty (indicating that their are no more nodes to be visited).
 
 Pseudocode:
-
+```
 initialize queue
 initialize start node
  
@@ -311,7 +311,7 @@ while the queue isn't empty
         if the neighbor hasn't been visited
 	    enqueue the neighbor to the queue
 	    mark the neighbor as visited
-
+```
 Depth-First Search (DFS) is a recursive algorithm that uses the idea of backtracking. It involves exhaustive searches of all the nodes by going ahead, if possible, else by backtracking. This recursive nature of DFS can be implemented using stacks. 
 
 The basic idea is as follows:
@@ -320,7 +320,7 @@ Pop a node from stack to select the next node to visit and push all its adjacent
 Repeat this process until the stack is empty. However, ensure that the nodes that are visited are marked. This will prevent you from visiting the same node more than once. If you do not mark the nodes that are visited and you visit the same node more than once, you may end up in an infinite loop.
 
 Pseudocode:
-
+```
 DFS-iterative (graph, root):                                   
     let S be stack
     S.push(root)            
@@ -340,6 +340,7 @@ DFS-recursive(graph, root):
     for all neighbours w of root in Graph G:
         if w is not visited:
             DFS-recursive(G, w)
+```
 #### How does dictionary work?
 HashMap in Java works on hashing principle. It is a data structure which allows us to store object and retrieve it in constant time O(1) provided we know the key. In hashing, hash functions are used to link key and value in HashMap.
 
