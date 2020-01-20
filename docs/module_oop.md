@@ -871,31 +871,203 @@ The following is a hierarchy of some of the exception classes in .Net:
 - A parameter value must be initialized within the calling method before its use.
 
 #### Can we override private virtual method in C#?
+You can't even declare private virtual methods because there's no point (since there'd be no way to override them). You cannot use the virtual modifier with the static, abstract, private, or override modifiers.
 #### What's the difference between IEquatable and just overriding Object.Equals()?
 #### Explain the differences between public, protected, private and internal. Explain access modifier – “protected internal” in C#!
+public - The type or member can be accessed by any other code in the same assembly or another assembly that references it.
+private - The type or member can only be accessed by code in the same class.
+protected - The type or member can only be accessed by code in the same class or in a derived class.
+internal - The type or member can be accessed by any code in the same assembly, but not from another assembly.
+protected internal - The type or member can be accessed by any code in the same assembly, or by any derived class in another assembly.
 #### What’s the difference between using `override` and `new` keywords when defining method in child class?
+virtual: indicates that a method may be overriden by an inheritor.
+
+override: overrides the functionality of a virtual method in a base class, providing different functionality. This indicates for the compiler to use the last defined implementation of a method. Even if the method is called on a reference to the base class it will use the implementation overriding it.
+
+new: hides the original method (which doesn't have to be virtual), providing different functionality. This should only be used where it is absolutely necessary. The new modifier instructs the compiler to use your child class implementation instead of the parent class implementation. Any code that is not referencing your class but the parent class will use the parent class implementation.
+
+When you hide a method, you can still access the original method by up casting to the base class. This is useful in some scenarios, but dangerous.
 #### Explain StringBuilder class in C#!
+The String object is immutable. Every time you use one of the methods in the System.String class, you create a new string object in memory, which requires a new allocation of space for that new object. In situations where you need to perform repeated modifications to a string, the overhead associated with creating a new String object can be costly. The System.Text.StringBuilder class can be used when you want to modify a string without creating a new object. For example, using the StringBuilder class can boost performance when concatenating many strings together in a loop. You must convert the StringBuilder object to a String object before you can pass the string represented by the StringBuilder object to a method that has a String parameter or display it in the user interface. You do this conversion by calling the StringBuilder.ToString method.
 #### How we can sort the array elements in descending order in C#?
+Method 1: Using Array.Sort() and Array.Reverse() Method
+Method 2: Using LINQ OrderByDescending
+Method 3: Using Iterative way
+``` C#
+// declaring and initializing the array 
+int[] arr = new int[] {1, 9, 6, 7, 5, 9}; 
+  
+int temp; 
+  
+// traverse 0 to array length 
+for (int i = 0; i < arr.Length - 1; i++) 
+  
+// traverse i+1 to array length 
+for (int j = i + 1; j < arr.Length; j++) 
+  
+// compare array element with  
+// all next element 
+if (arr[i] < arr[j]) { 
+  
+temp = arr[i]; 
+arr[i] = arr[j]; 
+arr[j] = temp; 
+} 
+```
 #### Can you use a value type as a generic type argument in C#? For example when implementing an interface like (IEquatable).
 #### What are Nullable Types in C#?
+As you know, a value type cannot be assigned a null value. For example, int i = null will give you a compile time error. C# 2.0 introduced nullable types that allow you to assign null to value type variables. You can declare nullable types using Nullable<t> where T is a type: Nullable<int> i = null;
+
+A nullable type can represent the correct range of values for its underlying value type, plus an additional null value. For example, Nullable<int> can be assigned any value from -2147483648 to 2147483647, or a null value. The Nullable types are instances of System.Nullable<T> struct. You can use the '?' operator to shorthand the syntax e.g. int?, long? instead of using Nullable<T>.
+
+You typically use a nullable value type when you need to represent the undefined value of an underlying value type. For example, a Boolean, or bool, variable can only be either true or false. However, in some applications a variable value can be undefined or missing. For example, a database field may contain true or false, or it may contain no value at all, that is, NULL. You can use the bool? type in that scenario.
 #### Conceptually, what is the difference between early-binding and late-binding?
+The word binding means the mechanism which the compiler uses to decide which method should be executed on which call.
+
+Early Binding (overloading) - In early binding, the compiler matches the function call with the correct function definition at compile time. It is also known as Static Binding or Compile-time Binding. By default, the compiler goes to the function definition which has been called during compile time.
+
+Late Binding (overriding) - In the case of late binding, the compiler matches the function call with the correct function definition at runtime. It is also known as Dynamic Binding or Runtime Binding. In late binding, the compiler identifies the type of object at runtime and then matches the function call with the correct function definition.
 #### What is delegate, event, callback, multicast delegate?
+Delegates are pointer to functions and used for call back, meaning delegate object stores a reference of a method.
+Multicast delegates help to invoke multiple callbacks. .NET common language runtime allows us to combine and assign multiple objects to one delegate instance by using the += operator. The multicast delegate contains a list of the assigned delegates. When the multicast delegate is called, it invokes the delegates in the list in order they added. 
+Events encapsulate delegate and implement publisher and subscriber model. An event is a notification raised by one object to notify other objects that some action has happened.
 #### What is enum in C#?
+Enum in C# language is a value type with a set of related named constants often referred to as an enumerator list. The enum keyword is used to declare an enumeration. It is a primitive data type, which is user-defined. Enums are strongly typed constants.
 #### What is null-conditional operator?
+Null-conditional operators allow for null checking with a minimal amount of code.
+```C#
+Address address = employee?.Address;
+```
+If employee is null, address will simply be assigned null, and no NullReferenceExeception will occur.
 #### What is null-coalescing operator?
+Null-coalescing operator – ??
+The null-coalescing operator was designed to be used easy with null-conditional operators. It provides default value when the outcome is null.
 #### What is serialization?
+Serialization is a process of converting an Object into stream of bytes so that it can be transferred over a network or stored in a persistent storage.
+Deserialization is the exact opposite - Fetch a stream of bytes from network or persistence storage and convert it back to the Object with the same state.
+
+- XML: Convert Object to XML, transfer it over a network or store it in a file/db. Retrieve it and convert it back to the object with same state.
+- JSON: Same can be done by converting the Object to JSON (JavaScript Object notation).
 #### What is the difference between Finalize() and Dispose() methods?
+.NET Framework provides two methods Finalize and Dispose for releasing unmanaged resources like files, database connections, COM etc.
+The dispose() method is defined inside the interface IDisposable whereas, the method finalize() is defined inside the class Object. The main difference between dispose() and finalize() is that the method dispose() has to be explicitly invoked by the user whereas, the method finalize() is invoked by the garbage collector, just before the object is destroyed. Finalize gets called by the GC when this object is no longer in use. Dispose is just a normal method which the user of this class can call to release any resources.
 #### How do you inherit a class from another class in C#?
+public class Child : Parent {}
 #### What is difference between “is” and “as” operators in C#?
+is - is operator is used to check the compatibility of an object with a given type and it returns the result as a Boolean (true or false).
+```C#
+if (someObject is StringBuilder)
+```
+
+as - as operator is used for casting of object to a given type or a class and returns null if it fails.
+```C#
+StringBuilder b = someObject as StringBuilder;
+```
 #### What are indexers in C# .NET?
+Indexers allow instances of a class to be indexed just like arrays.
+```C#
+using System;
+
+class SampleCollection<T>
+{
+   // Declare an array to store the data elements.
+   private T[] arr = new T[100];
+
+   // Define the indexer to allow client code to use [] notation.
+   public T this[int i]
+   {
+      get { return arr[i]; }
+      set { arr[i] = value; }
+   }
+}
+
+class Program
+{
+   static void Main()
+   {
+      var stringCollection = new SampleCollection<string>();
+      stringCollection[0] = "Hello, World";
+      Console.WriteLine(stringCollection[0]);
+   }
+}
+// The example displays the following output:
+//       Hello, World.
+```
 #### What is the difference between returning IQueryable<T> vs. IEnumerable<T>?
+The first important point to remember is “IQueryable” interface inherits from “IEnumerable”, so whatever “IEnumerable” can do, “IQueryable” can also do.
+
+```C#
+IEnumerable<Employee> emp = ent.Employees;
+IEnumerable<Employee> temp = emp.Where(x => x.Empid == 2).ToList<Employee>();
+```
+This where filter is executed on the client side where the “IEnumerable” code is. In other words, all the data is fetched from the database and then at the client it scans and gets the record with “EmpId” is “2”.
+
+```C#
+IQueryable<Employee> emp = ent.Employees;
+IEnumerable<Employee> temp = emp.Where(x => x.Empid == 2).ToList<Employee>();
+```
+In this case, the filter is applied on the database using the “SQL” query. So the client sends a request and on the server side, a select query is fired on the database and only necessary data is returned.
+
+The difference between “IQueryable” and “IEnumerable” is about where the filter logic is executed. One executes on the client side and the other executes on the database. So if you are working with only in-memory data collection “IEnumerable” is a good choice but if you want to query data collection which is connected with database, “IQueryable” is a better choice as it reduces network traffic and uses the power of SQL language.
 #### What is LINQ? Explain the idea of extension methods.
+LINQ stands for Language Integrated Query.
+
+Instead of writing YAQL (Yet Another Query Language), Microsoft language developers provided a way to express queries directly in their languages (such as C# and Visual Basic). The techniques for forming these queries do not rely on the implementation details of the thing being queried, so that you can write valid queries against many targets (databases, in-memory objects, XML) with practically no consideration of the underlying way in which the query will be executed.
+
+Extension methods:
+Extension methods enable you to "add" methods to existing types without creating a new derived type, recompiling, or otherwise modifying the original type. Extension methods are a special kind of static method, but they are called as if they were instance methods on the extended type. The most common extension methods are the LINQ standard query operators that add query functionality to the existing System.Collections.IEnumerable and System.Collections.Generic.IEnumerable<T> types. Extension methods are additional custom methods which were originally not included with the class. The first parameter of the extension method must be of the type for which the extension method is applicable, preceded by the this keyword.
+
+```C#
+namespace ExtensionMethods
+{
+    public static class IntExtensions
+     {
+        public static bool IsGreaterThan(this int i, int value)
+        {
+            return i > value;
+        }
+    }
+}
+```
+```C#
+using ExtensionMethods;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        int i = 10;
+
+        bool result = i.IsGreaterThan(100); 
+
+        Console.WriteLine(result);
+    }
+}
+```
 #### What are the advantages and disadvantages of lazy loading?
+Lazy loading is a concept where we delay the loading of the object until the point where we need it. Putting in simple words, on demand object loading rather than loading objects unnecessarily.
+
+Advantages of lazy loading:
+- Minimizes start up time of the application.
+- Application consumes less memory because of on-demand loading.
+- Unnecessary database SQL execution is avoided.
+
+The only one disadvantage is that the code becomes complicated. As we need to do checks if the loading is needed or not, there is a slight decrease in performance.
 #### How to use of “yield” keyword? Mention at least one practical scenario where it can be used?
+The functionality this keyword provides is that when iterating a list, we can read an element of the loop, return to the calling code and go back to the loop again at the same point, from where it left the loop and continue processing the records in the loop. 
+
+Use of yield: for example at filtering an array of ints without making any temporary array.
 #### What are attributes in C#? Give some examples of usage of them.
+An attribute is a declarative tag that is used to convey information to runtime about the behaviors of various elements like classes, methods, structures, enumerators, assemblies etc. in your program. You can add declarative information to a program by using an attribute. A declarative tag is depicted by square ([ ]) brackets placed above the element it is used for.
+
+Attributes are used for adding metadata, such as compiler instruction and other information such as comments, description, methods and classes to a program. 
 #### By what mechanism does NUnit know what methods to test?
+Reflection & Attributes
 #### What is the GAC? What problem does it solve?
+Global Assembly Cache (GAC):
+Each computer where the common language runtime is installed has a machine-wide code cache called the global assembly cache that stores assemblies specifically designated to be shared by several applications on the computer. GAC is nothing but a special disk folder where all the shared assemblies will be kept. erving assemblies on a machine becomes simpler because you only have to update one location (the GAC) rather than searching for multiple instances of an assembly stored on a machine.
 #### What is the largest number you can work with in C#?
+The BigInteger type is an immutable type that represents an arbitrarily large integer whose value in theory has no upper or lower bounds. Because it has no upper or lower bounds, an OutOfMemoryException can be thrown for any operation that causes a BigInteger value to grow too large.
 
 ### Database
 
