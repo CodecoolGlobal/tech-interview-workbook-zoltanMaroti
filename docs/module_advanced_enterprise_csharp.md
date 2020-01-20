@@ -31,10 +31,31 @@ A controller is responsible for controlling the way that a user interacts with a
 
 In general, you should strive for fat models and skinny controllers. Your controller methods should contain only a few lines of code. If a controller action gets too fat, then you should consider moving the logic out to a new class in the Models folder.
 #### Explain the page lifecycle of MVC.
-?????????????????????
-1. When the application is started, it hits the Main method in program.cs.
-2. This method then calls the ConfigureServices method in startup.cs. This is where all the required services in the application are added
-3. The ConfigureServices method then calls the configure method which calls the UseMvc middleware. This middleware then calls the routing middleware (UseRouter).
+The ASP.NET Core MVC Request Life Cycle is a sequence of events, stages or components that interact with each other to process an HTTP request and generate a response that goes back to the client.
+
+![alt text](https://www.c-sharpcorner.com/article/asp-net-core-mvc-request-life-cycle/Images/Picture1.png "request pipeline")
+
+**1. Middleware**
+Middleware component forms the basic building block of application HTTP pipeline. These are a series of components that are combined to form a request pipeline in order to handle any incoming request. Whenever a new request comes, it is passed to the first middleware component. The component then decides, whether to generate a response after handling that incoming request or to pass it to the next component. The response is sent back along these components, once the request has been handled.
+
+**2. Routing**
+Routing is a middleware component that implements MVC framework. The routing Middleware component decides how an incoming request can be mapped to Controllers and actions methods, with the help of convention routes and attribute routes. Routing bridges middleware and MVC framework by mapping incoming request to controller action methods. MVC provides default routes that are given a name and a template to match incoming request URLs. The Controllers and action variables are placeholders that are replaced by matching segments of the URL.
+
+**3. Controller Initialization**
+At this stage of ASP.NET MVC Core Request Life Cycle, the process of initialization and execution of controllers takes place. Controllers are responsible for handling incoming requests. The controller factory is the component that is responsible for creating controller instance. The controller selects the appropriate action methods on the basis of route templates provided. A controller class inherits from controller base class.
+
+**4. Action method execution**
+All the public methods of a Controller class are called Action methods. They are like any other normal methods with the following restrictions:
+
+- Action method must be public. It cannot be private or protected
+- Action method cannot be overloaded
+- Action method cannot be a static method.
+
+After the controllers are initialized, the action methods are executed. Controllers contain Action methods whose responsibility is to generate a response to an incoming request Action method inside controller classes executes logic to create Action Result. Action methods return objects that implements the IActionResult interface from the Microsoft.AspNetCore.Mvc namespace. The various types of response from the controller such as rendering a view or redirecting the client to another URL, all these responses are handled by IActionResult object, commonly known as action result.
+
+**5. Result Execution**
+The action method returns action result. If an action method returns a view result, the MVC view engine renders a view and returns the HTML response. If result is not of view type, then action method will generate its own response.
+Different types of action result are: ViewResult, ContentResult, JsonResult, HttpNotFoundResult...
 #### What is Razor View Engine?
 Razor View engine is a markup syntax which helps us to create dynamic web pages with the C#. Razor is a templating engine and ASP.NET MVC has implemented a view engine which allows us to use Razor inside of an MVC application to produce HTML.
 #### What you mean by Routing in MVC?
