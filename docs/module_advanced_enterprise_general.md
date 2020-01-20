@@ -5,11 +5,27 @@
 ### Architectures
 
 #### What is n-tier (or multi-tier) architecture?
+Multitier architecture (often referred to as n-tier architecture) or multilayered architecture is a client–server architecture in which presentation, application processing, and data management functions are physically separated. The most widespread use of multitier architecture is the three-tier architecture. N-tier application architecture provides a model by which developers can create flexible and reusable applications. By segregating an application into tiers, developers acquire the option of modifying or adding a specific layer, instead of reworking the entire application. A three-tier architecture is typically composed of a presentation tier, a domain logic tier, and a data storage tier. The layers should interact only with their direct neighbour below them
 #### What are microservices? Advantages and disadvantages?
+Microservices is an architecture used to separate a monolithic application into several independent services. These services are loosely connected and can be deployed independently, yet offer a cohesive experience to the end-user. Microservices are derivative of service-oriented architectures, as they break an application into a series of modules, each responsible for a unique function.
+
+Advantages:
+- Ease of understanding: With added simplicity, developers can better understand the functionality of a service.
+- Smaller and faster deployments: Smaller codebases and scope = quicker deployments
+- Scalability: Since your services are separate, you can more easily scale the most needed ones at the appropriate times, as opposed to the whole application
+- Eliminate vendor or technology lock-in: Microservices provide the flexibility to try out a new technology stack on an individual service as needed.
+- Improved fault isolation: Larger applications can remain mostly unaffected by the failure of a single module.
+Disadvantages:
+- Microservices are more complex
+- Microservices are often more expensive (More services equals more resources)
+- Global testing is difficult
+- Microservices can present security threats
+- Large vs small product companies: Microservices are great for large companies, but can be slower to implement and too complicated for small companies
 #### What is Separation of Concerns?
 Separation of concerns (SoC) is a design principle for separating a computer program into distinct sections such that each section addresses a separate concern. At a low level, this principle is closely related to the Single Responsibility Principle of object oriented programming. For example the business logic of the application is a concern and the user interface is another concern. Changing the user interface should not require changes to business logic and vice versa. The design will be more maintainable, less tightly coupled, and less likely to violate the Don’t Repeat Yourself principle. When concerns are well-separated, individual sections can be reused, as well as developed and updated independently. At an architectural level, separation of concerns is a key component of building layered applications.
 
 #### What is a layered design and why is it important in enterprise applications?
+Modern enterprise applications  can be large and daunting. The sheer amount of users, data, transactions, options, business cases, components, interacting systems, and a host of other factors, make designing business applications require a great deal of expertise. There are many examples of enterprise software that grew too complex, unmanageable, and fragile due to implementation, that did not account for change. It is for this reason that an effective enterprise application should be divided into layers. By defining each layer to have a separate responsibility, you achieve separation of concerns. 
 #### What is Dependency Injection?
 Dependency injection is a technique whereby one object supplies the dependencies of another object. Dependency injection is basically providing the objects that an object needs (its dependencies) instead of having it construct them itself. 
 
