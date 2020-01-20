@@ -100,8 +100,9 @@ SOA is well-suited for large, complex, enterprise-wide systems that require inte
  "testing")
 
 #### What is code coverage? Why is it used? How you can measure?
-Code Coverage is a measurement of how many lines / blocks / arcs of your code are executed while the automated tests are running. 
+Code coverage is an important concept in software testing, which measures to what extent the code of a program is covered by automated tests, ie. how many code lines, methods, etc. are run and tested by the set of tests.
 
+Code coverage is usually measured as a percentage of the functions, statements, branches (eg. if-else), lines of code actually tested when the test suite is run. The bigger the percentage, the smaller the chance that undetected bugs remain in the program.
 #### What does mocking mean? How would you do it 'manually' (i. e. without using any fancy framework)?
 Mocking is primarily used in unit testing. An object under test may have dependencies on other (complex) objects. To isolate the behavior of the object you want to replace the other objects by mocks that simulate the behavior of the real objects. This is useful if the real objects are impractical to incorporate into the unit test. In short, mocking is creating objects that simulate the behavior of real objects.
 
@@ -266,16 +267,48 @@ I would use MVC design pattern
 
 ### Data Structures
 #### What is the difference between Stack and Queue data structure?
+Stack and Queue both are the non-primitive data structures. The main differences between stack and queue are that stack uses LIFO (last in first out) method to access and add data elements whereas Queue uses FIFO (First in first out) method to access and add data elements.
 #### What is a graph? What are simple graphs? What are directed graphs? What are weighted graphs?
+A Graph is a non-linear data structure consisting of nodes and edges. The nodes are sometimes also referred to as vertices and the edges are lines or arcs that connect any two nodes in the graph. A node is a basic unit of a data structure, such as a linked list or tree data structure. Nodes contain data and also may link to other nodes. Links between nodes are often implemented by pointers.
+
+**Simple graph:** A graph with no loops and no parallel edges is called a simple graph.
+**Directed graph:** In a directed graph, each edge has a direction.
+**Weighted graphs:** Each edge of a graph has an associated numerical value, called a weight. Usually, the edge weights are nonnegative integers. Weighted graphs may be either directed or undirected.
 #### What are trees? What are binary trees? What are binary search trees?
+**Tree:** A tree is an undirected graph in which any two vertices are connected by exactly one path.  In a tree there exist only one path between any two vertices whereas a graph can have unidirectional and bidirectional paths between the nodes. In the tree, there is exactly one root node, and every child can have only one parent. As against, in a graph, there is no concept of the root node. Unlike Arrays, Linked Lists, Stack and queues, which are linear data structures, trees are hierarchical data structures.
+
+Main applications of trees include:
+- Manipulate hierarchical data.
+- Make information easy to search (see tree traversal).
+- Manipulate sorted lists of data.
+- Router algorithms
+
+**Binary tree:** a binary tree is a tree data structure in which each node has maximum two children, which are referred to as the left child and the right child. 
+
+**Binary search tree:** Binary Search Tree is a node-based binary tree data structure which has the following properties:
+
+- The left sub-tree of a node has a key less than or equal to its parent node's key.
+- The right sub-tree of a node has a key greater than to its parent node's key.
+
+The above properties of Binary Search Tree provide an ordering among keys so that the operations like search, minimum and maximum can be done fast.
 #### How can you store graphs in programs? What are the advantages/disadvantages per each?
 #### What are graph traversal algorithms? What is BFS, how does it work? What is DFS, how does it work?
 #### How does dictionary work?
+HashMap in Java works on hashing principle. It is a data structure which allows us to store object and retrieve it in constant time O(1) provided we know the key. In hashing, hash functions are used to link key and value in HashMap.
+
+When we call put method, hashcode() method of the key object is called so that hash function of the map can find a bucket location to store value object. When you want to retrieve the object, you call the get() method and again pass the key object. This time again key object generate same hash code (it's mandatory for it to do so to retrieve the object and that's why HashMap keys are immutable e.g. String) and we end up at same bucket location.
 #### Why is it important for keys in a hashmap to have an immutable type? (Consider string for example.)
+If immutable, the object's hashcode wont change and it allows caching the hashcode of different keys which makes the overall retrieval process very fast. Also for mutable objects ,the hashCode() might be dependent on fields that could change, if this happens you wont be able to find the key (and its value) in the HashMap since hashCode() returns different value.
 
 ### Algorithms
 #### What is QuickSort? Describe the main logic of this sorting algorithm.
+QuickSort is one of the most efficient sorting algorithms and is based on the splitting of an array into smaller ones. The name comes from the fact that, quick sort is capable of sorting a list of data elements significantly faster than any of the common sorting algorithms.
 
+Quicksort first divides a large array into two smaller sub-arrays: the low elements and the high elements. Quicksort can then recursively sort the sub-arrays. The steps are:
+
+1. Pick an element, called a pivot, from the array.
+2. Partitioning: reorder the array so that all elements with values less than the pivot come before the pivot, while all elements with values greater than the pivot come after it (equal values can go either way). After this partitioning, the pivot is in its final position. This is called the partition operation.
+3. Recursively apply the above steps to the sub-array of elements with smaller values and separately to the sub-array of elements with greater values.
 ## Software design
 
 ### Security
@@ -287,6 +320,7 @@ OAuth 2 is an authorization framework that enables applications to obtain limite
  "oauth")
 
 #### What is Basic Authentication?
+Basic authentication is a simple authentication scheme built into the HTTP protocol. The client sends HTTP requests with the Authorization: Basic header, followed by credentials in the base64 encoding of id and password joined by a single colon (username:password).
 #### What is CORS, why it’s needed in browsers?
 Cross-Origin Resource Sharing (CORS) is a mechanism that uses additional HTTP headers to tell browsers to give a web application running at one origin, access to selected resources from a different origin. A web application executes a cross-origin HTTP request when it requests a resource that has a different origin (domain, protocol, or port) from its own. An example of a cross-origin request: the front-end JavaScript code served from https://domain-a.com uses XMLHttpRequest to make a request for https://domain-b.com/data.json.
 
@@ -314,6 +348,9 @@ Multithreading is a widespread programming and execution model that allows multi
 Daemon thread is a low priority thread that runs in background to perform tasks such as garbage collection. Traditionally daemon processes in UNIX were those that were constantly running in background, much like services in Windows. A daemon thread in Java is one that doesn't prevent the JVM from exiting. Specifically the JVM will exit when only daemon threads remain.
 
 #### What is the difference between concurrent and parallel execution of code?
+![alt text](https://i.stack.imgur.com/ZktFr.png "concurrent vs parallel")
+
+
 Concurrency and parallelism are two related but distinct concepts.
 
 **Concurrency** means that two or more calculations happen within the same time frame, and there is usually some sort of dependency between them. It's a form of computing in which several computations are executed during overlapping time periods — concurrently —instead of sequentially. A concurrent system is one where a computation can advance without waiting for all other computations to complete. (async-await)
