@@ -9,13 +9,14 @@ Multitier architecture (often referred to as n-tier architecture) or multilayere
 #### What are microservices? Advantages and disadvantages?
 Microservices is an architecture used to separate a monolithic application into several independent services. These services are loosely connected and can be deployed independently, yet offer a cohesive experience to the end-user. Microservices are derivative of service-oriented architectures, as they break an application into a series of modules, each responsible for a unique function.
 
-Advantages:
+**Advantages:**
 - Ease of understanding: With added simplicity, developers can better understand the functionality of a service.
 - Smaller and faster deployments: Smaller codebases and scope = quicker deployments
 - Scalability: Since your services are separate, you can more easily scale the most needed ones at the appropriate times, as opposed to the whole application
 - Eliminate vendor or technology lock-in: Microservices provide the flexibility to try out a new technology stack on an individual service as needed.
 - Improved fault isolation: Larger applications can remain mostly unaffected by the failure of a single module.
-Disadvantages:
+
+**Disadvantages:**
 - Microservices are more complex
 - Microservices are often more expensive (More services equals more resources)
 - Global testing is difficult
@@ -72,6 +73,16 @@ With above mentioned components, let’s try to implement the DAO pattern. We wi
 ![alt text](https://cdn.journaldev.com/wp-content/uploads/2017/11/DAO-Pattern.png "dao")
 
 #### What is SOA? When to use?
+A service-oriented architecture (SOA) is an architectural pattern in computer software design in which application components provide services to other components via a communications protocol, typically over a network. The principles of service-orientation are independent of any product, vendor or technology. SOA just makes it easier for software components over various networks to work with each other. Web services which are built as per the SOA architecture tend to make web service more independent.
+
+SOA is well-suited for large, complex, enterprise-wide systems that require integration with many heterogeneous applications and services. It is also well-suited for applications that have many shared components, particularly components that are shared across the enterprise."
+
+**Advantages:**
+- Standardized Service Contract
+- Loose Coupling – Less dependency on each other.
+- Service Abstraction - Services hide the logic they encapsulate from the outside world.
+- Service Reusability - Logic is divided into services with the intent of maximizing reuse.
+- Service Statelessness -  This means that services should not withhold information from one state to the other.
 
 ### Testing
 #### What are unit test, integration test, system test, regression test, acceptance test? What is the major difference between these?
