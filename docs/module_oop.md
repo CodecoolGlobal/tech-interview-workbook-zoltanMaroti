@@ -853,26 +853,24 @@ The following is a hierarchy of some of the exception classes in .Net:
 ![alt text](https://www.tutorialsteacher.com/Content/images/csharp/exception-hierarchy.png "Errors")
 
 #### What is the difference between “out” and “ref” parameters in C#?
+By default, parameters are always pass by value. However, the CLR does allow you to pass parameters by reference. In C#, you can use the out or ref keywords for passing parameters by reference. When the compiler sees that you’ve used these keywords, it will emit code that passes the *address* of the parameter rather than its value.
 
-**ref:** The ref keyword passes arguments by reference. It means any changes made to this argument in the method will be reflected in that variable when control returns to the calling method. 
+ref tells the compiler that the object is initialized before entering the function, while out tells the compiler that the object will be initialized inside the function.
 
-**out:** The out keyword passes arguments by reference. 
+**ref:** The ref modifier means that:
+- The value is already set and
+- The method can read and modify it.
 
-**Ref Vs Out**
-
-**Ref:**
-- The parameter or argument must be initialized first before it is passed to ref.	
-- Passing a parameter value by Ref is useful when the called method is also needed to modify the pass parameter.	
-- It is not compulsory to initialize a parameter value before using it in a calling method.	
-
-**Out:**
-- It is not compulsory to initialize a parameter or argument before it is passed to an out.
-- Declaring a parameter to an out method is useful when multiple values need to be returned from a function or method.
-- A parameter value must be initialized within the calling method before its use.
+**out:** The out modifier means that:
+- The Value isn't set and can't be read by the method until it is set.
+- The method must set it before returning.  
 
 #### Can we override private virtual method in C#?
 You can't even declare private virtual methods because there's no point (since there'd be no way to override them). You cannot use the virtual modifier with the static, abstract, private, or override modifiers.
 #### What's the difference between IEquatable and just overriding Object.Equals()?
+By implementing IEquatable, you can use value types.
+
+The main reason is performance. When generics were introduced in .NET 2.0 they were able to add a bunch of neat classes such as List<T>, Dictionary<K,V>, HashSet<T>, etc. These structures make heavy use of GetHashCode and Equals. But for value types this required boxing. IEquatable<T> lets a structure implement a strongly typed Equals method so no boxing is required. Thus much better performance when using value types with generic collections.
 #### Explain the differences between public, protected, private and internal. Explain access modifier – “protected internal” in C#!
 public - The type or member can be accessed by any other code in the same assembly or another assembly that references it.
 private - The type or member can only be accessed by code in the same class.
@@ -915,6 +913,7 @@ arr[j] = temp;
 } 
 ```
 #### Can you use a value type as a generic type argument in C#? For example when implementing an interface like (IEquatable).
+This interface is implemented by types whose values can be equated (for example, the numeric and string classes). A value type or class implements the Equals method to create a type-specific method suitable for determining equality of instances. Defines a generalized method that a value type or class implements to create a type-specific method for determining equality of instances. Replace the type parameter of the IEquatable<T> interface with the type that is implementing this interface. If you implement IEquatable<T>, you should also override the base class implementations of Equals(Object) and GetHashCode() so that their behavior is consistent with that of the Equals(T) method.
 #### What are Nullable Types in C#?
 As you know, a value type cannot be assigned a null value. For example, int i = null will give you a compile time error. C# 2.0 introduced nullable types that allow you to assign null to value type variables. You can declare nullable types using Nullable<t> where T is a type: Nullable<int> i = null;
 
